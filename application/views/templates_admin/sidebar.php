@@ -1,7 +1,7 @@
 <div class="col-md-3 left_col">
   <div class="left_col scroll-view">
     <div class="navbar nav_title" style="border: 0;">
-      <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+      <a href="index" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
     </div>
 
     <div class="clearfix"></div>
@@ -9,11 +9,11 @@
     <!-- menu profile quick info -->
     <div class="profile clearfix">
       <div class="profile_pic">
-        <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+        <img src="<?= base_url('assets/') ?>img/user.png" alt="..." class="img-circle profile_img">
       </div>
       <div class="profile_info">
-        <span>Welcome,</span>
-        <h2>John Doe</h2>
+        <span>Welcome, </span>
+        <h2><?= $this->session->userdata('username') ?></h2>
       </div>
     </div>
     <!-- /menu profile quick info -->
@@ -25,30 +25,30 @@
       <div class="menu_section">
         <h3>General</h3>
         <ul class="nav side-menu">
-          <?php if ($this->session->userdata('hakakses') == 'kadin') { ?>
+          <?php if ($this->session->userdata('hakakses') == 'pembantu') { ?>
             <li>
-              <a href="https://google.com">
+              <a href="index">
                 <i class="fa fa-home"></i> Dashboard
               </a>
             </li>
             <li>
-              <a href="https://google.com">
-                <i class="fa fa-home"></i> Pajak
+              <a href="pajak">
+                <i class="fa fa-indent"></i> Pajak
               </a>
             </li>
             <li>
-              <a href="https://google.com">
-                <i class="fa fa-home"></i> Transaksi
+              <a href="transaksi">
+                <i class="fa fa-money"></i> Transaksi
               </a>
             </li>
             <li>
-              <a href="https://google.com">
-                <i class="fa fa-home"></i> Laporan BKU
+              <a href="laporan_bku">
+                <i class="fa fa-file"></i> Laporan BKU
               </a>
             </li>
             <li>
-              <a href="https://google.com">
-                <i class="fa fa-home"></i> Laporan Pajak
+              <a href="laporan_pajak">
+                <i class="fa fa-file-text"></i> Laporan Pajak
               </a>
             </li>
 
@@ -56,45 +56,45 @@
             </li>
           <?php } elseif ($this->session->userdata('hakakses') == 'bendahara') { ?>
             <li>
-              <a href="https://google.com">
+              <a href="index">
                 <i class="fa fa-home"></i> Dashboard
               </a>
             </li>
             <li>
-              <a href="https://google.com">
-                <i class="fa fa-home"></i> Saldo Awal
+              <a href="saldo_awal">
+                <i class="fa fa-archive"></i> Saldo Awal
               </a>
             </li>
             <li>
-              <a href="https://google.com">
-                <i class="fa fa-home"></i> Jenis Pengeluaran
+              <a href="jenis_pengeluaran">
+                <i class="fa fa-share-square-o"></i> Jenis Pengeluaran
               </a>
             </li>
             <li>
-              <a href="https://google.com">
-                <i class="fa fa-home"></i> Laporan BKU
+              <a href="laporan_bku">
+                <i class="fa fa-file"></i> Laporan BKU
               </a>
             </li>
             <li>
-              <a href="https://google.com">
-                <i class="fa fa-home"></i> Laporan Pajak
+              <a href="laporan_pajak">
+                <i class="fa fa-file-text"></i> Laporan Pajak
               </a>
             </li>
-          <?php } elseif ($this->session->userdata('hakakses') == 'pembantu') { ?>
+          <?php } elseif ($this->session->userdata('hakakses') == 'kadin') { ?>
             <li>
-              <a href="https://google.com">
+              <a href="index">
                 <i class="fa fa-home"></i> Dashboard
               </a>
             </li>
-            
+
             <li>
-              <a href="https://google.com">
-                <i class="fa fa-home"></i> Laporan BKU
+              <a href="laporan_bku">
+                <i class="fa fa-file"></i> Laporan BKU
               </a>
             </li>
             <li>
-              <a href="https://google.com">
-                <i class="fa fa-home"></i> Laporan Pajak
+              <a href="laporan_pajak">
+                <i class="fa fa-file-text"></i> Laporan Pajak
               </a>
             </li>
           <?php } ?>
@@ -132,7 +132,7 @@
       <ul class=" navbar-right">
         <li class="nav-item dropdown open" style="padding-left: 15px;">
           <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-            <img src="images/img.jpg" alt="">John Doe
+            <img src="<?= base_url('assets/') ?>img/user.png" alt=""><?= $this->session->userdata('username') ?>
           </a>
           <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="javascript:;"> Profile</a>
@@ -141,7 +141,7 @@
               <span>Settings</span>
             </a>
             <a class="dropdown-item" href="javascript:;">Help</a>
-            <a class="dropdown-item" href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+            <a class="dropdown-item" href="<?= base_url('auth/logout') ?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
           </div>
         </li>
 

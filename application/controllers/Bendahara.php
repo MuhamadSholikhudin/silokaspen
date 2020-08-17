@@ -1,12 +1,12 @@
 <?php
 
-class Kadin extends CI_Controller{
+class Bendahara extends CI_Controller{
 
     public function __construct()
     {
         parent::__construct();
 
-        if($this->session->userdata('hakakses') != 'kadin'){
+        if($this->session->userdata('hakakses') != 'bendahara'){
 $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Anda Belum Login
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -18,55 +18,68 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
     }
 
 
-    public function index(){
-
+    public function index()
+    {
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
-        $this->load->view('kadin/dashboard');
-        $this->load->view('templates_admin/footer.php');
+        $this->load->view('bendahara/dashboard');
+        $this->load->view('templates_admin/footer');
     }
 
-    public function laporan_bku()
+    public function saldo_awal()
     {
-
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
-        $this->load->view('kadin/laporan_bku');
-        $this->load->view('templates_admin/footer.php');
+        $this->load->view('bendahara/saldo_awal');
+        $this->load->view('templates_admin/footer');
     }
 
-    public function tambah_aksi()
+    public function jenis_pengeluaran()
     {
+        $this->load->view('templates_admin/header');
+        $this->load->view('templates_admin/sidebar');
+        $this->load->view('bendahara/jenis_pengeluaran');
+        $this->load->view('templates_admin/footer');
+    }
 
+    public function tambah_saldoawal()
+    {
         $nama_brg = $this->input->post('nama_brg');
         $keterangan = $this->input->post('keterangan');
         $kategori = $this->input->post('kategori');
         $harga = $this->input->post('harga');
         $stok = $this->input->post('stok');
 
-        $gambar = $_FILES['gambar']['name'];
-        if ($gambar = '') {
-        } else {
-            $config['upload_path'] = './uploads/';
-            $config['allowed_types'] = 'jpg|jpeg|png|gif';
-            $this->load->library('upload', $config);
-            if (!$this->upload->do_upload('gambar')) {
-                echo "Gambar Gagal Di Upload";
-            } else {
-                $gambar = $this->upload->data('file_name');
-            }
-        }
         $data = array(
             'nama_brg' => $nama_brg,
             'keterangan' => $keterangan,
             'kategori' => $kategori,
             'harga' => $harga,
-            'stok' => $stok,
-            'gambar' => $gambar
+            'stok' => $stok
         );
 
-        $this->model_barang->tambah_barang($data, 'tb_barang');
-        redirect('admin/data_barang/index');
+        $this->model_saldoawal->tambah_saldoawal($data, 'tb_saldoawal');
+        redirect('pembantu/index');
+    }
+
+    public function tambah_jnspengeluaran()
+    {
+        $kdjndpengeluaran = $this->input->post('kdjndpengeluaran');
+        $uraian = $this->input->post('uraian');
+        $carapembayaran = $this->input->post('carapembayaran');
+        $namatoko = $this->input->post('namatoko');
+        $alamattoko = $this->input->post('alamattoko');
+
+        $data = array(
+            'kdjndpengeluaran' => $kdjndpengeluaran,
+            'uraian' => $uraian,
+            'carapembayaran' => $carapembayaran,
+            'namatoko' => $namatoko,
+            'alamattoko' => $alamattoko
+        );
+
+        $this->model_jnspengeluaran->tambah_jnspengeluaran($data, 'tb_jnspengeluaran');
+        redirect('pembantu/index');
     }
 
     public function edit($id)

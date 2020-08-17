@@ -31,6 +31,9 @@
 
   <!-- Custom Theme Style -->
   <link href="<?= base_url('assets/'); ?>build/css/custom.min.css" rel="stylesheet">
+
+  <!-- Sweet Alert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 </head>
 
 <body class="nav-md">

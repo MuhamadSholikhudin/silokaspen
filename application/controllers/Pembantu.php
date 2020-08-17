@@ -1,12 +1,12 @@
 <?php
 
-class Kadin extends CI_Controller{
+class Pembantu extends CI_Controller{
 
     public function __construct()
     {
         parent::__construct();
 
-        if($this->session->userdata('hakakses') != 'kadin'){
+        if($this->session->userdata('hakakses') != 'pembantu'){
 $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Anda Belum Login
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -22,51 +22,71 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
 
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
-        $this->load->view('kadin/dashboard');
+        $this->load->view('pembantu/dashboard');
         $this->load->view('templates_admin/footer.php');
     }
 
-    public function laporan_bku()
+    public function pajak()
+    {
+        $this->load->view('templates_admin/header');
+        $this->load->view('templates_admin/sidebar');
+        $this->load->view('pembantu/pajak');
+        $this->load->view('templates_admin/footer.php');
+    }
+
+    public function transaksi()
     {
 
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
-        $this->load->view('kadin/laporan_bku');
+        $this->load->view('pembantu/transaksi');
         $this->load->view('templates_admin/footer.php');
     }
 
-    public function tambah_aksi()
+    public function tambah_transaksi()
     {
 
-        $nama_brg = $this->input->post('nama_brg');
-        $keterangan = $this->input->post('keterangan');
-        $kategori = $this->input->post('kategori');
-        $harga = $this->input->post('harga');
-        $stok = $this->input->post('stok');
+        $notransaksi = $this->input->post('notransaksi');
+        $kdjnspengeluaran = $this->input->post('kdjnspengeluaran');
+        $kdsaldo = $this->input->post('kdsaldo');
+        $jnstransaksi = $this->input->post('jnstransaksi');
+        $uraian = $this->input->post('uraian');
+        $jumlah = $this->input->post('jumlah');
 
-        $gambar = $_FILES['gambar']['name'];
-        if ($gambar = '') {
-        } else {
-            $config['upload_path'] = './uploads/';
-            $config['allowed_types'] = 'jpg|jpeg|png|gif';
-            $this->load->library('upload', $config);
-            if (!$this->upload->do_upload('gambar')) {
-                echo "Gambar Gagal Di Upload";
-            } else {
-                $gambar = $this->upload->data('file_name');
-            }
-        }
         $data = array(
-            'nama_brg' => $nama_brg,
-            'keterangan' => $keterangan,
-            'kategori' => $kategori,
-            'harga' => $harga,
-            'stok' => $stok,
-            'gambar' => $gambar
+            'notransaksi' => $notransaksi,
+            'kdjnspengeluaran' => $kdjnspengeluaran,
+            'kdsaldo' => $kdsaldo,
+            'jnstransaksi' => $jnstransaksi,
+            'uraian' => $uraian,
+            'jumlah' => $jumlah
         );
 
-        $this->model_barang->tambah_barang($data, 'tb_barang');
-        redirect('admin/data_barang/index');
+        $this->model_transaksi->tambah_transaksi($data, 'tb_transaksi');
+        redirect('pembantu/index');
+    }
+
+    public function tambah_pajak()
+    {
+
+        $nodok = $this->input->post('nodok');
+        $tgldok = $this->input->post('tgldok');
+        $jumlah = $this->input->post('jumlah');
+        $kdjndpengeluaran = $this->input->post('kdjndpengeluaran');
+        $kdsaldo = $this->input->post('kdsaldo');
+        $ppn = $this->input->post('ppn');
+
+        $data = array(
+            'nodok' => $nodok,
+            'tgldok' => $tgldok,
+            'jumlah' => $jumlah,
+            'kdjndpengeluaran' => $kdjndpengeluaran,
+            'kdsaldo' => $kdsaldo,
+            'ppn' => $ppn
+        );
+
+        $this->model_pajak->tambah_pajak($data, 'tb_pajak');
+        redirect('pembantu/index');
     }
 
     public function edit($id)
@@ -103,5 +123,4 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $this->model_barang->update_data($where, $data, 'tb_barang');
         redirect('admin/data_barang/index');
     }
-
 }

@@ -23,14 +23,15 @@ class Auth extends CI_Controller{
                     redirect('auth/login');
             }else {
                 $this->session->set_userdata('username', $auth->username);
+                $this->session->set_userdata('namalengkap', $auth->namalengkap);
                 $this->session->set_userdata('hakakses', $auth->hakakses);
 
                 switch($auth->hakakses){
-                    case 'kadin' : redirect('kadin/dashboard');
+                    case 'kadin' : redirect('kadin/');
                         break;
-                    case 'bendahara' : redirect('bendahara/table');
+                    case 'bendahara' : redirect('bendahara/');
                         break;
-                    case 'pembantu': redirect('pembantu/dashboard');
+                    case 'pembantu': redirect('pembantu/');
                         break;
                     default: break;
                 }
