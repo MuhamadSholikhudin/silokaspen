@@ -1,7 +1,7 @@
 <div class="col-md-3 left_col">
   <div class="left_col scroll-view">
     <div class="navbar nav_title" style="border: 0;">
-      <a href="index" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+      <a href="<?= base_url('') . $this->session->userdata('hakakses') . '/index' ?>" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
     </div>
 
     <div class="clearfix"></div>
@@ -27,27 +27,27 @@
         <ul class="nav side-menu">
           <?php if ($this->session->userdata('hakakses') == 'pembantu') { ?>
             <li>
-              <a href="index">
+              <a href="<?= base_url('pembantu/index') ?>">
                 <i class="fa fa-home"></i> Dashboard
               </a>
             </li>
             <li>
-              <a href="pajak">
+              <a href="<?= base_url('pembantu/data_pajak') ?>">
                 <i class="fa fa-indent"></i> Pajak
               </a>
             </li>
             <li>
-              <a href="transaksi">
+              <a href="<?= base_url('pembantu/data_transaksi') ?>">
                 <i class="fa fa-money"></i> Transaksi
               </a>
             </li>
             <li>
-              <a href="laporan_bku">
+              <a href="<?= base_url('pembantu/laporan_bku') ?>">
                 <i class="fa fa-file"></i> Laporan BKU
               </a>
             </li>
             <li>
-              <a href="laporan_pajak">
+              <a href="<?= base_url('pembantu/laporan_pajak') ?>">
                 <i class="fa fa-file-text"></i> Laporan Pajak
               </a>
             </li>
@@ -56,27 +56,27 @@
             </li>
           <?php } elseif ($this->session->userdata('hakakses') == 'bendahara') { ?>
             <li>
-              <a href="index">
+              <a href="<?= base_url('bendahara/index') ?>">
                 <i class="fa fa-home"></i> Dashboard
               </a>
             </li>
             <li>
-              <a href="saldo_awal">
+              <a href="<?= base_url('bendahara/data_saldo_awal') ?>">
                 <i class="fa fa-archive"></i> Saldo Awal
               </a>
             </li>
             <li>
-              <a href="jenis_pengeluaran">
+              <a href="<?= base_url('bendahara/data_jenis_pengeluaran') ?>">
                 <i class="fa fa-share-square-o"></i> Jenis Pengeluaran
               </a>
             </li>
             <li>
-              <a href="laporan_bku">
+              <a href="<?= base_url('bendahara/laporan_bku') ?>">
                 <i class="fa fa-file"></i> Laporan BKU
               </a>
             </li>
             <li>
-              <a href="laporan_pajak">
+              <a href="<?= base_url('bendahara/laporan_pajak') ?>">
                 <i class="fa fa-file-text"></i> Laporan Pajak
               </a>
             </li>

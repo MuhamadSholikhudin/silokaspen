@@ -6,7 +6,7 @@
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
-          </div>
+        </div>
         </div>
 
         <!-- jQuery -->
@@ -22,13 +22,15 @@
         <!-- Datatables -->
         <script type="text/javascript">
           $(document).ready(function() {
+
+            
             $('#example').DataTable();
           });
         </script>
         <!-- <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script type=" text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script> -->
         <!-- <script type=" text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script> -->
-         <script src="<?= base_url('assets/'); ?>vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="<?= base_url('assets/'); ?>vendors/datatables.net/js/jquery.dataTables.min.js"></script>
         <script src="<?= base_url('assets/'); ?>vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
         <script src="<?= base_url('assets/'); ?>vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
         <script src="<?= base_url('assets/'); ?>vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
@@ -42,7 +44,7 @@
         <script src="<?= base_url('assets/'); ?>vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
         <script src="<?= base_url('assets/'); ?>vendors/jszip/dist/jszip.min.js"></script>
         <script src="<?= base_url('assets/'); ?>vendors/pdfmake/build/pdfmake.min.js"></script>
-        <script src="<?= base_url('assets/'); ?>vendors/pdfmake/build/vfs_fonts.js"></script> 
+        <script src="<?= base_url('assets/'); ?>vendors/pdfmake/build/vfs_fonts.js"></script>
 
         <!-- Custom Theme Scripts -->
         <script src="<?= base_url('assets/'); ?>build/js/custom.min.js"></script>

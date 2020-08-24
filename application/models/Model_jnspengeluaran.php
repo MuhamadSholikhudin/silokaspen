@@ -31,6 +31,12 @@ class Model_jnspengeluaran extends CI_Model
         $this->db->delete($table);
     }
 
+    function get_sub_jnspengeluaran()
+    {
+        $query = $this->db->query("SELECT kdjnspengeluaran  FROM tb_jnspengeluaran");
+        return $query->result();
+    }
+
     public function find($id)
     {
         $result = $this->db->where('id_brg', $id)

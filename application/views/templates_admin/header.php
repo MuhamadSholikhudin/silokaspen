@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>DataTables | Gentelella</title>
+  <title>Sistem Bendahara Disdikpora</title>
 
   <!-- Bootstrap -->
   <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -31,6 +31,9 @@
 
   <!-- Custom Theme Style -->
   <link href="<?= base_url('assets/'); ?>build/css/custom.min.css" rel="stylesheet">
+
+  <!-- JQUERY AJAX -->
+  <!-- <script src="<?= base_url('assets/'); ?>js/jqueryt.min.js"></script> -->
 
   <!-- Sweet Alert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>

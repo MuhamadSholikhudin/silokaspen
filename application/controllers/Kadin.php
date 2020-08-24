@@ -23,7 +23,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
         $this->load->view('kadin/dashboard');
-        $this->load->view('templates_admin/footer.php');
+        $this->load->view('templates_admin/footer');
     }
 
     public function laporan_bku()
@@ -32,7 +32,16 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
         $this->load->view('kadin/laporan_bku');
-        $this->load->view('templates_admin/footer.php');
+        $this->load->view('templates_admin/footer');
+    }
+
+    public function laporan_pajak()
+    {
+
+        $this->load->view('templates_admin/header');
+        $this->load->view('templates_admin/sidebar');
+        $this->load->view('kadin/laporan_bku');
+        $this->load->view('templates_admin/footer');
     }
 
     public function tambah_aksi()
