@@ -130,6 +130,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
 
     public function edit_saldoawal_aksi()
     {
+        $kdsaldolama = $this->input->post('kdsaldolama');
         $kdsaldo = $this->input->post('kdsaldo');
         $tglsaldomasuk = $this->input->post('tglsaldomasuk');
         $periodebulan = $this->input->post('periodebulan');
@@ -149,7 +150,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         );
 
         $where = [
-            'kdsaldo' => $kdsaldo
+            'kdsaldo' => $kdsaldolama
         ];
 
         $this->Model_saldoawal->update_data($where, $data, 'tb_saldoawal');
@@ -173,11 +174,12 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         );
 
         $this->Model_jnspengeluaran->tambah_jnspengeluaran($data, 'tb_jnspengeluaran');
-        redirect('bendahara/index');
+        redirect('bendahara/data_jenis_pengeluaran');
     }
 
     public function edit_jnspengeluaran_aksi()
     {
+        $kdjnspengeluaranlama = $this->input->post('kdjnspengeluaranlama');
         $kdjnspengeluaran = $this->input->post('kdjnspengeluaran');
         $uraian = $this->input->post('uraian');
         $carapembayaran = $this->input->post('carapembayaran');
@@ -193,7 +195,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         );
 
         $where = [
-            'kdjnspengeluaran' => $kdjnspengeluaran
+            'kdjnspengeluaran' => $kdjnspengeluaranlama
         ];
 
         $this->Model_jnspengeluaran->update_data($where, $data, 'tb_jnspengeluaran');

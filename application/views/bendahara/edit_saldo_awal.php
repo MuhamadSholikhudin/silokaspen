@@ -23,6 +23,7 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <input type="number" id="kdsaldo" name="kdsaldo" value="<?= $sal->kdsaldo ?>" class="form-control" required>
+                                        <input type="hidden" id="kdsaldolama" name="kdsaldolama" value="<?= $sal->kdsaldo ?>" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="item form-group">

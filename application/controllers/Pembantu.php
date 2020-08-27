@@ -186,6 +186,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
     public function edit_pajak_aksi()
     {
 
+        $nodoklama = $this->input->post('nodoklama');
         $nodok = $this->input->post('nodok');
         $tgldok = $this->input->post('tgldok');
         $idusername = $this->input->post('idusername');
@@ -236,7 +237,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         );
 
         $this->db->set($data);
-        $this->db->where('nodok', $nodok);
+        $this->db->where('nodok', $nodoklama);
         $this->db->update('tb_pajak');
 
 
@@ -245,6 +246,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
 
     public function edit_transaksi_aksi()
     {
+        $notransaksilama = $this->input->post('notransaksilama');
         $notransaksi = $this->input->post('notransaksi');
         $tgltransaksi = $this->input->post('tgltransaksi');
         $idusername = $this->input->post('idusername');
@@ -289,7 +291,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         );
 
         $this->db->set($data);
-        $this->db->where('notransaksi', $notransaksi);
+        $this->db->where('notransaksi', $notransaksilama);
         $this->db->update('tb_transaksi');
 
 

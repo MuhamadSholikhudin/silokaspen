@@ -43,13 +43,11 @@
                         <tbody>
                             <?php $no = 1; ?>
                             <?php foreach ($laporan as $lap) : ?>
-
-
                                 <tr>
                                     <th scope="row"><?= $no++ ?></th>
+                                    <td><?= $lap->kdsaldo ?></td>
                                     <td><?= $lap->tglsaldomasuk ?></td>
                                     <td>a</td>
-                                    <td><?= $lap->kdsaldo ?></td>
                                     <td><?= $lap->saldomasuk ?></td>
                                     <td><?= $lap->jumlah ?></td>
                                 </tr>

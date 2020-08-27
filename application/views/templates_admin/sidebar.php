@@ -1,7 +1,7 @@
 <div class="col-md-3 left_col">
   <div class="left_col scroll-view">
     <div class="navbar nav_title" style="border: 0;">
-      <a href="<?= base_url('') . $this->session->userdata('hakakses') . '/index' ?>" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+      <a href="<?= base_url('') . $this->session->userdata('hakakses') . '/index' ?>" class="site_title"><i class="fa fa-paw"></i> <span>SILOKASPEN</span></a>
     </div>
 
     <div class="clearfix"></div>

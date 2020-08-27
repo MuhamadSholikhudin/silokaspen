@@ -21,6 +21,7 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <input type="text" id="nodok" name="nodok" value="<?= $paj->nodok ?>" required="required" class="form-control ">
+                                        <input type="hidden" id="nodoklama" name="nodoklama" value="<?= $paj->nodok ?>" required="required" class="form-control ">
                                     </div>
                                 </div>
 

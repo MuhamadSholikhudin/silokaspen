@@ -1,11 +1,7 @@
 <div class="right_col" role="main" style="min-height: 4546px;">
     <div class>
-
-
         <div class="clearfix"></div>
-
         <div class="row">
-
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
@@ -85,35 +81,35 @@
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="ppn">PPN <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="ppn" name="ppn" required="required" class="form-control">
+                                    <input type="number" id="ppn" name="ppn" Min="0" required="required" class="form-control">
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="pph21">PPh21 <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="pph21" name="pph21" required="required" class="form-control">
+                                    <input type="number" id="pph21" name="pph21" Min="0" required="required" class="form-control">
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="pph22">PPH22 <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="pph22" name="pph22" required="required" class="form-control">
+                                    <input type="number" id="pph22" Min="0" name="pph22" Min="0" required="required" class="form-control">
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="pph23">PP23 <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="pph23" name="pph23" required="required" class="form-control">
+                                    <input type="number" id="pph23" name="pph23" Min="0" required="required" class="form-control">
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="pphlain">PPH lain lain<span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="pphlain" name="pphlain" required="required" class="form-control">
+                                    <input type="number" id="pphlain" name="pphlain" Min="0" required="required" class="form-control">
                                 </div>
                             </div>
                             <div class="item form-group">

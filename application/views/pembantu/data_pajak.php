@@ -1,9 +1,6 @@
 <div class="right_col" role="main" style="min-height: 4546px;">
     <div class>
-
-
         <div class="clearfix"></div>
-
         <div class="bg-white p-3">
             <h3 class="text-center">Data Pajak</h3>
             <a href="<?= base_url('pembantu/pajak') ?>" class="btn btn-primary">Tambah Pajak</a>

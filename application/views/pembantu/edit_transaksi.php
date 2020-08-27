@@ -21,6 +21,7 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <input type="text" id="notransaksi" required="required" name="notransaksi" value="<?= $tran->notransaksi ?>" class="form-control ">
+                                        <input type="hidden" id="notransaksilama" required="required" name="notransaksilama" value="<?= $tran->notransaksi ?>" class="form-control ">
                                     </div>
                                 </div>
                                 <div class="item form-group">

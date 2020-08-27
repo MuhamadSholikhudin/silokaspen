@@ -23,6 +23,7 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <input type="text" id="kdjndpengeluaran" name="kdjnspengeluaran" value="<?= $jns->kdjnspengeluaran ?>" required="required" class="form-control ">
+                                        <input type="hidden" id="kdjnspengeluaranlama" name="kdjnspengeluaranlama" value="<?= $jns->kdjnspengeluaran ?>" required="required" class="form-control ">
                                     </div>
                                 </div>
 
