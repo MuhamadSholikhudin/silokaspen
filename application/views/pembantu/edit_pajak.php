@@ -58,12 +58,13 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <select class="form-control" id="kdjnspengeluaran" name="kdjnspengeluaran">
-                                            <option>Pilih Kode Pengeluaran</option>
-                                            <?php foreach ($kdjnspengeluaran as $kdjns) : ?>
+                                        <?php foreach ($kdjnspengeluaran as $kdjns) : ?>
+                                            <?php if ($kdjns->kdjnspengeluaran == $paj->kdjnspengeluaran) : ?>
+                                                <option value="<?= $kdjns->kdjnspengeluaran ?>" selected> <?= $kdjns->kdjnspengeluaran ?> </option>
+                                            <?php else : ?>
                                                 <option value="<?= $kdjns->kdjnspengeluaran ?>"> <?= $kdjns->kdjnspengeluaran ?> </option>
-                                            <?php endforeach; ?>
-                                            <option value="1"> 1 </option>
-
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
                                         </select>
                                     </div>
                                 </div>
@@ -72,12 +73,13 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <select class="form-control" id="kdsaldo" name="kdsaldo">
-                                            <option>Pilih Kode Saldo</option>
-                                            <?php foreach ($kdsaldo as $kd) : ?>
-                                                <option value="<?= $kd->kdsaldo ?>"> <?= $kd->kdsaldo ?> </option>
+                                        <?php foreach ($kdsaldo as $kd) : ?>
+                                                <?php if ($kd->kdsaldo == $paj->kdsaldo) : ?>
+                                                    <option value="<?= $kd->kdsaldo ?>" selected> <?= $kd->kdsaldo ?> </option>
+                                                <?php else : ?>
+                                                    <option value="<?= $kd->kdsaldo ?>"> <?= $kd->kdsaldo ?> </option>
+                                                <?php endif; ?>
                                             <?php endforeach; ?>
-                                            <option value="1"> 1 </option>
-
                                         </select>
                                     </div>
                                 </div>
