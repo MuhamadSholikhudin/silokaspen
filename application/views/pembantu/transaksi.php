@@ -49,12 +49,12 @@
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="kdsaldo">Kode Saldo <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <select class="form-control" name="kdsaldo">
-                                        <option value="">Choose option</option>
-                                        <option value="">Option one</option>
-                                        <option value="">Option two</option>
-                                        <option value="">Option three</option>
-                                        <option value="">Option four</option>
+                                <select class="form-control" id="kdsaldo" name="kdsaldo">
+                                        <option>Pilih Kode Saldo</option>
+                                        <?php foreach ($kdsaldo as $kd) : ?>
+                                            <option value="<?= $kd->kdsaldo ?>"> <?= $kd->kdsaldo ?> </option>
+                                        <?php endforeach; ?>
+                                        <option value="1"> 1 </option>
                                     </select>
                                 </div>
                             </div>
@@ -62,12 +62,12 @@
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="kdjnspengeluaran">Kode Jenis Pengeluaran <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <select class="form-control" name="kdjnspengeluaran">
-                                        <option value="">Choose option</option>
-                                        <option value="">Option one</option>
-                                        <option value="">Option two</option>
-                                        <option value="">Option three</option>
-                                        <option value="">Option four</option>
+                                <select class="form-control" id="kdjnspengeluaran" name="kdjnspengeluaran">
+                                        <option>Pilih Kode Pengeluaran</option>
+                                        <?php foreach ($kdjnspengeluaran as $kdjns) : ?>
+                                            <option value="<?= $kdjns->kdjnspengeluaran ?>"> <?= $kdjns->kdjnspengeluaran ?> </option>
+                                        <?php endforeach; ?>
+                                        <option value="1"> 1 </option>
                                     </select>
                                 </div>
                             </div>

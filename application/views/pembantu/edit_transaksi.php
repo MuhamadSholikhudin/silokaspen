@@ -51,11 +51,13 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <select class="form-control" name="kdsaldo">
-                                            <option value="">Choose option</option>
-                                            <option value="">Option one</option>
-                                            <option value="">Option two</option>
-                                            <option value="">Option three</option>
-                                            <option value="">Option four</option>
+                                            <?php foreach ($kdsaldo as $kd) : ?>
+                                                <?php if ($kd->kdsaldo == $tran->kdsaldo) : ?>
+                                                    <option value="<?= $kd->kdsaldo ?>" selected> <?= $kd->kdsaldo ?> </option>
+                                                <?php else : ?>
+                                                    <option value="<?= $kd->kdsaldo ?>"> <?= $kd->kdsaldo ?> </option>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
                                         </select>
                                     </div>
                                 </div>
@@ -64,11 +66,13 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <select class="form-control" name="kdjnspengeluaran">
-                                            <option value="">Choose option</option>
-                                            <option value="">Option one</option>
-                                            <option value="">Option two</option>
-                                            <option value="">Option three</option>
-                                            <option value="">Option four</option>
+                                        <?php foreach ($kdjnspengeluaran as $kdjns) : ?>
+                                            <?php if ($kdjns->kdjnspengeluaran == $tran->kdjnspengeluaran) : ?>
+                                                <option value="<?= $kdjns->kdjnspengeluaran ?>" selected> <?= $kdjns->kdjnspengeluaran ?> </option>
+                                            <?php else : ?>
+                                                <option value="<?= $kdjns->kdjnspengeluaran ?>"> <?= $kdjns->kdjnspengeluaran ?> </option>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
                                         </select>
                                     </div>
                                 </div>
@@ -84,7 +88,7 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="uraian">Uraian <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <textarea type="text" id="uraian" name="uraian" value="<?= $tran->uraian ?>" required="required" class="form-control"></textarea>
+                                        <textarea type="text" id="uraian" name="uraian"  required="required" class="form-control"><?= $tran->uraian ?></textarea>
                                     </div>
                                 </div>
                                 <div class="item form-group">
