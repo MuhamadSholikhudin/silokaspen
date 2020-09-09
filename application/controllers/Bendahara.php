@@ -97,7 +97,6 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         FROM tb_saldoawal JOIN tb_transaksi ON  tb_saldoawal.kdsaldo = tb_transaksi.kdsaldo
         JOIN tb_pajak ON tb_saldoawal.kdsaldo = tb_pajak.kdsaldo ")->result();
 
-        
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
         $this->load->view('bendahara/laporan_bku', $data);
