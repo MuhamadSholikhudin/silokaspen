@@ -24,7 +24,16 @@
                                     <input type="text" id="kdjndpengeluaran" name="kdjnspengeluaran" required="required" class="form-control ">
                                 </div>
                             </div>
-
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="carapembayaran">cara Pembayaran <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <select class="form-control" id="carapembayaran" name="carapembayaran">
+                                        <option value="tunai">Tunai</option>
+                                        <option value="nontunai">Non-Tunai</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="uraian">Uraian <span class="required">*</span>
                                 </label>
@@ -32,13 +41,8 @@
                                     <textarea type="text" id="uraian" name="uraian" required="required" class="form-control"></textarea>
                                 </div>
                             </div>
-                            <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="carapembayaran">cara Pembayaran <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 ">
-                                    <textarea type="text" id="carapembayaran" name="carapembayaran" required="required" class="form-control"></textarea>
-                                </div>
-                            </div>
+
+
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="namatoko">Nama Toko <span class="required">*</span>
                                 </label>
