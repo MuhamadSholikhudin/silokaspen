@@ -76,6 +76,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
     {
         $data['kdjnspengeluaran'] = $this->Model_jnspengeluaran->tampil_data()->result();
         $data['kdsaldo'] = $this->db->query("SELECT kdsaldo FROM tb_saldoawal ")->result();
+        $data['transaksi'] = $this->db->query("SELECT * FROM tb_transaksi ")->result();
 
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');

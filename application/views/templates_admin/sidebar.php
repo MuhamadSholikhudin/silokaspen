@@ -43,7 +43,7 @@
               </a>
             </li>
             <li>
-              <a href="<?= base_url('pembantu/laporan_bku') ?>">
+              <a href="<?= base_url('pembantu/bku') ?>">
                 <i class="fa fa-file"></i> Laporan BKU
               </a>
             </li>

@@ -16,11 +16,18 @@
                         <br>
                         <form id="demo-form2" action="<?= base_url('pembantu/tambah_transaksi') ?>" method="POST" enctype="multipart/form-data" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
 
-                            <div class="item form-group">
+                            <!-- <div class="item form-group ">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="notransaksi">Nomer Transaksi <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <input type="text" id="notransaksi" required="required" name="notransaksi" class="form-control ">
+                                </div>
+                            </div> -->
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="kode_rekening">Kode Rekening <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <input type="number" id="kode_rekening" required="required" name="kode_rekening" class="form-control ">
                                 </div>
                             </div>
                             <div class="item form-group">
@@ -38,11 +45,11 @@
                                 </div>
                             </div>
 
-                            <div class="item form-group">
+                            <div class="item form-group d-none">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="idusername">Id Username <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="kdsaldo" name="idusername" required="required" class="form-control ">
+                                    <input type="text" id="idusername" name="idusername" value="<?= $this->session->userdata('idusername') ?>" required="required" class="form-control ">
                                 </div>
                             </div>
                             <div class="item form-group">
@@ -54,7 +61,6 @@
                                         <?php foreach ($kdsaldo as $kd) : ?>
                                             <option value="<?= $kd->kdsaldo ?>"> <?= $kd->kdsaldo ?> </option>
                                         <?php endforeach; ?>
-                                        <option value="1"> 1 </option>
                                     </select>
                                 </div>
                             </div>

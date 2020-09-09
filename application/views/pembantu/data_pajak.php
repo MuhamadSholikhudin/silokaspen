@@ -30,7 +30,7 @@
                                     <td><?= $no++ ?> </td>
                                     <td><a href="<?= base_url('pembantu/edit_pajak/') .  $paj->nodok  ?>"><?= $paj->nodok ?></a></td>
                                     <td><?= $paj->tgldok ?></td>
-                                    <td><?= $paj->kdjnspengeluaran ?></td>
+                                    <td><?= $paj->notransaksi ?></td>
                                     <td><?= $paj->kdsaldo ?></td>
                                     <td><?= $paj->ppn ?></td>
                                     <td><?= $paj->pph21 ?></td>

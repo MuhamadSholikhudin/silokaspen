@@ -28,19 +28,20 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <div class="table-response">
+                    <div class="table-responsive">
 
 
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>No</th>
                                     <th>Kode Rekening</th>
                                     <th>Uraiaan</th>
                                     <th>Tanggal</th>
                                     <th>No BKU</th>
                                     <th>Tunai</th>
                                     <th>Non Tunai</th>
+                                    <th>Terima UP</th>
 
                                     <th>Nama Toko</th>
                                     <th>Alamat Toko</th>
@@ -52,26 +53,52 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <tr>
+                                        <th scope="row"></th>
+                                        <td></td>
+                                        <td>Uraian</td>
+                                        <td>Tanggal</td>
+
+                                        <td ></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Panjar</td>
+
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>pph23</td>
+                                        <td>pphlain</td>
+                                      
+                                    </tr>
                                 <?php $no = 1; ?>
                                 <?php foreach ($laporan as $lap) : ?>
                                     <tr>
                                         <th scope="row"><?= $no++ ?></th>
                                         <td></td>
                                         <td><?= $lap->uraian ?></td>
-                                        <td><?= $lap->tglsaldomasuk ?></td>
+                                        <td><?= $lap->tgltransaksi ?></td>
 
-                                        <td><?= $lap->kdsaldo ?></td>
-                                        <td>Tunai</td>
-                                        <td>Non-Tunai</td>
-                                        <td>Nama Toko</td>
-                                        <td>Alamat Toko</td>
-                                        <td>ppn</td>
-                                        <td>pph21</td>
-                                        <td>pph22</td>
+                                        <td><?= $lap->notransaksi ?></td>
+                                        <?php if($lap->carapembayaran == 'tunai') {?>
+                                              <td><?= $lap->jumlah ?></td>
+                                              <td>0</td>                                 
+                                        <?php } elseif($lap->carapembayaran == 'nontunai'){ ?>
+                                            <td>0</td>  
+                                            <td><?= $lap->jumlah ?></td>
+                                            <?php } ?>
+                                        <td></td>
+                                        <td><?= $lap->namatoko ?></td>
+                                        <td><?= $lap->alamattoko ?></td>
+                                        <td><?= $lap->ppn ?></td>
+                                        <td><?= $lap->pph21 ?></td>
+                                        <td><?= $lap->pph22 ?></td>
                                         <!-- <td>pph23</td>
                                         <td>pphlain</td> -->
-                                        <td><?= $lap->saldomasuk ?></td>
-                                        <td><?= $lap->jumlah ?></td>
+                                        <td><?= $lap->pph23 ?></td>
+                                        <td><?= $lap->pphlain ?></td>
                                     </tr>
                                 <?php endforeach; ?>
 
@@ -94,10 +121,10 @@
                                     <td>5</td>
                                     <td>6</td>
                                     <td>7</td>
+                                    <td>8</td>
                                 </tr>
                                 <tr>
                                     <td colspan="5" class="text-center"> Saldo/disetor Bendahara pengeluaran</td>
-
                                     <td>Saldo</td>
                                     <td></td>
                                     <td>Sisa</td>
@@ -107,32 +134,44 @@
                                     <td>4</td>
                                     <td>5</td>
                                     <td>6</td>
+                                    <td>7</td>
+
                                 </tr>
 
                             </tbody>
                         </table>
                         <div class="row">
-                            <div class="col-sm-6">
-                                <br>
-                                <h6>Mengetahui</h6>
-                                <h6>Pejabat Pelaksana teknis Kegiatan</h6>
-                                <br>
-                                <br>
-                                <br>
+                            <div class="col-sm-8">
+                            <table>
+                            <tbody>
+                               <tr><td>&nbsp; </td></tr>
+                                <tr> <td>  Mengetahui</td></tr>
+                                <tr><td>Pejabat Pelaksana teknis </td></tr>
+                                <tr><td>&nbsp; </td></tr>
+                                <tr><td>&nbsp; </td></tr>
+                                <tr><td>&nbsp; </td></tr>
+                                <tr><td>&nbsp; </td></tr>
 
-                                <h6>ENDANG LISTIYANI, SE</h6>
-                                <h6>NIP. 19640726 198603 2 012</h6>
+                                <tr><td>ENDANG LISTIYANI, SE</td></tr>
+                                <tr><td>NIP. 19640726 198603 2 012</td></tr>
+                                </tbody>
+                            </table>
+                              
                             </div>
-                            <div class="col-sm-6">
-                                <h6>Kudus, 30 Desember 2019</h6>
-                                <h6>Pembantu Bendahara Pengeluaran Belanja Langsung</h6>
-                                <h6>Disdikpora Kabupaten Kudus</h6>
-                                <br>
-                                <br>
-                                <br>
+                            <div class="col-sm-4">
+                            <table>
+                            <tbody>
+                               <tr><td>Kudus,  30 Desember 2019 </td></tr>
+                                <tr> <td> Pembantu Bendahara Pengeluaran Belanja Langsung</td></tr>
+                                <tr><td>Disdikpora Kabupaten Kudus </td></tr>
+                                <tr><td>&nbsp; </td></tr>
+                                <tr><td><button class="btn-sm btn-primary" type="submit">ACC</button> </td></tr>
+                                <tr><td>&nbsp; </td></tr>
 
-                                <h6>DWI BUDIHARTANTI</h6>
-                                <h6>NIP. 19860317 201406 2 002</h6>
+                                <tr><td>DWI BUDIHARTANTI</td></tr>
+                                <tr><td>NIP. 19640726 198603 2 012</td></tr>
+                                </tbody>
+                            </table>
                             </div>
                         </div>
                     </div>

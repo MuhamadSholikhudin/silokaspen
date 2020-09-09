@@ -19,7 +19,19 @@
                                     <input type="text" id="nodok" name="nodok" required="required" class="form-control ">
                                 </div>
                             </div>
-
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="notransaksi">Nomer Transaksi <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 ">
+                                    <select class="form-control" id="notransaksi" name="notransaksi">
+                                        <option value="a">a</option>
+                                        <option value="b">b</option>
+                                        <?php foreach($transaksi as $tran) : ?>
+                                            <option value="<?= $tran->notransaksi ?>"><?= $tran->notransaksi ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Dokumen <span class="required">*</span>
                                 </label>
@@ -57,9 +69,6 @@
                                         <?php foreach ($kdjnspengeluaran as $kdjns) : ?>
                                             <option value="<?= $kdjns->kdjnspengeluaran ?>"> <?= $kdjns->kdjnspengeluaran ?> </option>
                                         <?php endforeach; ?>
-                                        <option value="1"> 1 </option>
-
-
                                     </select>
                                 </div>
                             </div>
