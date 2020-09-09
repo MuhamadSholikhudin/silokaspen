@@ -28,9 +28,10 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
 
     public function saldo_awal()
     {
+        $data['bulan'] = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
-        $this->load->view('bendahara/saldo_awal');
+        $this->load->view('bendahara/saldo_awal', $data);
         $this->load->view('templates_admin/footer');
     }
 
@@ -48,6 +49,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
     {
         $where = array('kdsaldo' => $kdsaldo);
         $data['saldo'] = $this->Model_saldoawal->edit_saldoawal($where, 'tb_saldoawal')->result();
+        $data['bulan'] = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
@@ -69,7 +71,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
     {
         $where = array('kdjnspengeluaran' => $kdjnspengeluaran);
         $data['jnspengeluaran'] = $this->Model_jnspengeluaran->edit_jnspengeluaran($where, 'tb_jnspengeluaran')->result();
-
+$data['carapem'] = ['tunai', 'nontunai'];
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
         $this->load->view('bendahara/edit_jenis_pengeluaran', $data);
@@ -86,16 +88,24 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $this->load->view('templates_admin/footer');
     }
 
-    public function laporan_bku()
+
+    public function bku()
     {
-        $data['laporan'] = $this->db->query(" SELECT tb_saldoawal.tglsaldomasuk, tb_saldoawal.kdsaldo, tb_transaksi.uraian, tb_saldoawal.saldomasuk, tb_transaksi.jumlah, tb_pajak.jumlah 
-        FROM tb_saldoawal JOIN tb_transaksi ON  tb_saldoawal.kdsaldo = tb_transaksi.kdsaldo 
-        JOIN tb_pajak ON tb_saldoawal.kdsaldo = tb_pajak.kdsaldo")->result();
+$data['bku'] = $this->db->query("SELECT * FROM tb_saldoawal ORDER BY tglsaldomasuk DESC")->result();
+        $this->load->view('templates_admin/header');
+        $this->load->view('templates_admin/sidebar');
+        $this->load->view('bendahara/data_laporan_bku', $data);
+        $this->load->view('templates_admin/footer');
+    }
+
+    public function laporan_bku($kdsaldo)
+    {
+        $data['laporan'] = $this->db->query(" SELECT tb_saldoawal.tglsaldomasuk, tb_saldoawal.kdsaldo, tb_transaksi.uraian, tb_saldoawal.saldomasuk, tb_transaksi.jumlah
+        FROM tb_saldoawal JOIN tb_transaksi ON  tb_saldoawal.kdsaldo = tb_transaksi.kdsaldo WHERE tb_saldoawal.kdsaldo = $kdsaldo ")->result();
 
         $data['jumtot'] = $this->db->query(" SELECT SUM(saldomasuk) as tot FROM tb_saldoawal ")->result();
-        $data['jumkel'] = $this->db->query(" SELECT SUM(tb_transaksi.jumlah OR tb_pajak.jumlah) as totkel 
-        FROM tb_saldoawal JOIN tb_transaksi ON  tb_saldoawal.kdsaldo = tb_transaksi.kdsaldo
-        JOIN tb_pajak ON tb_saldoawal.kdsaldo = tb_pajak.kdsaldo ")->result();
+        $data['jumkel'] = $this->db->query(" SELECT SUM(tb_transaksi.jumlah) as totkel 
+        FROM tb_saldoawal JOIN tb_transaksi ON  tb_saldoawal.kdsaldo = tb_transaksi.kdsaldo ")->result();
 
         
         $this->load->view('templates_admin/header');

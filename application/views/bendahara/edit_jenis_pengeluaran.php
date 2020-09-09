@@ -35,12 +35,22 @@
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="carapembayaran">cara Pembayaran <span class="required">*</span>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="carapembayaran">Cara Pembayaran <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <textarea type="text" id="carapembayaran" name="carapembayaran" required="required" class="form-control"><?= $jns->carapembayaran ?></textarea>
+                                        <select class="form-control" id="carapembayaran" name="carapembayaran">
+                                            <option value="<?= $jns->carapembayaran ?>"> <?= $jns->carapembayaran ?> </option>
+                                            <?php foreach ($carapem as $car) : ?>
+                                                <?php if ($car == $jns->carapembayaran) : ?>
+                                                    <option value="<?= $car ?>"> <?= $car ?> </option>
+                                                <?php else : ?>
+                                                    <option value="<?= $car ?>"> <?= $car ?> </option>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </select>
                                     </div>
                                 </div>
+
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="namatoko">Nama Toko <span class="required">*</span>
                                     </label>

@@ -2,7 +2,7 @@
     <div class>
         <div class="page-title">
             <div class="title_left">
-                <h3>Users <small>Some examples to get you started</small></h3>
+                <h3>Selamat datang, <?= $this->session->userdata('namalengkap') ?> <small>Pembantu Bendahara Disdikpora</small></h3>
             </div>
 
             <div class="title_right">

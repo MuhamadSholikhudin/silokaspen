@@ -41,19 +41,21 @@
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align">Periode bulan <span class="required">*</span>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="periodebulan">Periode bulan <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input id="periodebulan" name="periodebulan" value="<?= $sal->periodebulan ?>" class="date-picker form-control" placeholder="dd-mm-yyyy" type="text" required onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
-                                        <script>
-                                            function timeFunctionLong(input) {
-                                                setTimeout(function() {
-                                                    input.type = 'text';
-                                                }, 60000);
-                                            }
-                                        </script>
-                                    </div>
+                                        <select class="form-control" id="periodebulan" name="periodebulan">
+                                            <?php foreach ($bulan as $bul) : ?>
+                                                <?php if ($bul == $sal->periodebulan) : ?>
+                                                    <option value="<?= $bul ?>"><?= $bul ?></option>
+                                                <?php else : ?>
+                                                    <option value="<?= $bul ?>"><?= $bul ?></option>
 
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+
+                                        </select>
+                                    </div>
                                 </div>
                                 <!-- <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align">Periode tahun <span class="required">*</span>
