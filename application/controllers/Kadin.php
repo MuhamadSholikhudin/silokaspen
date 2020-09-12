@@ -26,22 +26,96 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $this->load->view('templates_admin/footer');
     }
 
-    public function laporan_bku()
+    public function bku()
     {
-
+        $data['bku'] = $this->db->query("SELECT * FROM tb_saldoawal WHERE status = (1 OR 2) ORDER BY tglsaldomasuk DESC")->result();
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
-        $this->load->view('kadin/laporan_bku');
+        $this->load->view('kadin/data_laporan_bku', $data);
         $this->load->view('templates_admin/footer');
     }
 
-    public function laporan_pajak()
+    public function laporan_bku($kdsaldo)
     {
+        $data['jumif'] = $this->db->get_where('tb_saldoawal', ['kdsaldo' => $kdsaldo])->result();
 
-        $this->load->view('templates_admin/header');
-        $this->load->view('templates_admin/sidebar');
-        $this->load->view('kadin/laporan_bku');
-        $this->load->view('templates_admin/footer');
+
+            $data['laporan'] = $this->db->query(" SELECT tb_transaksi.kode_rekening, tb_transaksi.uraian, tb_transaksi.tgltransaksi, tb_transaksi.notransaksi, tb_transaksi.jumlah, tb_jnspengeluaran.carapembayaran, tb_jnspengeluaran.namatoko, tb_jnspengeluaran.alamattoko, tb_pajak.ppn, tb_pajak.pph21, tb_pajak.pph22, tb_pajak.pph23, tb_pajak.pphlain
+        FROM tb_transaksi JOIN tb_saldoawal ON  tb_saldoawal.kdsaldo = tb_transaksi.kdsaldo 
+        JOIN tb_jnspengeluaran ON tb_transaksi.kdjnspengeluaran = tb_jnspengeluaran.kdjnspengeluaran
+        JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi
+        WHERE tb_saldoawal.kdsaldo = $kdsaldo ")->result();
+
+            $data['jumtot'] = $this->db->query(" SELECT SUM(saldomasuk) as tot FROM tb_saldoawal ")->result();
+            $data['jumkel'] = $this->db->query(" SELECT SUM(tb_transaksi.jumlah) as totkel 
+        FROM tb_saldoawal JOIN tb_transaksi ON  tb_saldoawal.kdsaldo = tb_transaksi.kdsaldo ")->result();
+
+            $data['idsaldo'] = $this->db->query(" SELECT kdsaldo FROM tb_saldoawal WHERE kdsaldo = $kdsaldo LIMIT 1")->result();
+            $this->load->view('templates_admin/header');
+            $this->load->view('templates_admin/sidebar');
+            $this->load->view('kadin/laporan_bku', $data);
+            $this->load->view('templates_admin/footer');
+
+
+
+
+    }
+
+    public function acc_laporan()
+    {
+        $notransaksi = $this->input->post('notransaksi');
+        $id = $this->input->post('kdsaldo');
+        $result = array();
+        foreach ($notransaksi as $key => $val) {
+            $result[] = array(
+                "notransaksi" => $notransaksi[$key],
+                "status" => $_POST['status'][$key]
+            );
+        }
+        $this->db->update_batch('tb_transaksi', $result, 'notransaksi');
+
+
+        $data = [
+            'status' => 2
+
+        ];
+        $where = [
+            'kdsaldo' => $id
+        ];
+
+        $this->Model_saldoawal->update_data($where, $data, 'tb_saldoawal');
+
+
+        redirect('kadin/laporan_bku/' . $id);
+    }
+
+
+    public function un_acc()
+    {
+        $notransaksi = $this->input->post('notransaksi');
+        $id = $this->input->post('kdsaldo');
+        $result = array();
+        foreach ($notransaksi as $key => $val) {
+            $result[] = array(
+                "notransaksi" => $notransaksi[$key],
+                "status" => $_POST['status'][$key]
+            );
+        }
+        $this->db->update_batch('tb_transaksi', $result, 'notransaksi');
+
+
+        $data = [
+            'status' => 1
+
+        ];
+        $where = [
+            'kdsaldo' => $id
+        ];
+
+        $this->Model_saldoawal->update_data($where, $data, 'tb_saldoawal');
+
+
+        redirect('kadin/laporan_bku/' . $id);
     }
 
     public function tambah_aksi()

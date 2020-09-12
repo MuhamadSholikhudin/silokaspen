@@ -20,13 +20,13 @@
                                 </div>
                             </div>
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="notransaksi">Nomer Transaksi <span class="required">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="idnotransaksi">Nomer Transaksi <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <select class="form-control" id="notransaksi" name="notransaksi">
-                                        <option value="a">a</option>
-                                        <option value="b">b</option>
-                                        <?php foreach($transaksi as $tran) : ?>
+                                    <select class="form-control" id="idnotransaksi" name="notransaksi">
+                                        <option value="">Pilih Nomer Transaksi</option>
+
+                                        <?php foreach ($transaksi as $tran) : ?>
                                             <option value="<?= $tran->notransaksi ?>"><?= $tran->notransaksi ?></option>
                                         <?php endforeach ?>
                                     </select>
@@ -50,17 +50,18 @@
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="idusername">ID Username <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="idusername" name="idusername" value="<?= $this->session->userdata('username') ?>" required="required" class="form-control" readonly>
+                                    <input type="hidden" name="idusername" value="<?= $this->session->userdata('idusername') ?>" required="required" class="form-control" readonly>
+                                    <input type="text" id="idusername" value="<?= $this->session->userdata('username') ?>" required="required" class="form-control" readonly>
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <!-- <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="jumlah">Jumlah <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <input type="number" id="jumlah" name="jumlah" required="required" class="form-control">
                                 </div>
-                            </div>
-                            <div class="item form-group">
+                            </div> -->
+                            <!-- <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="kdjnspengeluaran">Kode Jenis Pengeluaran <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
@@ -71,20 +72,14 @@
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="kdsaldo">Kode Saldo <span class="required">*</span>
                                 </label>
-                                <div class="col-md-6 col-sm-6 ">
-                                    <select class="form-control" id="kdsaldo" name="kdsaldo">
-                                        <option>Pilih Kode Saldo</option>
-                                        <?php foreach ($kdsaldo as $kd) : ?>
-                                            <option value="<?= $kd->kdsaldo ?>"> <?= $kd->kdsaldo ?> </option>
-                                        <?php endforeach; ?>
-                                        <option value="1"> 1 </option>
-
-                                    </select>
-                                </div>
+<div class="col-md-6 col-sm-6 ">
+                                <input type="number" name="kdsaldo" id="kdsaldo" class="form-control">
+                                <input type="text" name="sisa" id="sisa" class="form-control" readonly>
+</div>
                             </div>
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="ppn">PPN <span class="required">*</span>

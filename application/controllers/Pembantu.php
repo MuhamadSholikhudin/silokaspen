@@ -40,7 +40,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
     public function pajak()
     {
         $data['kdjnspengeluaran'] = $this->Model_jnspengeluaran->tampil_data()->result();
-        $data['kdsaldo'] = $this->db->query("SELECT kdsaldo FROM tb_saldoawal ")->result();
+        $data['transaksi'] = $this->db->query("SELECT * FROM tb_transaksi WHERE notransaksi NOT IN(SELECT notransaksi FROM tb_pajak)")->result();
 
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
@@ -75,7 +75,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
     public function transaksi()
     {
         $data['kdjnspengeluaran'] = $this->Model_jnspengeluaran->tampil_data()->result();
-        $data['kdsaldo'] = $this->db->query("SELECT kdsaldo FROM tb_saldoawal ")->result();
+        $data['kdsaldo'] = $this->db->query("SELECT kdsaldo FROM tb_saldoawal WHERE status = 0")->result();
         $data['transaksi'] = $this->db->query("SELECT * FROM tb_transaksi ")->result();
 
         $this->load->view('templates_admin/header');
@@ -107,9 +107,12 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $idusername = $this->input->post('idusername');
         $kdsaldo = $this->input->post('kdsaldo');
         $kdjnspengeluaran = $this->input->post('kdjnspengeluaran');
-        $jnstransaksi = $this->input->post('jnstransaksi');
+        // $jnstransaksi = $this->input->post('jnstransaksi');
         $uraian = $this->input->post('uraian');
         $jumlah = $this->input->post('jumlah');
+        $sisa = $this->input->post('sisa');
+
+        $jumlahsaldosisa = $sisa - $jumlah;
 
         $gambar = $_FILES['gambar']['name'];
         if ($gambar = '') {
@@ -130,14 +133,24 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
             'idusername' => $idusername,
             'kdsaldo' => $kdsaldo,
             'kdjnspengeluaran' => $kdjnspengeluaran,
-            'jnstransaksi' => $jnstransaksi,
+            // 'jnstransaksi' => $jnstransaksi,
             'uraian' => $uraian,
             'jumlah' => $jumlah,
             'gambar' => $gambar
         );
 
+        $datat = array(
+            'jumlahsaldosisa' => $jumlahsaldosisa
+        );
+
+        $wheret = array(
+            'kdsaldo' => $kdsaldo
+        );
+
+        $this->Model_saldoawal->update_datat($wheret, $datat, 'tb_saldoawal');
+
         $this->Model_transaksi->tambah_transaksi($data, 'tb_transaksi');
-        redirect('pembantu/index');
+        redirect('pembantu/data_transaksi');
     }
 
     public function tambah_pajak()
@@ -146,14 +159,20 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $nodok = $this->input->post('nodok');
         $tgldok = $this->input->post('tgldok');
         $idusername = $this->input->post('idusername');
-        $jumlah = $this->input->post('jumlah');
-        $kdjnspengeluaran = $this->input->post('kdjnspengeluaran');
+        // $jumlah = $this->input->post('jumlah');
+        $notransaksi = $this->input->post('notransaksi');
         $kdsaldo = $this->input->post('kdsaldo');
         $ppn = $this->input->post('ppn');
         $pph21 = $this->input->post('pph21');
         $pph22 = $this->input->post('pph22');
         $pph23 = $this->input->post('pph23');
         $pphlain = $this->input->post('pphlain');
+        $jumlah = $ppn + $pph21 + $pph22 + $pph23 + $pphlain ;
+
+        $sisa = $this->input->post('sisa');
+        // $kdsaldo = $this->input->post('kdsaldo');
+
+        $jumlahsaldosisa = $sisa - $jumlah;
 
         $gambar = $_FILES['gambar']['name'];
         if ($gambar = '') {
@@ -173,7 +192,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
             'tgldok' => $tgldok,
             'idusername' => $idusername,
             'jumlah' => $jumlah,
-            'kdjnspengeluaran' => $kdjnspengeluaran,
+            'notransaksi' => $notransaksi,
             'kdsaldo' => $kdsaldo,
             'ppn' => $ppn,
             'pph21' => $pph21,
@@ -182,6 +201,16 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
             'pphlain' => $pphlain,
             'gambar' => $gambar
         );
+
+        $datat = array(
+            'jumlahsaldosisa' => $jumlahsaldosisa
+        );
+
+        $wheret = array(
+            'kdsaldo' => $kdsaldo
+        );
+
+        $this->Model_saldoawal->update_datat($wheret, $datat, 'tb_saldoawal');
 
         $this->Model_pajak->tambah_pajak($data, 'tb_pajak');
         redirect('pembantu/index');
@@ -243,7 +272,6 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $this->db->set($data);
         $this->db->where('nodok', $nodoklama);
         $this->db->update('tb_pajak');
-
 
         redirect('pembantu/data_pajak/');
     }
@@ -359,5 +387,23 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
 
         $this->model_barang->update_data($where, $data, 'tb_barang');
         redirect('admin/data_barang/index');
+    }
+
+
+ 
+
+
+    function get_sub_kdsaldop()
+    {
+        $notransaksi = $this->input->post('id', TRUE);
+        $data = $this->Model_saldoawal->get_sub_kdsaldop($notransaksi)->result();
+        echo json_encode($data);
+    }
+
+    function get_sub_kdsaldo()
+    {
+        $kdsaldo = $this->input->post('id', TRUE);
+        $data = $this->Model_saldoawal->get_sub_kdsaldo($kdsaldo)->result();
+        echo json_encode($data);
     }
 }

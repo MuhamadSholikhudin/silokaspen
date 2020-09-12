@@ -110,10 +110,28 @@ $data['bku'] = $this->db->query("SELECT * FROM tb_saldoawal ORDER BY tglsaldomas
         $data['jumkel'] = $this->db->query(" SELECT SUM(tb_transaksi.jumlah) as totkel 
         FROM tb_saldoawal JOIN tb_transaksi ON  tb_saldoawal.kdsaldo = tb_transaksi.kdsaldo ")->result();
 
+$data['idsaldo'] = $this->db->query(" SELECT kdsaldo FROM tb_saldoawal WHERE kdsaldo = $kdsaldo LIMIT 1")->result();
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
         $this->load->view('bendahara/laporan_bku', $data);
         $this->load->view('templates_admin/footer');
+    }
+
+    public function cetak_bku($kdsaldo)
+    {
+        $data['laporan'] = $this->db->query(" SELECT tb_transaksi.kode_rekening, tb_transaksi.uraian, tb_transaksi.tgltransaksi, tb_transaksi.notransaksi, tb_transaksi.jumlah, tb_jnspengeluaran.carapembayaran, tb_jnspengeluaran.namatoko, tb_jnspengeluaran.alamattoko, tb_pajak.ppn, tb_pajak.pph21, tb_pajak.pph22, tb_pajak.pph23, tb_pajak.pphlain
+        FROM tb_transaksi JOIN tb_saldoawal ON  tb_saldoawal.kdsaldo = tb_transaksi.kdsaldo 
+        JOIN tb_jnspengeluaran ON tb_transaksi.kdjnspengeluaran = tb_jnspengeluaran.kdjnspengeluaran
+        JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi
+        WHERE tb_saldoawal.kdsaldo = $kdsaldo ")->result();
+
+        $data['jumtot'] = $this->db->query(" SELECT SUM(saldomasuk) as tot FROM tb_saldoawal ")->result();
+        $data['jumkel'] = $this->db->query(" SELECT SUM(tb_transaksi.jumlah) as totkel 
+        FROM tb_saldoawal JOIN tb_transaksi ON  tb_saldoawal.kdsaldo = tb_transaksi.kdsaldo ")->result();
+
+        $data['idsaldo'] = $this->db->query(" SELECT kdsaldo FROM tb_saldoawal WHERE kdsaldo = $kdsaldo LIMIT 1")->result();
+ 
+        $this->load->view('bendahara/cetak_laporan', $data);
     }
 
     public function tambah_saldoawal()
@@ -213,6 +231,35 @@ $data['bku'] = $this->db->query("SELECT * FROM tb_saldoawal ORDER BY tglsaldomas
         $this->Model_jnspengeluaran->update_data($where, $data, 'tb_jnspengeluaran');
         redirect('bendahara/data_jenis_pengeluaran');
     }
+
+    public function ajukan_laporan_bku()
+    {
+        $notransaksi = $this->input->post('notransaksi');
+        $id = $this->input->post('kdsaldo');
+        $result = array();
+        foreach ($notransaksi as $key => $val) {
+            $result[] = array(
+                "notransaksi" => $notransaksi[$key],
+                "status" => $_POST['status'][$key]
+            );
+        }
+        $this->db->update_batch('tb_transaksi', $result, 'notransaksi');
+
+
+        $data = [
+            'status' => 1
+
+        ];
+        $where = [
+            'kdsaldo' => $id
+        ];
+
+        $this->Model_saldoawal->update_data($where, $data, 'tb_saldoawal');
+
+
+        redirect('bendahara/laporan_bku/' . $id);
+    }
+
 
     public function edit($id)
     {

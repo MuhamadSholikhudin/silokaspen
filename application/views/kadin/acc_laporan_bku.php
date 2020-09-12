@@ -73,8 +73,7 @@
                                     <td>pphlain</td>
 
                                 </tr>
- 
-                                <form action="<?= base_url('bendahara/ajukan_laporan_bku/') ?>" method="post">
+                                <form action="<?= base_url('kadin/un_acc/') ?>" method="post" enctype="multipart/form-data">
 
                                 <?php foreach($idsaldo as $ds): ?>
                                 <input type="text" name="kdsaldo" value="<?= $ds->kdsaldo ?>" >
@@ -199,7 +198,7 @@
                                             <td>&nbsp; </td>
                                         </tr>
                                         <tr>
-                                            <td><button class="btn-sm btn-primary" type="submit">Ajukan</button> </td>
+                                            <td><button class="btn-sm btn-danger" type="submit">Un-ACC</button> </td>
                                         </tr>
                                         <tr>
                                             <td>&nbsp; </td>

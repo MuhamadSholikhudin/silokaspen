@@ -11,16 +11,7 @@
                         <?php foreach ($bku as $sal) : ?>
 
                             <li class="list-group-item">
-                                <h5><a href="<?= base_url('bendahara/laporan_bku/') . $sal->kdsaldo ?>">Laporan Buku Kas Umum Bulan <?= $sal->periodebulan . ' ' . $sal->periodetahun ?></a>
-                                    <?php if ($sal->status == 2) { ?>
-                                        <a href="<?= base_url('bendahara/cetak_bku/') . $sal->kdsaldo ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-warning">Cetak</a>
-                                    <?php
-                                    } else { ?>
-                                        <button class="btn btn-sm btn-primary">Belum Acc</button>
-
-                                    <?php   }
-                                    ?>
-                                </h5>
+                                <h5><a href="<?= base_url('kadin/laporan_bku/') . $sal->kdsaldo ?>">Laporan Buku Kas Umum Bulan <?= $sal->periodebulan . ' ' . $sal->periodetahun ?></a></h5>
                             </li>
                         <?php endforeach; ?>
                     </ul>

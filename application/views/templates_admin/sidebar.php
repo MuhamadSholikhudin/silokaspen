@@ -83,18 +83,18 @@
             </li>
           <?php } elseif ($this->session->userdata('hakakses') == 'kadin') { ?>
             <li>
-              <a href="index">
+              <a href="<?= base_url('kadin/index') ?>">
                 <i class="fa fa-home"></i> Dashboard
               </a>
             </li>
 
             <li>
-              <a href="laporan_bku">
+              <a href="<?= base_url('kadin/bku') ?>">
                 <i class="fa fa-file"></i> Laporan BKU
               </a>
             </li>
             <li>
-              <a href="laporan_pajak">
+              <a href="<?= base_url('kadin/Lap_pajak') ?>">
                 <i class="fa fa-file-text"></i> Laporan Pajak
               </a>
             </li>
@@ -141,7 +141,7 @@
           </div>
         </li>
 
-        
+
       </ul>
     </nav>
   </div>
