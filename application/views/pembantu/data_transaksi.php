@@ -27,12 +27,17 @@
                             <?php foreach ($transaksi as $tran) : ?>
                                 <tr>
                                     <td><?= $no++; ?></td>
-                                    <td><a href="<?= base_url('pembantu/edit_transaksi/') . $tran->notransaksi ?>"><?= $tran->notransaksi ?></a></td>
-                                    <td><?= $tran->tgltransaksi ?></td>
-                                    <td><?= $tran->kdsaldo ?></td>
-                                    <td><?= $tran->kdjnspengeluaran ?></td>
-                                    <td><?= $tran->jnstransaksi ?></td>
-                                    <td><?= $tran->jumlah ?></td>
+                                    <td> <?php if ($tran->status == 0) { ?>
+                                            <a href="<?= base_url('pembantu/edit_transaksi/') . $tran->notransaksi ?>"><?= $tran->notransaksi ?></a></td>
+                                <?php   } else { ?>
+                                    <?= $tran->notransaksi ?>
+                                <?php  } ?>
+                                </td>
+                                <td><?= $tran->tgltransaksi ?></td>
+                                <td><?= $tran->kdsaldo ?></td>
+                                <td><?= $tran->kdjnspengeluaran ?></td>
+                                <td><?= $tran->jnstransaksi ?></td>
+                                <td><?= $tran->jumlah ?></td>
                                 </tr>
                             <?php endforeach; ?>
 

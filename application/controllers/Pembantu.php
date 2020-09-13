@@ -28,8 +28,9 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
 
     public function data_pajak()
     {
-        $data['pajak'] = $this->Model_pajak->tampil_data()->result();
+        // $data['pajak'] = $this->Model_pajak->tampil_data()->result();
         // $data['kdsaldo'] = $this->db->query("SELECT kdsaldo FROM tb_saldoawal ")->result();
+$data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON tb_pajak.notransaksi = tb_transaksi.notransaksi")->result();
 
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
@@ -107,7 +108,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $idusername = $this->input->post('idusername');
         $kdsaldo = $this->input->post('kdsaldo');
         $kdjnspengeluaran = $this->input->post('kdjnspengeluaran');
-        // $jnstransaksi = $this->input->post('jnstransaksi');
+        $kode_rekening = $this->input->post('kode_rekening');
         $uraian = $this->input->post('uraian');
         $jumlah = $this->input->post('jumlah');
         $sisa = $this->input->post('sisa');
@@ -133,7 +134,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
             'idusername' => $idusername,
             'kdsaldo' => $kdsaldo,
             'kdjnspengeluaran' => $kdjnspengeluaran,
-            // 'jnstransaksi' => $jnstransaksi,
+            'kode_rekening' => $kode_rekening,
             'uraian' => $uraian,
             'jumlah' => $jumlah,
             'gambar' => $gambar
@@ -284,7 +285,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $idusername = $this->input->post('idusername');
         $kdsaldo = $this->input->post('kdsaldo');
         $kdjnspengeluaran = $this->input->post('kdjnspengeluaran');
-        $jnstransaksi = $this->input->post('jnstransaksi');
+        $kode_rekening = $this->input->post('kode_rekening');
         $uraian = $this->input->post('uraian');
         $jumlah = $this->input->post('jumlah');
 
@@ -317,7 +318,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
             'idusername' => $idusername,
             'kdsaldo' => $kdsaldo,
             'kdjnspengeluaran' => $kdjnspengeluaran,
-            'jnstransaksi' => $jnstransaksi,
+            'kode_rekening' => $kode_rekening,
             'uraian' => $uraian,
             'jumlah' => $jumlah
         );

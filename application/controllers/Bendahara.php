@@ -106,11 +106,11 @@ $data['bku'] = $this->db->query("SELECT * FROM tb_saldoawal ORDER BY tglsaldomas
         JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi
         WHERE tb_saldoawal.kdsaldo = $kdsaldo ")->result();
 
-        $data['jumtot'] = $this->db->query(" SELECT SUM(saldomasuk) as tot FROM tb_saldoawal ")->result();
-        $data['jumkel'] = $this->db->query(" SELECT SUM(tb_transaksi.jumlah) as totkel 
-        FROM tb_saldoawal JOIN tb_transaksi ON  tb_saldoawal.kdsaldo = tb_transaksi.kdsaldo ")->result();
-
-$data['idsaldo'] = $this->db->query(" SELECT kdsaldo FROM tb_saldoawal WHERE kdsaldo = $kdsaldo LIMIT 1")->result();
+        $data['idsaldo'] = $this->db->query(" SELECT * FROM tb_saldoawal WHERE kdsaldo = $kdsaldo LIMIT 1")->result();
+        $data['jumsisa'] = $this->db->query(" SELECT SUM(jumlahsaldosisa) as jumsis FROM tb_saldoawal WHERE kdsaldo = $kdsaldo")->result();
+        $data['jumtunai'] = $this->db->query(" SELECT SUM(tb_transaksi.jumlah) as tunai FROM tb_transaksi  JOIN tb_jnspengeluaran ON tb_transaksi.kdjnspengeluaran = tb_jnspengeluaran.kdjnspengeluaran JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi WHERE tb_transaksi.kdsaldo = $kdsaldo AND tb_jnspengeluaran.carapembayaran = 'tunai' ")->result();
+        $data['jumnontunai'] = $this->db->query(" SELECT SUM(tb_transaksi.jumlah) as nontunai FROM tb_transaksi JOIN  tb_jnspengeluaran ON tb_transaksi.kdjnspengeluaran = tb_jnspengeluaran.kdjnspengeluaran JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi WHERE tb_transaksi.kdsaldo = $kdsaldo AND tb_jnspengeluaran.carapembayaran = 'nontunai' ")->result();
+               
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
         $this->load->view('bendahara/laporan_bku', $data);
@@ -129,7 +129,7 @@ $data['idsaldo'] = $this->db->query(" SELECT kdsaldo FROM tb_saldoawal WHERE kds
         $data['jumkel'] = $this->db->query(" SELECT SUM(tb_transaksi.jumlah) as totkel 
         FROM tb_saldoawal JOIN tb_transaksi ON  tb_saldoawal.kdsaldo = tb_transaksi.kdsaldo ")->result();
 
-        $data['idsaldo'] = $this->db->query(" SELECT kdsaldo FROM tb_saldoawal WHERE kdsaldo = $kdsaldo LIMIT 1")->result();
+        $data['idsaldo'] = $this->db->query(" SELECT * FROM tb_saldoawal WHERE kdsaldo = $kdsaldo LIMIT 1")->result();
  
         $this->load->view('bendahara/cetak_laporan', $data);
     }

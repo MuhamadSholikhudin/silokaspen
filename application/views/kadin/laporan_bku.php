@@ -5,16 +5,7 @@
                 <h3>Users <small>Some examples to get you started</small></h3>
             </div>
 
-            <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-secondary" type="button">Go!</button>
-                        </span>
-                    </div>
-                </div>
-            </div>
+
         </div>
 
         <div class="clearfix"></div>
@@ -23,7 +14,11 @@
 
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Laporan BKU <small>Pemerintah Kabupaten Kudus</small></h2>
+                    <h2>Laporan BKU Pemerintah Kabupaten Kudus Bulan
+                        <?php foreach ($idsaldo as $ds) : ?>
+                            <?= $ds->periodebulan ?>&nbsp;<?= $ds->periodetahun ?>
+                        <?php endforeach; ?>
+                    </h2>
 
                     <div class="clearfix"></div>
                 </div>
@@ -78,18 +73,18 @@
                                         <form action="<?= base_url('kadin/acc_laporan/') ?>" method="post" enctype="multipart/form-data">
 
                                             <?php foreach ($idsaldo as $ds) : ?>
-                                                <input type="text" name="kdsaldo" value="<?= $ds->kdsaldo ?>">
+                                                <input type="hidden" name="kdsaldo" value="<?= $ds->kdsaldo ?>">
                                             <?php endforeach; ?>
                                             <?php $no = 1; ?>
                                             <?php foreach ($laporan as $lap) : ?>
                                                 <tr>
                                                     <th scope="row"><?= $no++ ?></th>
-                                                    <td></td>
+                                                    <td><?= $lap->kode_rekening ?></td>
                                                     <td><?= $lap->uraian ?></td>
                                                     <td><?= $lap->tgltransaksi ?></td>
 
-                                                    <td><?= $lap->notransaksi ?><input type="text" name="notransaksi[]" value="<?= $lap->notransaksi ?>">
-                                                        <input type="text" name="status[]" value="2"></td>
+                                                    <td><?= $lap->notransaksi ?><input type="hidden" name="notransaksi[]" value="<?= $lap->notransaksi ?>">
+                                                        <input type="hidden" name="status[]" value="2"></td>
                                                     <?php if ($lap->carapembayaran == 'tunai') { ?>
                                                         <td><?= $lap->jumlah ?></td>
                                                         <td>0</td>
@@ -111,18 +106,18 @@
                                             <?php endforeach; ?>
 
                                             <tr>
-                                                <td colspan="4" class="text-center">Jumlah</td>
-
-                                                <td>Jumlah</td>
+                                                <td colspan="5" class="text-center">Jumlah</td>
                                                 <td>
-                                                    <?php foreach ($jumtot as $jum) :
-                                                        echo  $jum->tot;
+                                                    <?php foreach ($jumtunai as $jum) :
+                                                        echo  $jum->tunai;
                                                     endforeach;    ?>
                                                 </td>
-                                                <td><?php foreach ($jumkel as $jum) :
-                                                        echo  $jum->totkel;
+                                                <td><?php foreach ($jumnontunai as $jum) :
+                                                        echo  $jum->nontunai;
                                                     endforeach;    ?></td>
-                                                <td>1</td>
+                                                <td><?php foreach ($idsaldo as $jum) :
+                                                        echo  $jum->saldomasuk;
+                                                    endforeach;    ?></td>
                                                 <td>2</td>
                                                 <td>3</td>
                                                 <td>4</td>
@@ -133,7 +128,10 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="5" class="text-center"> Saldo/disetor Bendahara pengeluaran</td>
-                                                <td>Saldo</td>
+                                                <td><?php foreach ($jumsisa as $jum) :
+                                                        echo  $jum->jumsis;
+                                                    endforeach;    ?></td>
+                                                </td>
                                                 <td></td>
                                                 <td>Sisa</td>
                                                 <td>1</td>
@@ -219,18 +217,18 @@
                                 <form action="<?= base_url('kadin/un_acc/') ?>" method="post" enctype="multipart/form-data">
 
                                     <?php foreach ($idsaldo as $ds) : ?>
-                                        <input type="text" name="kdsaldo" value="<?= $ds->kdsaldo ?>">
+                                        <input type="hidden" name="kdsaldo" value="<?= $ds->kdsaldo ?>">
                                     <?php endforeach; ?>
                                     <?php $no = 1; ?>
                                     <?php foreach ($laporan as $lap) : ?>
                                         <tr>
                                             <th scope="row"><?= $no++ ?></th>
-                                            <td></td>
+                                            <td><?= $lap->kode_rekening ?></td>
                                             <td><?= $lap->uraian ?></td>
                                             <td><?= $lap->tgltransaksi ?></td>
 
-                                            <td><?= $lap->notransaksi ?><input type="text" name="notransaksi[]" value="<?= $lap->notransaksi ?>">
-                                                <input type="text" name="status[]" value="1"></td>
+                                            <td><?= $lap->notransaksi ?><input type="hidden" name="notransaksi[]" value="<?= $lap->notransaksi ?>">
+                                                <input type="hidden" name="status[]" value="1"></td>
                                             <?php if ($lap->carapembayaran == 'tunai') { ?>
                                                 <td><?= $lap->jumlah ?></td>
                                                 <td>0</td>
@@ -252,18 +250,18 @@
                                     <?php endforeach; ?>
 
                                     <tr>
-                                        <td colspan="4" class="text-center">Jumlah</td>
-
-                                        <td>Jumlah</td>
+                                        <td colspan="5" class="text-center">Jumlah</td>
                                         <td>
-                                            <?php foreach ($jumtot as $jum) :
-                                                echo  $jum->tot;
+                                            <?php foreach ($jumtunai as $jum) :
+                                                echo  $jum->tunai;
                                             endforeach;    ?>
                                         </td>
-                                        <td><?php foreach ($jumkel as $jum) :
-                                                echo  $jum->totkel;
+                                        <td><?php foreach ($jumnontunai as $jum) :
+                                                echo  $jum->nontunai;
                                             endforeach;    ?></td>
-                                        <td>1</td>
+                                        <td><?php foreach ($idsaldo as $jum) :
+                                                echo  $jum->saldomasuk;
+                                            endforeach;    ?></td>
                                         <td>2</td>
                                         <td>3</td>
                                         <td>4</td>
@@ -274,7 +272,10 @@
                                     </tr>
                                     <tr>
                                         <td colspan="5" class="text-center"> Saldo/disetor Bendahara pengeluaran</td>
-                                        <td>Saldo</td>
+                                        <td><?php foreach ($jumsisa as $jum) :
+                                                echo  $jum->jumsis;
+                                            endforeach;    ?></td>
+                                        </td>
                                         <td></td>
                                         <td>Sisa</td>
                                         <td>1</td>
@@ -284,9 +285,7 @@
                                         <td>5</td>
                                         <td>6</td>
                                         <td>7</td>
-
                                     </tr>
-
                                     </tbody>
                                     </table>
                                     <div class="row">
