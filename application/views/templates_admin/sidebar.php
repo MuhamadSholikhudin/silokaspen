@@ -47,14 +47,7 @@
                 <i class="fa fa-file"></i> Laporan BKU
               </a>
             </li>
-            <li>
-              <a href="<?= base_url('pembantu/laporan_pajak') ?>">
-                <i class="fa fa-file-text"></i> Laporan Pajak
-              </a>
-            </li>
 
-
-            </li>
           <?php } elseif ($this->session->userdata('hakakses') == 'bendahara') { ?>
             <li>
               <a href="<?= base_url('bendahara/index') ?>">
@@ -76,11 +69,6 @@
                 <i class="fa fa-file"></i> Laporan BKU
               </a>
             </li>
-            <li>
-              <a href="<?= base_url('bendahara/laporan_pajak') ?>">
-                <i class="fa fa-file-text"></i> Laporan Pajak
-              </a>
-            </li>
           <?php } elseif ($this->session->userdata('hakakses') == 'kadin') { ?>
             <li>
               <a href="<?= base_url('kadin/index') ?>">
@@ -91,11 +79,6 @@
             <li>
               <a href="<?= base_url('kadin/bku') ?>">
                 <i class="fa fa-file"></i> Laporan BKU
-              </a>
-            </li>
-            <li>
-              <a href="<?= base_url('kadin/Lap_pajak') ?>">
-                <i class="fa fa-file-text"></i> Laporan Pajak
               </a>
             </li>
           <?php } ?>

@@ -15,56 +15,57 @@
 </head>
 
 <body>
-    
-        <div class="row">
-            <div class="col-lg-12">
-                <h6 class="text-center mt-3">DATA/BUKTI PENGELUARAN</h6>
-                <h6 class="text-center">KEGIATAN BELANJA BARANG DAN JASA</h6>
-                <h6 class="text-center">PENERIMAAN UP (UANG PANJAR) BULAN DESEMBER 2019 TAHAP II</h6>
-                <table class="table table-bordered mt-3">
-                    <thead>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h6 class="text-center mt-3">DATA/BUKTI PENGELUARAN</h6>
+            <h6 class="text-center">KEGIATAN BELANJA BARANG DAN JASA</h6>
+            <h6 class="text-center">PENERIMAAN UP (UANG PANJAR) BULAN DESEMBER 2019 TAHAP II</h6>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Kode Rekening</th>
+                        <th>Uraiaan</th>
+                        <th>Tanggal</th>
+                        <th>No BKU</th>
+                        <th>Tunai</th>
+                        <th>Non Tunai</th>
+                        <th>Terima UP</th>
+
+                        <th>Nama Toko</th>
+                        <th>Alamat Toko</th>
+                        <th>Ppn</th>
+                        <th>Pph21</th>
+                        <th>Pph22</th>
+                        <th>Pph23</th>
+                        <th>Pph Lain</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($idsaldo as $ds) : ?>
                         <tr>
-                            <th>No</th>
-                            <th>Kode Rekening</th>
-                            <th>Uraiaan</th>
-                            <th>Tanggal</th>
-                            <th>No BKU</th>
-                            <th>Tunai</th>
-                            <th>Non Tunai</th>
-                            <th>Terima UP</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><?= $ds->tglsaldomasuk ?></td>
 
-                            <th>Nama Toko</th>
-                            <th>Alamat Toko</th>
-                            <th>Ppn</th>
-                            <th>Pph21</th>
-                            <th>Pph22</th>
-                            <th>Pph23</th>
-                            <th>Pph Lain</th>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><?= $ds->saldomasuk ?></td>
+
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row"></th>
-                            <td></td>
-                            <td>Uraian</td>
-                            <td>Tanggal</td>
+                    <?php endforeach; ?>
 
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>Panjar</td>
-
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>pph23</td>
-                            <td>pphlain</td>
-
-                        </tr>
-
-
+                    <form action="<?= base_url('bendahara/ajukan_laporan_bku/') ?>" method="post">
 
                         <?php foreach ($idsaldo as $ds) : ?>
                             <input type="hidden" name="kdsaldo" value="<?= $ds->kdsaldo ?>">
@@ -73,7 +74,7 @@
                         <?php foreach ($laporan as $lap) : ?>
                             <tr>
                                 <th scope="row"><?= $no++ ?></th>
-                                <td></td>
+                                <td><?= $lap->kode_rekening ?></td>
                                 <td><?= $lap->uraian ?></td>
                                 <td><?= $lap->tgltransaksi ?></td>
 
@@ -92,122 +93,137 @@
                                 <td><?= $lap->ppn ?></td>
                                 <td><?= $lap->pph21 ?></td>
                                 <td><?= $lap->pph22 ?></td>
-                                <!-- <td>pph23</td>
-                                                        <td>pphlain</td> -->
                                 <td><?= $lap->pph23 ?></td>
                                 <td><?= $lap->pphlain ?></td>
                             </tr>
                         <?php endforeach; ?>
 
                         <tr>
-                            <td colspan="4" class="text-center">Jumlah</td>
-
-                            <td>Jumlah</td>
+                            <td colspan="5" class="text-center">Jumlah</td>
                             <td>
-                                <?php foreach ($jumtot as $jum) :
-                                    echo  $jum->tot;
+                                <?php foreach ($jumtunai as $jum) :
+                                    echo  $jum->tunai;
                                 endforeach;    ?>
                             </td>
-                            <td><?php foreach ($jumkel as $jum) :
-                                    echo  $jum->totkel;
+                            <td><?php foreach ($jumnontunai as $jum) :
+                                    echo  $jum->nontunai;
                                 endforeach;    ?></td>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>8</td>
+                            <td><?php foreach ($idsaldo as $jum) :
+                                    echo  $jum->saldomasuk;
+                                endforeach;    ?></td>
+                            <td></td>
+                            <td></td>
+
+                            <td><?php foreach ($jumppn as $jum) :
+                                    echo  $jum->ppn;
+                                endforeach;    ?></td>
+                            <td><?php foreach ($jumpph21 as $jum) :
+                                    echo  $jum->pph21;
+                                endforeach;    ?></td>
+                            <td><?php foreach ($jumpph22 as $jum) :
+                                    echo  $jum->pph22;
+                                endforeach;    ?></td>
+                            <td><?php foreach ($jumpph23 as $jum) :
+                                    echo  $jum->pph23;
+                                endforeach;    ?></td>
+                            <td><?php foreach ($jumpphlain as $jum) :
+                                    echo  $jum->pphlain;
+                                endforeach;    ?></td>
                         </tr>
                         <tr>
                             <td colspan="5" class="text-center"> Saldo/disetor Bendahara pengeluaran</td>
-                            <td>Saldo</td>
+                            <td><?php foreach ($jumsisa as $jum) :
+                                    echo  $jum->jumsis;
+                                endforeach;    ?></td>
+                            </td>
                             <td></td>
-                            <td>Sisa</td>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                            <td>7</td>
-
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
 
-                    </tbody>
-                </table>
-                <div class="row">
-                    <div class="col-sm-8">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>&nbsp; </td>
-                                </tr>
-                                <tr>
-                                    <td> Mengetahui</td>
-                                </tr>
-                                <tr>
-                                    <td>Pejabat Pelaksana teknis </td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp; </td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp; </td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp; </td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp; </td>
-                                </tr>
+                </tbody>
+            </table>
 
-                                <tr>
-                                    <td>ENDANG LISTIYANI, SE</td>
-                                </tr>
-                                <tr>
-                                    <td>NIP. 19640726 198603 2 012</td>
-                                </tr>
-                            </tbody>
-                        </table>
+            <div class="row">
+                <div class="col-sm-8">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>&nbsp; </td>
+                            </tr>
+                            <tr>
+                                <td> Mengetahui</td>
+                            </tr>
+                            <tr>
+                                <td>Pejabat Pelaksana teknis </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp; </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp; </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp; </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp; </td>
+                            </tr>
 
-                    </div>
-                    <div class="col-sm-4">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>Kudus, 30 Desember 2019 </td>
-                                </tr>
-                                <tr>
-                                    <td> Pembantu Bendahara Pengeluaran Belanja Langsung</td>
-                                </tr>
-                                <tr>
-                                    <td>Disdikpora Kabupaten Kudus </td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp; </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                    <td>&nbsp; </td>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>&nbsp; </td>
-                                </tr>
+                            <tr>
+                                <td>ENDANG LISTIYANI, SE</td>
+                            </tr>
+                            <tr>
+                                <td>NIP. 19640726 198603 2 012</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-                                <tr>
-                                    <td>DWI BUDIHARTANTI</td>
-                                </tr>
-                                <tr>
-                                    <td>NIP. 19640726 198603 2 012</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
-            
+                <div class="col-sm-4">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Kudus, 30 Desember 2019 </td>
+                            </tr>
+                            <tr>
+                                <td> Pembantu Bendahara Pengeluaran Belanja Langsung</td>
+                            </tr>
+                            <tr>
+                                <td>Disdikpora Kabupaten Kudus </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp; </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    &nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp; </td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp; </td>
+                            </tr>
+
+                            <tr>
+                                <td>DWI BUDIHARTANTI</td>
+                            </tr>
+                            <tr>
+                                <td>NIP. 19640726 198603 2 012</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
 
             <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
