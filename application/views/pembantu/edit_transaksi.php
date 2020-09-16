@@ -118,7 +118,17 @@
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="gambar">Gambar<span class="required">*</span>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="img">Gambar Lama<span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                    <div class="image view view-first">
+                                             <img src="<?= base_url('uploads/') . $tran->gambar ?>" alt="<?= $tran->gambar ?>" style="width: 100%; display: block;">
+                                    </div>
+                                    </div>
+                                </div>
+                                    
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="gambar">Ubah Gambar<span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <input type="file" id="gambar" name="gambar" required="required" class="form-control">
