@@ -28,7 +28,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
 
     public function bku()
     {
-        $data['bku'] = $this->db->query("SELECT * FROM tb_saldoawal WHERE status = (1 OR 2) ORDER BY tglsaldomasuk DESC")->result();
+        $data['bku'] = $this->db->query("SELECT * FROM tb_saldoawal WHERE status = 1 OR status = 2 ORDER BY tglsaldomasuk DESC")->result();
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
         $this->load->view('kadin/data_laporan_bku', $data);
@@ -82,7 +82,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
 
         $this->Model_saldoawal->update_data($where, $data, 'tb_saldoawal');
 
-
+        $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Laporan BKU berhasil di ACC', 'success')</script>");
         redirect('kadin/laporan_bku/' . $id);
     }
 
@@ -111,77 +111,10 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
 
         $this->Model_saldoawal->update_data($where, $data, 'tb_saldoawal');
 
+        $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Laporan BKU berhasil di Batalkan Accnya', 'success')</script>");
 
         redirect('kadin/laporan_bku/' . $id);
     }
 
-    public function tambah_aksi()
-    {
-
-        $nama_brg = $this->input->post('nama_brg');
-        $keterangan = $this->input->post('keterangan');
-        $kategori = $this->input->post('kategori');
-        $harga = $this->input->post('harga');
-        $stok = $this->input->post('stok');
-
-        $gambar = $_FILES['gambar']['name'];
-        if ($gambar = '') {
-        } else {
-            $config['upload_path'] = './uploads/';
-            $config['allowed_types'] = 'jpg|jpeg|png|gif';
-            $this->load->library('upload', $config);
-            if (!$this->upload->do_upload('gambar')) {
-                echo "Gambar Gagal Di Upload";
-            } else {
-                $gambar = $this->upload->data('file_name');
-            }
-        }
-        $data = array(
-            'nama_brg' => $nama_brg,
-            'keterangan' => $keterangan,
-            'kategori' => $kategori,
-            'harga' => $harga,
-            'stok' => $stok,
-            'gambar' => $gambar
-        );
-
-        $this->model_barang->tambah_barang($data, 'tb_barang');
-        redirect('admin/data_barang/index');
-    }
-
-    public function edit($id)
-    {
-        $where = array('id_brg' => $id);
-        $data['barang'] = $this->model_barang->edit_barang($where, 'tb_barang')->result();
-
-        $this->load->view('templates_admin/header');
-        $this->load->view('templates_admin/sidebar');
-        $this->load->view('admin/edit_barang', $data);
-        $this->load->view('templates_admin/footer.php');
-    }
-
-    public function update()
-    {
-        $id = $this->input->post('id_brg');
-        $nama_brg = $this->input->post('nama_brg');
-        $keterangan = $this->input->post('keterangan');
-        $kategori = $this->input->post('kategori');
-        $harga = $this->input->post('harga');
-        $stok = $this->input->post('stok');
-
-        $data = [
-            'nama_brg' => $nama_brg,
-            'keterangan' => $keterangan,
-            'kategori' => $kategori,
-            'harga' => $harga,
-            'stok' => $stok,
-        ];
-        $where = [
-            'id_brg' => $id
-        ];
-
-        $this->model_barang->update_data($where, $data, 'tb_barang');
-        redirect('admin/data_barang/index');
-    }
 
 }

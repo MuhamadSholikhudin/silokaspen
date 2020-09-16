@@ -89,7 +89,8 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="saldomasuk">Saldo Masuk <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="number" id="saldomasuk" name="saldomasuk" value="<?= $sal->saldomasuk ?>" required="true" class="form-control">
+                                        <input type="number" id="saldomasuk" name="saldomasukbaru" value="<?= $sal->saldomasuk ?>" required="true" class="form-control">
+                                        <input type="hidden" id="saldomasuk" name="saldomasuklama" value="<?= $sal->saldomasuk ?>" required="true" class="form-control">
                                     </div>
                                 </div>
                                 <div class="item form-group">
@@ -110,7 +111,7 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="jumlahsaldosisa">Jumlah Saldo Sisa <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="number" id="jumlahsaldosisa" name="jumlahsaldosisa" value="<?= $sal->jumlahsaldosisa ?>" required="required" class="form-control">
+                                        <input type="number" id="jumlahsaldosisa" name="jumlahsaldosisalama" value="<?= $sal->jumlahsaldosisa ?>" required="required" class="form-control">
                                     </div>
                                 </div>
 

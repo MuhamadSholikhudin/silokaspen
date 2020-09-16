@@ -113,45 +113,58 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON t
         $jumlah = $this->input->post('jumlah');
         $sisa = $this->input->post('sisa');
 
-        $jumlahsaldosisa = $sisa - $jumlah;
+        $cari = $this->db->query("SELECT notransaksi FROM tb_transaksi WHERE notransaksi = $notransaksi LIMIT 1")->num_rows();
 
-        $gambar = $_FILES['gambar']['name'];
-        if ($gambar = '') {
-        } else {
-            $config['upload_path'] = './uploads/';
-            $config['allowed_types'] = 'jpg|jpeg|png|gif';
-            $this->load->library('upload', $config);
-            if (!$this->upload->do_upload('gambar')) {
-                echo "Gambar Gagal Di Upload";
+        if($cari == 1){
+            $this->session->set_flashdata("message", "<script>Swal.fire('ERROR', 'Data Transaksi Gagal di tambahkan karena Nomer Transaksi sudah ada', 'error')</script>");
+            redirect('pembantu/transaksi');
+        }else{
+            $jumlahsaldosisa = $sisa - $jumlah;
+
+            $gambar = $_FILES['gambar']['name'];
+            if ($gambar = '') {
             } else {
-                $gambar = $this->upload->data('file_name');
+                $config['upload_path'] = './uploads/';
+                $config['allowed_types'] = 'jpg|jpeg|png|gif';
+                $this->load->library('upload', $config);
+                if (!$this->upload->do_upload('gambar')) {
+                    echo "Gambar Gagal Di Upload";
+                } else {
+                    $gambar = $this->upload->data('file_name');
+                }
             }
+
+            $data = array(
+                'notransaksi' => $notransaksi,
+                'tgltransaksi' => $tgltransaksi,
+                'idusername' => $idusername,
+                'kdsaldo' => $kdsaldo,
+                'kdjnspengeluaran' => $kdjnspengeluaran,
+                'kode_rekening' => $kode_rekening,
+                'uraian' => $uraian,
+                'jumlah' => $jumlah,
+                'gambar' => $gambar
+            );
+
+            $datat = array(
+                'jumlahsaldosisa' => $jumlahsaldosisa
+            );
+
+            $wheret = array(
+                'kdsaldo' => $kdsaldo
+            );
+
+            $this->Model_saldoawal->update_datat($wheret, $datat, 'tb_saldoawal');
+
+            $this->Model_transaksi->tambah_transaksi($data, 'tb_transaksi');
+
+            $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Transaksi berhasil di tambahkan', 'success')</script>");
+
+            redirect('pembantu/data_transaksi');
         }
 
-        $data = array(
-            'notransaksi' => $notransaksi,
-            'tgltransaksi' => $tgltransaksi,
-            'idusername' => $idusername,
-            'kdsaldo' => $kdsaldo,
-            'kdjnspengeluaran' => $kdjnspengeluaran,
-            'kode_rekening' => $kode_rekening,
-            'uraian' => $uraian,
-            'jumlah' => $jumlah,
-            'gambar' => $gambar
-        );
 
-        $datat = array(
-            'jumlahsaldosisa' => $jumlahsaldosisa
-        );
-
-        $wheret = array(
-            'kdsaldo' => $kdsaldo
-        );
-
-        $this->Model_saldoawal->update_datat($wheret, $datat, 'tb_saldoawal');
-
-        $this->Model_transaksi->tambah_transaksi($data, 'tb_transaksi');
-        redirect('pembantu/data_transaksi');
+        
     }
 
     public function tambah_pajak()
@@ -168,53 +181,62 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON t
         $pph22 = $this->input->post('pph22');
         $pph23 = $this->input->post('pph23');
         $pphlain = $this->input->post('pphlain');
-        $jumlah = $ppn + $pph21 + $pph22 + $pph23 + $pphlain ;
-
         $sisa = $this->input->post('sisa');
         // $kdsaldo = $this->input->post('kdsaldo');
 
-        $jumlahsaldosisa = $sisa - $jumlah;
+        $cari = $this->db->query("SELECT nodok FROM tb_pajak WHERE nodok = $nodok")->num_rows();
+if($cari == 1){
+            $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Pajak Gagal di tambahkan karena Nomer Dokumen sudah ada', 'error')</script>");
 
-        $gambar = $_FILES['gambar']['name'];
-        if ($gambar = '') {
-        } else {
-            $config['upload_path'] = './uploads/';
-            $config['allowed_types'] = 'jpg|jpeg|png|gif';
-            $this->load->library('upload', $config);
-            if (!$this->upload->do_upload('gambar')) {
-                echo "Gambar Gagal Di Upload";
+            redirect('pembantu/pajak');
+}else{
+            $jumlah = $ppn + $pph21 + $pph22 + $pph23 + $pphlain;
+            $jumlahsaldosisa = $sisa - $jumlah;
+
+            $gambar = $_FILES['gambar']['name'];
+            if ($gambar = '') {
             } else {
-                $gambar = $this->upload->data('file_name');
+                $config['upload_path'] = './uploads/';
+                $config['allowed_types'] = 'jpg|jpeg|png|gif';
+                $this->load->library('upload', $config);
+                if (!$this->upload->do_upload('gambar')) {
+                    echo "Gambar Gagal Di Upload";
+                } else {
+                    $gambar = $this->upload->data('file_name');
+                }
             }
-        }
 
-        $data = array(
-            'nodok' => $nodok,
-            'tgldok' => $tgldok,
-            'idusername' => $idusername,
-            'jumlah' => $jumlah,
-            'notransaksi' => $notransaksi,
-            'kdsaldo' => $kdsaldo,
-            'ppn' => $ppn,
-            'pph21' => $pph21,
-            'pph22' => $pph22,
-            'pph23' => $pph23,
-            'pphlain' => $pphlain,
-            'gambar' => $gambar
-        );
+            $data = array(
+                'nodok' => $nodok,
+                'tgldok' => $tgldok,
+                'idusername' => $idusername,
+                'jumlah' => $jumlah,
+                'notransaksi' => $notransaksi,
+                'kdsaldo' => $kdsaldo,
+                'ppn' => $ppn,
+                'pph21' => $pph21,
+                'pph22' => $pph22,
+                'pph23' => $pph23,
+                'pphlain' => $pphlain,
+                'gambar' => $gambar
+            );
 
-        $datat = array(
-            'jumlahsaldosisa' => $jumlahsaldosisa
-        );
+            $datat = array(
+                'jumlahsaldosisa' => $jumlahsaldosisa
+            );
 
-        $wheret = array(
-            'kdsaldo' => $kdsaldo
-        );
+            $wheret = array(
+                'kdsaldo' => $kdsaldo
+            );
 
-        $this->Model_saldoawal->update_datat($wheret, $datat, 'tb_saldoawal');
+            $this->Model_saldoawal->update_datat($wheret, $datat, 'tb_saldoawal');
 
-        $this->Model_pajak->tambah_pajak($data, 'tb_pajak');
-        redirect('pembantu/index');
+            $this->Model_pajak->tambah_pajak($data, 'tb_pajak');
+
+            $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Pajak berhasil di tambahkan', 'success')</script>");
+            redirect('pembantu/data_pajak');
+        }      
+        
     }
 
     public function edit_pajak_aksi()
@@ -224,16 +246,23 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON t
         $nodok = $this->input->post('nodok');
         $tgldok = $this->input->post('tgldok');
         $idusername = $this->input->post('idusername');
-        $jumlah = $this->input->post('jumlah');
-        $kdjnspengeluaran = $this->input->post('kdjnspengeluaran');
+        // $kdjnspengeluaran = $this->input->post('kdjnspengeluaran');
         $kdsaldo = $this->input->post('kdsaldo');
         $ppn = $this->input->post('ppn');
         $pph21 = $this->input->post('pph21');
         $pph22 = $this->input->post('pph22');
         $pph23 = $this->input->post('pph23');
         $pphlain = $this->input->post('pphlain');
+        
+        $sisa = $this->input->post('sisa');
+        $jumlahlama = $this->input->post('jumlahlama');
 
-        // $data['pajak'] = $this->Model_pajak->edit_pajak($where, 'tb_pajak')->result();
+        $jumlah = $ppn + $pph21 + $pph22 + $pph23 + $pphlain;
+
+        $jumlahselisih = $jumlahlama - $jumlah;
+
+        // $jumlah = $jumlahbaru;
+        $jumlahsaldosisa = $sisa + $jumlahselisih;
 
         // cek jika ada gambar yang akan diupload
         $upload_gambar = $_FILES['gambar']['name'];
@@ -261,7 +290,6 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON t
             'tgldok' => $tgldok,
             'idusername' => $idusername,
             'jumlah' => $jumlah,
-            'kdjnspengeluaran' => $kdjnspengeluaran,
             'kdsaldo' => $kdsaldo,
             'ppn' => $ppn,
             'pph21' => $pph21,
@@ -274,6 +302,18 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON t
         $this->db->where('nodok', $nodoklama);
         $this->db->update('tb_pajak');
 
+
+        $datat = array(
+            'jumlahsaldosisa' => $jumlahsaldosisa
+        );
+
+        $wheret = array(
+            'kdsaldo' => $kdsaldo
+        );
+
+        $this->Model_saldoawal->update_datat($wheret, $datat, 'tb_saldoawal');
+
+        $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Pajak berhasil di Edit', 'success')</script>");
         redirect('pembantu/data_pajak/');
     }
 
@@ -287,7 +327,16 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON t
         $kdjnspengeluaran = $this->input->post('kdjnspengeluaran');
         $kode_rekening = $this->input->post('kode_rekening');
         $uraian = $this->input->post('uraian');
-        $jumlah = $this->input->post('jumlah');
+        $sisa = $this->input->post('sisa');
+
+
+        $jumlahlama = $this->input->post('jumlahlama');
+        $jumlahbaru = $this->input->post('jumlahbaru');
+
+        $jumlahselisih = $jumlahbaru - $jumlahlama;
+
+        $jumlah = $jumlahbaru;
+        $jumlahsaldosisa = $sisa - $jumlahselisih;
 
         // $data['pajak'] = $this->Model_pajak->edit_pajak($where, 'tb_pajak')->result();
 
@@ -328,6 +377,18 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON t
         $this->db->update('tb_transaksi');
 
 
+        $datat = array(
+            'jumlahsaldosisa' => $jumlahsaldosisa
+        );
+
+        $wheret = array(
+            'kdsaldo' => $kdsaldo
+        );
+
+        $this->Model_saldoawal->update_datat($wheret, $datat, 'tb_saldoawal');
+
+
+        $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Transaksi berhasil di Edit', 'success')</script>");
         redirect('pembantu/data_transaksi/');
     }
 

@@ -1,12 +1,6 @@
 <div class="right_col" role="main" style="min-height: 4546px;">
     <div class>
-        <div class="page-title">
-            <div class="title_left">
-                <h3>Users <small>Some examples to get you started</small></h3>
-            </div>
-
-
-        </div>
+       
 
         <div class="clearfix"></div>
 
@@ -163,11 +157,9 @@
                                             <td>&nbsp; </td>
                                         </tr>
                                         <tr>
-                                            <td>&nbsp; </td>
+                                            <td><div class="btn-sm btn-primary text-center">Ter-ACC</div> </td>
                                         </tr>
-                                        <tr>
-                                            <td>&nbsp; </td>
-                                        </tr>
+
                                         <tr>
                                             <td>&nbsp; </td>
                                         </tr>
@@ -305,11 +297,11 @@
                                                         <td>&nbsp; </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>&nbsp; </td>
+                                                        <td>
+                                                            <div class="btn-sm btn-primary text-center">Ter-ACC</div>
+                                                        </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>&nbsp; </td>
-                                                    </tr>
+
                                                     <tr>
                                                         <td>&nbsp; </td>
                                                     </tr>

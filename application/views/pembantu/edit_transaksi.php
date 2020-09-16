@@ -25,6 +25,13 @@
                                     </div>
                                 </div>
                                 <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="kode_rekening">Kode Rekening <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <input type="number" id="kode_rekening" required="required" name="kode_rekening" value="<?= $tran->kode_rekening ?>" class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal transaksi <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
@@ -39,11 +46,22 @@
                                     </div>
                                 </div>
 
-                                <div class="item form-group">
+                                <div class="item form-group d-none">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="idusername">Id Username <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <input type="text" id="kdsaldo" name="idusername" value="<?= $tran->idusername ?>" required="required" class="form-control ">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="idusername">Saldo Sisa <span class="required">*</span>
+                                    </label>
+<?php $jumsisa = $this->db->query("SELECT jumlahsaldosisa FROM tb_saldoawal WHERE kdsaldo = $tran->kdsaldo ")->result(); ?>
+
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <?php foreach($jumsisa as $sis) :?>
+                                        <input type="text" id="kdsaldo" name="sisa" value="<?= $sis->jumlahsaldosisa ?>" required="required" class="form-control" disabled>
+                                        <?php endforeach; ?>
                                     </div>
                                 </div>
                                 <div class="item form-group">
@@ -66,13 +84,13 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <select class="form-control" name="kdjnspengeluaran">
-                                        <?php foreach ($kdjnspengeluaran as $kdjns) : ?>
-                                            <?php if ($kdjns->kdjnspengeluaran == $tran->kdjnspengeluaran) : ?>
-                                                <option value="<?= $kdjns->kdjnspengeluaran ?>" selected> <?= $kdjns->kdjnspengeluaran ?> </option>
-                                            <?php else : ?>
-                                                <option value="<?= $kdjns->kdjnspengeluaran ?>"> <?= $kdjns->kdjnspengeluaran ?> </option>
-                                            <?php endif; ?>
-                                        <?php endforeach; ?>
+                                            <?php foreach ($kdjnspengeluaran as $kdjns) : ?>
+                                                <?php if ($kdjns->kdjnspengeluaran == $tran->kdjnspengeluaran) : ?>
+                                                    <option value="<?= $kdjns->kdjnspengeluaran ?>" selected> <?= $kdjns->kdjnspengeluaran ?> </option>
+                                                <?php else : ?>
+                                                    <option value="<?= $kdjns->kdjnspengeluaran ?>"> <?= $kdjns->kdjnspengeluaran ?> </option>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
                                         </select>
                                     </div>
                                 </div>
@@ -88,14 +106,15 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="uraian">Uraian <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <textarea type="text" id="uraian" name="uraian"  required="required" class="form-control"><?= $tran->uraian ?></textarea>
+                                        <textarea type="text" id="uraian" name="uraian" required="required" class="form-control"><?= $tran->uraian ?></textarea>
                                     </div>
                                 </div>
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="jumlah">Jumlah <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="number" id="jumlah" min="0" name="jumlah" value="<?= $tran->jumlah ?>" required="required" class="form-control">
+                                        <input type="hidden" id="jumlah" min="0" name="jumlahlama" value="<?= $tran->jumlah ?>" required="required" class="form-control">
+                                        <input type="number" id="jumlah" min="0" name="jumlahbaru" value="<?= $tran->jumlah ?>" required="required" class="form-control">
                                     </div>
                                 </div>
                                 <div class="item form-group">

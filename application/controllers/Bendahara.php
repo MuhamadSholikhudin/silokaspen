@@ -91,7 +91,7 @@ $data['carapem'] = ['tunai', 'nontunai'];
 
     public function bku()
     {
-$data['bku'] = $this->db->query("SELECT * FROM tb_saldoawal ORDER BY tglsaldomasuk DESC")->result();
+$data['bku'] = $this->db->query("SELECT tb_pajak.kdsaldo, tb_saldoawal.periodebulan, tb_saldoawal.periodetahun, tb_saldoawal.status FROM tb_pajak JOIN tb_saldoawal ON tb_pajak.kdsaldo = tb_saldoawal.kdsaldo GROUP BY kdsaldo")->result();
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
         $this->load->view('bendahara/data_laporan_bku', $data);
@@ -184,6 +184,8 @@ $data['bku'] = $this->db->query("SELECT * FROM tb_saldoawal ORDER BY tglsaldomas
         );
 
         $this->Model_saldoawal->tambah_saldoawal($data, 'tb_saldoawal');
+        $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Saldo Awal berhasil di tambahkan', 'success')</script>");
+
         redirect('bendahara/data_saldo_awal');
     }
 
@@ -194,9 +196,16 @@ $data['bku'] = $this->db->query("SELECT * FROM tb_saldoawal ORDER BY tglsaldomas
         $tglsaldomasuk = $this->input->post('tglsaldomasuk');
         $periodebulan = $this->input->post('periodebulan');
         $periodetahun = $this->input->post('periodetahun');
-        $saldomasuk = $this->input->post('saldomasuk');
+        $saldomasuklama = $this->input->post('saldomasuklama');
+        $saldomasukbaru = $this->input->post('saldomasukbaru');
         $tglsaldosisa = $this->input->post('tglsaldosisa');
-        $jumlahsaldosisa = $this->input->post('jumlahsaldosisa');
+        $jumlahsaldosisalama = $this->input->post('jumlahsaldosisalama');
+
+        $saldoselisih = $saldomasukbaru - $saldomasuklama;
+
+        $saldomasuk = $saldomasuklama + $saldoselisih;
+        $jumlahsaldosisa = $jumlahsaldosisalama + $saldoselisih;
+
 
         $data = array(
             'kdsaldo' => $kdsaldo,
@@ -213,6 +222,8 @@ $data['bku'] = $this->db->query("SELECT * FROM tb_saldoawal ORDER BY tglsaldomas
         ];
 
         $this->Model_saldoawal->update_data($where, $data, 'tb_saldoawal');
+        $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Saldo Awal berhasil di Edit', 'success')</script>");
+
         redirect('bendahara/data_saldo_awal');
     }
 
@@ -233,6 +244,8 @@ $data['bku'] = $this->db->query("SELECT * FROM tb_saldoawal ORDER BY tglsaldomas
         );
 
         $this->Model_jnspengeluaran->tambah_jnspengeluaran($data, 'tb_jnspengeluaran');
+        $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Jenis Pengeluaran berhasil di tambahkan', 'success')</script>");
+
         redirect('bendahara/data_jenis_pengeluaran');
     }
 
@@ -258,6 +271,8 @@ $data['bku'] = $this->db->query("SELECT * FROM tb_saldoawal ORDER BY tglsaldomas
         ];
 
         $this->Model_jnspengeluaran->update_data($where, $data, 'tb_jnspengeluaran');
+        $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Jenis Pengeluaran berhasil di Edit', 'success')</script>");
+
         redirect('bendahara/data_jenis_pengeluaran');
     }
 
@@ -285,6 +300,7 @@ $data['bku'] = $this->db->query("SELECT * FROM tb_saldoawal ORDER BY tglsaldomas
 
         $this->Model_saldoawal->update_data($where, $data, 'tb_saldoawal');
 
+        $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Laporan BKU berhasil di Ajukan', 'success')</script>");
 
         redirect('bendahara/laporan_bku/' . $id);
     }
@@ -313,7 +329,7 @@ $data['bku'] = $this->db->query("SELECT * FROM tb_saldoawal ORDER BY tglsaldomas
 
         $this->Model_saldoawal->update_data($where, $data, 'tb_saldoawal');
 
-
+        $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Laporan BKU berhasil di batalkan Ajukannya', 'success')</script>");
         redirect('bendahara/laporan_bku/' . $id);
     }
 

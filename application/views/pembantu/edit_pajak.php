@@ -50,30 +50,16 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="jumlah">Jumlah <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="number" id="jumlah" name="jumlah" value="<?= $paj->jumlah ?>" required="required" class="form-control">
+                                        <input type="number" id="jumlah" name="jumlahlama" value="<?= $paj->jumlah ?>" required="required" class="form-control">
                                     </div>
                                 </div>
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="kdjnspengeluaran">Kode Jenis Pengeluaran <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <select class="form-control" id="kdjnspengeluaran" name="kdjnspengeluaran">
-                                        <?php foreach ($kdjnspengeluaran as $kdjns) : ?>
-                                            <?php if ($kdjns->kdjnspengeluaran == $paj->kdjnspengeluaran) : ?>
-                                                <option value="<?= $kdjns->kdjnspengeluaran ?>" selected> <?= $kdjns->kdjnspengeluaran ?> </option>
-                                            <?php else : ?>
-                                                <option value="<?= $kdjns->kdjnspengeluaran ?>"> <?= $kdjns->kdjnspengeluaran ?> </option>
-                                            <?php endif; ?>
-                                        <?php endforeach; ?>
-                                        </select>
-                                    </div>
-                                </div>
+
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="kdsaldo">Kode Saldo <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <select class="form-control" id="kdsaldo" name="kdsaldo">
-                                        <?php foreach ($kdsaldo as $kd) : ?>
+                                            <?php foreach ($kdsaldo as $kd) : ?>
                                                 <?php if ($kd->kdsaldo == $paj->kdsaldo) : ?>
                                                     <option value="<?= $kd->kdsaldo ?>" selected> <?= $kd->kdsaldo ?> </option>
                                                 <?php else : ?>
@@ -81,6 +67,17 @@
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select>
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="sal">Saldo Sisa <span class="required">*</span>
+                                    </label>
+                                    <?php $jumsisa = $this->db->query("SELECT jumlahsaldosisa FROM tb_saldoawal WHERE kdsaldo = $paj->kdsaldo ")->result(); ?>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <?php foreach ($jumsisa as $sis) : ?>
+                                            <input type="number" id="sal" name="sisa" value="<?= $sis->jumlahsaldosisa ?>" required="required" class="form-control" readonly>
+                                        <?php endforeach; ?>
                                     </div>
                                 </div>
                                 <div class="item form-group">
@@ -119,9 +116,16 @@
                                     </div>
                                 </div>
                                 <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="img">Gambar<span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        
+                                        <img src="<?= base_url('uploads/') . $paj->gambar ?> alt=" <?= $paj->gambar ?>" >
+                                    </div>
+                                </div>
+                                <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="gambar">Gambar<span class="required">*</span>
                                     </label>
-                                    <img src="<?= base_url('uploads/') . $paj->gambar ?> alt=" <?= $paj->gambar ?>" srcset="">
                                     <div class="col-md-6 col-sm-6 ">
                                         <input type="file" id="gambar" name="gambar" required="required" class="form-control">
                                     </div>

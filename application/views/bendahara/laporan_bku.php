@@ -65,7 +65,7 @@
                                 <?php endforeach; ?>
                                 <?php foreach ($jumif as $ju) : ?>
                                     <?php if ($ju->status == 0) { ?>
-                                        <form action="<?= base_url('bendahara/ajukan_laporan_bku/') ?>" method="post">
+                                        <form action="<?= base_url('bendahara/ajukan_laporan_bku/') ?>" method="post" enctype="multipart/form-data">
 
                                             <?php foreach ($idsaldo as $ds) : ?>
                                                 <input type="hidden" name="kdsaldo" value="<?= $ds->kdsaldo ?>">
