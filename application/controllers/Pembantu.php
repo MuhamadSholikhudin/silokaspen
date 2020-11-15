@@ -275,10 +275,10 @@ if($cari == 1){
             $this->load->library('upload', $config);
 
             if ($this->upload->do_upload('gambar')) {
-                $old_gambar = $data['pajak']['gambar'];
-                if ($old_gambar != 'default.jpg') {
-                    unlink(FCPATH . 'uploads/' . $old_gambar);
-                }
+                // $old_gambar = $data['pajak']['gambar'];
+                // if ($old_gambar != 'default.jpg') {
+                //     unlink(FCPATH . 'uploads/' . $old_gambar);
+                // }
                 $new_gambar = $this->upload->data('file_name');
                 $this->db->set('gambar', $new_gambar);
             } else {
@@ -351,10 +351,10 @@ if($cari == 1){
             $this->load->library('upload', $config);
 
             if ($this->upload->do_upload('gambar')) {
-                $old_gambar = $data['pajak']['gambar'];
-                if ($old_gambar != 'default.jpg') {
-                    unlink(FCPATH . 'uploads/' . $old_gambar);
-                }
+                // $old_gambar = $data['pajak']['gambar'];
+                // if ($old_gambar != 'default.jpg') {
+                //     unlink(FCPATH . 'uploads/' . $old_gambar);
+                // }
                 $new_gambar = $this->upload->data('file_name');
                 $this->db->set('gambar', $new_gambar);
             } else {

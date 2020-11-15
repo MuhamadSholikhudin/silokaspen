@@ -115,19 +115,21 @@
                                         <input type="text" id="pphlain" name="pphlain" value="<?= $paj->pphlain ?>" required="required" class="form-control">
                                     </div>
                                 </div>
+
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="img">Gambar<span class="required">*</span>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="img">Gambar lama<span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        
-                                        <img src="<?= base_url('uploads/') . $paj->gambar ?> alt=" <?= $paj->gambar ?>" >
+                                        <div class="image view view-first">
+                                            <img style="width: 100%; height:100%;" src="<?= base_url('uploads/') . $paj->gambar ?>" alt="image">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="gambar">Gambar<span class="required">*</span>
+                                <div class=" item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="gambar">Ubah Gambar<span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="file" id="gambar" name="gambar" required="required" class="form-control">
+                                        <input type="file" id="gambar" name="gambar" value="<?= $paj->gambar ?>" required="required" class="form-control">
                                     </div>
                                 </div>
                             <?php endforeach; ?>

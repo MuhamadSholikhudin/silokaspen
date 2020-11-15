@@ -21,6 +21,20 @@
 
     <!-- Custom Theme Style -->
     <link href="<?= base_url('assets/'); ?>build/css/custom.min.css" rel="stylesheet">
+
+    <style>
+        .login {
+            background-image: url("https://lh3.googleusercontent.com/proxy/yIF9TWaojPUMy13j5FVX6Ve29K-HG52qg5GxtuiCeHnCeuD8FYT4YG-8-vLLOVKpmqBsECHXB-yXV_9hmOyeFCZenHv4TAYJJ21Pd14_DSO1DYlqq8k");
+            /* Full height */
+            height: 650px;
+            
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 
 <body class="login">
@@ -40,8 +54,8 @@
                             <input type="password" class="form-control" placeholder="Password" name="password" required="" />
                         </div>
                         <div>
-                            <button class="btn btn-primary" >Log in</button>
-                            
+                            <button class="btn btn-primary">Log in</button>
+
                         </div>
 
                         <div class="clearfix"></div>
@@ -57,7 +71,7 @@
                                 <p>©<?= date('Y') ?> All Rights Reserved. SILOKASPEN</p>
                             </div>
                         </div>
-                        </form>
+                    </form>
                 </section>
             </div>
 
