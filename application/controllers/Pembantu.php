@@ -264,6 +264,8 @@ if($cari == 1){
         // $jumlah = $jumlahbaru;
         $jumlahsaldosisa = $sisa + $jumlahselisih;
 
+$data['pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE nodok = $nodoklama ")->result_array();
+
         // cek jika ada gambar yang akan diupload
         $upload_gambar = $_FILES['gambar']['name'];
 
@@ -338,7 +340,7 @@ if($cari == 1){
         $jumlah = $jumlahbaru;
         $jumlahsaldosisa = $sisa - $jumlahselisih;
 
-        // $data['pajak'] = $this->Model_pajak->edit_pajak($where, 'tb_pajak')->result();
+        $data['transaksi'] = $this->db->query("SELECT * FROM tb_transaksi WHERE notransaksi = $notransaksilama ")->result_array();
 
         // cek jika ada gambar yang akan diupload
         $upload_gambar = $_FILES['gambar']['name'];
@@ -351,10 +353,17 @@ if($cari == 1){
             $this->load->library('upload', $config);
 
             if ($this->upload->do_upload('gambar')) {
+<<<<<<< HEAD
                 // $old_gambar = $data['pajak']['gambar'];
                 // if ($old_gambar != 'default.jpg') {
                 //     unlink(FCPATH . 'uploads/' . $old_gambar);
                 // }
+=======
+                $old_gambar = $data['transaksi']['gambar'];
+                if ($old_gambar != 'default.jpg') {
+                    unlink(FCPATH . 'uploads/' . $old_gambar);
+                }
+>>>>>>> aeac62c64ae0e78758addaf1c46c5577589df0f3
                 $new_gambar = $this->upload->data('file_name');
                 $this->db->set('gambar', $new_gambar);
             } else {

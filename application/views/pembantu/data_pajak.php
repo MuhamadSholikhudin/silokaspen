@@ -43,7 +43,7 @@
                                     <td><?= $paj->pph22 ?></td>
                                     <td><?= $paj->pph23 ?></td>
                                     <td><?= $paj->pphlain ?></td>
-                                    <td><?= $paj->jumlah ?></td>
+                                    <td><?= $paj->ppn + $paj->pph21 + $paj->pph22 + $paj->pph23 + $paj->pphlain ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
