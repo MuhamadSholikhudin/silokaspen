@@ -42,7 +42,7 @@
         <a class="hiddenanchor" id="signup"></a>
         <a class="hiddenanchor" id="signin"></a>
 
-        <div class="login_wrapper">
+        <div class="login_wrapper bg-light">
             <div class="animate form login_form">
                 <section class="login_content">
                     <form action="<?= base_url('auth/login'); ?>" method="POST" enctype="multipart/form-data">
