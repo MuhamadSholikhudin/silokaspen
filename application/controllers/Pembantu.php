@@ -63,6 +63,34 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON t
         $this->load->view('templates_admin/footer');
     }
 
+    public function cetak_pajak($nodok)
+    {
+        $where = array('nodok' => $nodok);
+        $data['pajak'] = $this->Model_pajak->edit_pajak($where, 'tb_pajak')->result();
+
+        $data['kdjnspengeluaran'] = $this->Model_jnspengeluaran->tampil_data()->result();
+        $data['kdsaldo'] = $this->db->query("SELECT kdsaldo FROM tb_saldoawal ")->result();
+
+ 
+        $this->load->view('pembantu/cetak_pajak', $data);
+
+    }
+    public function hapus_pajak($nodok)
+    {
+
+        $filter = $this->db->query("SELECT tb_transaksi.status FROM tb_pajak JOIN tb_transaksi ON tb_pajak.notransaksi = tb_transaksi.notransaksi WHERE   nodok = '$nodok' ")->result();
+ 
+        if ($filter > 1) {
+            redirect('pembantu/data_pajak/');
+        } elseif ($filter < 2) {
+            $where = ['nodok' => $nodok];
+            $this->Model_pajak->hapus_data($where, 'tb_pajak');
+            redirect('pembantu/data_pajak/');
+        }
+    }
+
+
+
     public function data_transaksi()
     {
         $data['transaksi'] = $this->Model_transaksi->tampil_data()->result();
@@ -99,6 +127,21 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON t
         $this->load->view('pembantu/edit_transaksi', $data);
         $this->load->view('templates_admin/footer');
     }
+
+    public function cetak_transaksi($notransaksi)
+    {
+
+        $where = array('notransaksi' => $notransaksi);
+        $data['transaksi'] = $this->Model_transaksi->edit_transaksi($where, 'tb_transaksi')->result();
+
+        $data['kdjnspengeluaran'] = $this->Model_jnspengeluaran->tampil_data()->result();
+        $data['kdsaldo'] = $this->db->query("SELECT kdsaldo FROM tb_saldoawal ")->result();
+
+       
+        $this->load->view('pembantu/cetak_transaksi', $data);
+
+    }
+
 
     public function tambah_transaksi()
     {
@@ -353,17 +396,10 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE nodok = $nodokla
             $this->load->library('upload', $config);
 
             if ($this->upload->do_upload('gambar')) {
-<<<<<<< HEAD
                 // $old_gambar = $data['pajak']['gambar'];
                 // if ($old_gambar != 'default.jpg') {
                 //     unlink(FCPATH . 'uploads/' . $old_gambar);
                 // }
-=======
-                $old_gambar = $data['transaksi']['gambar'];
-                if ($old_gambar != 'default.jpg') {
-                    unlink(FCPATH . 'uploads/' . $old_gambar);
-                }
->>>>>>> aeac62c64ae0e78758addaf1c46c5577589df0f3
                 $new_gambar = $this->upload->data('file_name');
                 $this->db->set('gambar', $new_gambar);
             } else {
@@ -399,6 +435,21 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE nodok = $nodokla
 
         $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Transaksi berhasil di Edit', 'success')</script>");
         redirect('pembantu/data_transaksi/');
+    }
+
+    public function hapus_transaksi($notransaksi)
+    {
+
+        $data['filter'] = $this->db->query("SELECT status FROM tb_transaksi WHERE  notransaksi = '$notransaksi' ")->result();
+
+        if ($data['filter']['status'] > 1) {
+            redirect('pembantu/data_transaksi/');
+        } elseif ($data['filter']['status'] < 2) {
+            $where = ['notransaksi' => $notransaksi];
+            $this->Model_transaksi->hapus_data($where, 'tb_transaksi');
+            redirect('pembantu/data_transaksi/');
+        }
+
     }
 
     function get_jnspengeluaran()

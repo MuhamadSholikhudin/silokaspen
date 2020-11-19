@@ -20,6 +20,7 @@
                                 <th>Jenis Pengeluaran</th>
                                 <th>Jenis Transaksi</th>
                                 <th>Jumlah</th>
+                                <th>Cetak</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,6 +39,11 @@
                                 <td><?= $tran->kdjnspengeluaran ?></td>
                                 <td><?= $tran->jnstransaksi ?></td>
                                 <td><?= $tran->jumlah ?></td>
+                                <td>
+                                    <a class="btn btn-warning text-right" target="blank" href="<?= base_url('pembantu/cetak_transaksi/' . $tran->notransaksi) ?>"> <i class="fa fa-print"></i> Cetak</a>
+                                    <a class="btn btn-danger text-right"  href="<?= base_url('pembantu/hapus_transaksi/' . $tran->notransaksi) ?>"> <i class="fa fa-remove"></i> Hapus</a>
+
+                                </td>
                                 </tr>
                             <?php endforeach; ?>
 

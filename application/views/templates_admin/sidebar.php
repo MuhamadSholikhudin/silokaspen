@@ -1,7 +1,7 @@
 <div class="col-md-3 left_col">
   <div class="left_col scroll-view">
     <div class="navbar nav_title" style="border: 0;">
-      <a href="<?= base_url('') . $this->session->userdata('hakakses') . '/index' ?>" class="site_title"><i class="fa fa-paw"></i> <span>SILOKASPEN</span></a>
+      <a href="<?= base_url('') . $this->session->userdata('hakakses') . '/index' ?>" class="site_title"><span>SILOKASPEN</span></a>
     </div>
 
     <div class="clearfix"></div>
@@ -42,11 +42,7 @@
                 <i class="fa fa-indent"></i> Pajak
               </a>
             </li>
-            <li>
-              <a href="<?= base_url('pembantu/bku') ?>">
-                <i class="fa fa-file"></i> Laporan BKU
-              </a>
-            </li>
+         
 
           <?php } elseif ($this->session->userdata('hakakses') == 'bendahara') { ?>
             <li>
@@ -64,6 +60,12 @@
                 <i class="fa fa-share-square-o"></i> Jenis Pengeluaran
               </a>
             </li>
+            <li>
+              <a href="<?= base_url('bendahara/pengguna') ?>">
+                <i class="fa fa-user"></i> Pengguna
+              </a>
+            </li>
+            <li>
             <li>
               <a href="<?= base_url('bendahara/bku') ?>">
                 <i class="fa fa-file"></i> Laporan BKU
@@ -84,7 +86,7 @@
           <?php } ?>
         </ul>
       </div>
-      
+
 
     </div>
     <!-- /sidebar menu -->

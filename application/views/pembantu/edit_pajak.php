@@ -139,7 +139,9 @@
                                     <a class="btn btn-primary" href="<?= base_url('pembantu/data_pajak') ?>">Cancel</a>
                                     <button type="submit" class="btn btn-success">Edit</button>
                                 </div>
+                                <a class="btn btn-warning text-right" href="<?= base_url('pembantu/cetak_transaksi') ?>"> <i class="fa fa-print"></i> Cetak</a>
                             </div>
+
 
                         </form>
                     </div>

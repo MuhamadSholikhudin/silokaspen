@@ -119,7 +119,8 @@ $data['bku'] = $this->db->query("SELECT tb_pajak.kdsaldo, tb_saldoawal.periodebu
         $data['jumpph23'] = $this->db->query(" SELECT SUM(pph23) as pph23 FROM tb_pajak WHERE kdsaldo = $kdsaldo  ")->result();
         $data['jumpphlain'] = $this->db->query(" SELECT SUM(pphlain) as pphlain FROM tb_pajak WHERE kdsaldo = $kdsaldo  ")->result();
 
-        
+        $data['bendahara'] = $this->db->query(" SELECT * FROM tb_login WHERE hakakses = 'bendahara' ")->result();
+$data['pembantu'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'pembantu' LIMIT 1")->result();        
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
         $this->load->view('bendahara/laporan_bku', $data);
@@ -158,6 +159,8 @@ $data['bku'] = $this->db->query("SELECT tb_pajak.kdsaldo, tb_saldoawal.periodebu
         $data['jumpph23'] = $this->db->query(" SELECT SUM(pph23) as pph23 FROM tb_pajak WHERE kdsaldo = $kdsaldo  ")->result();
         $data['jumpphlain'] = $this->db->query(" SELECT SUM(pphlain) as pphlain FROM tb_pajak WHERE kdsaldo = $kdsaldo  ")->result();
 
+        $data['bendahara'] = $this->db->query(" SELECT * FROM tb_login WHERE hakakses = 'bendahara' ")->result();
+$data['pembantu'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'pembantu' LIMIT 1")->result();        
 
 
         $this->load->view('bendahara/cetak_laporan', $data);
@@ -334,39 +337,89 @@ $data['bku'] = $this->db->query("SELECT tb_pajak.kdsaldo, tb_saldoawal.periodebu
     }
 
 
-    public function edit($id)
-    {
-        $where = array('id_brg' => $id);
-        $data['barang'] = $this->model_barang->edit_barang($where, 'tb_barang')->result();
+
+
+
+    public function pengguna(){
+        $data['user'] = $this->db->get('tb_login')->result();
 
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
-        $this->load->view('admin/edit_barang', $data);
-        $this->load->view('templates_admin/footer.php');
+        $this->load->view('bendahara/pengguna', $data);
+        $this->load->view('templates_admin/footer');
     }
 
-    public function update()
+    public function tambah_pengguna()
     {
-        $id = $this->input->post('id_brg');
-        $nama_brg = $this->input->post('nama_brg');
-        $keterangan = $this->input->post('keterangan');
-        $kategori = $this->input->post('kategori');
-        $harga = $this->input->post('harga');
-        $stok = $this->input->post('stok');
+        $data['user'] = $this->db->get('tb_login')->result();
+        $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
 
-        $data = [
-            'nama_brg' => $nama_brg,
-            'keterangan' => $keterangan,
-            'kategori' => $kategori,
-            'harga' => $harga,
-            'stok' => $stok,
-        ];
+        $this->load->view('templates_admin/header');
+        $this->load->view('templates_admin/sidebar');
+        $this->load->view('bendahara/tambah_pengguna', $data);
+        $this->load->view('templates_admin/footer');
+    }
+
+    public function pengguna_edit($idusername)
+    {
+        $where = array('idusername' => $idusername);
+        $data['user'] = $this->db->query("SELECT * FROM tb_login WHERE idusername = '$idusername' ")->result();
+$data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
+        $this->load->view('templates_admin/header');
+        $this->load->view('templates_admin/sidebar');
+        $this->load->view('bendahara/edit_pengguna', $data);
+        $this->load->view('templates_admin/footer');
+    }
+
+
+    public function tambah_tb_login_aksi()
+    {
+        $namalengkap = $this->input->post('namalengkap');
+        $username = $this->input->post('username');
+        $nip = $this->input->post('nip');
+        $telepon = $this->input->post('telepon');
+        $hakakses = $this->input->post('hakakses');
+        $password = $this->input->post('password');
+
+        $data = array(
+            'nip' => $nip,
+            'username' => $username,
+            'password' => $password,
+            'hakakses' => $hakakses,
+            'telepon' => $telepon,
+            'namalengkap' => $namalengkap,
+        );
+
+        $this->Model_tblogin->tambah_tb_login($data, 'tb_login');
+        $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Jenis Pengeluaran berhasil di tambahkan', 'success')</script>");
+        redirect('bendahara/pengguna/');
+    }
+
+    public function edit_tb_login_aksi()
+    {
+        $idusername = $this->input->post('idusername');
+        $namalengkap = $this->input->post('namalengkap');
+        $username = $this->input->post('username');
+        $nip = $this->input->post('nip');
+        $telepon = $this->input->post('telepon');
+        $hakakses = $this->input->post('hakakses');
+        $password = $this->input->post('password');
+        
+        $data = array(
+            'nip' => $nip,
+            'username' => $username,
+            'password' => $password,
+            'hakakses' => $hakakses,
+            'telepon' => $telepon,
+            'namalengkap' => $namalengkap,
+        );
+
         $where = [
-            'id_brg' => $id
+            'idusername' => $idusername
         ];
 
-        $this->model_barang->update_data($where, $data, 'tb_barang');
-        redirect('admin/data_barang/index');
+        $this->Model_saldoawal->update_data($where, $data, 'tb_login');
+        redirect('bendahara/pengguna/');
     }
 
 }

@@ -67,7 +67,7 @@
                             <br />
 
                             <div>
-                                <h1><i class="fa fa-paw"></i>SILOKASPEN</h1>
+                                <h1>SILOKASPEN</h1>
                                 <p>©<?= date('Y') ?> All Rights Reserved. SILOKASPEN</p>
                             </div>
                         </div>

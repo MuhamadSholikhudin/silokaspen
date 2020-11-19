@@ -172,12 +172,14 @@
                                             <td>&nbsp; </td>
                                         </tr>
 
-                                        <tr>
-                                            <td>ENDANG LISTIYANI, SE</td>
-                                        </tr>
-                                        <tr>
-                                            <td>NIP. 19640726 198603 2 012</td>
-                                        </tr>
+                                        <?php foreach ($bendahara as $ben) : ?>
+                                            <tr>
+                                                <td><?= $ben->namalengkap ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>NIP. <?= $ben->nip ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
 
@@ -210,12 +212,14 @@
                                             <td>&nbsp; </td>
                                         </tr>
 
-                                        <tr>
-                                            <td>DWI BUDIHARTANTI</td>
-                                        </tr>
-                                        <tr>
-                                            <td>NIP. 19640726 198603 2 012</td>
-                                        </tr>
+                                        <?php foreach ($pembantu as $pem) : ?>
+                                            <tr>
+                                                <td><?= $pem->namalengkap ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>NIP. <?= $pem->nip ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                                 </form>
@@ -327,12 +331,14 @@
                                                         <td>&nbsp; </td>
                                                     </tr>
 
-                                                    <tr>
-                                                        <td>ENDANG LISTIYANI, SE</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>NIP. 19640726 198603 2 012</td>
-                                                    </tr>
+                                                    <?php foreach ($bendahara as $ben) : ?>
+                                                        <tr>
+                                                            <td><?= $ben->namalengkap ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>NIP. <?= $ben->nip ?></td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
                                                 </tbody>
                                             </table>
 
@@ -365,12 +371,14 @@
                                                         <td>&nbsp; </td>
                                                     </tr>
 
-                                                    <tr>
-                                                        <td>DWI BUDIHARTANTI</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>NIP. 19640726 198603 2 012</td>
-                                                    </tr>
+                                                    <?php foreach ($pembantu as $pem) : ?>
+                                                        <tr>
+                                                            <td><?= $pem->namalengkap ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>NIP. <?= $pem->nip ?></td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
                                                 </tbody>
                                             </table>
                                 </form>
@@ -480,17 +488,21 @@
                                                 <tr>
                                                     <td><button class="btn-sm btn-danger">Ter Acc</button> </td>
                                                 </tr>
-<tr><td></td></tr>
+                                                <tr>
+                                                    <td></td>
+                                                </tr>
                                                 <tr>
                                                     <td>&nbsp; </td>
                                                 </tr>
 
-                                                <tr>
-                                                    <td>ENDANG LISTIYANI, SE</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>NIP. 19640726 198603 2 012</td>
-                                                </tr>
+                                                <?php foreach ($bendahara as $ben) : ?>
+                                                    <tr>
+                                                        <td><?= $ben->namalengkap ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>NIP. <?= $ben->nip ?></td>
+                                                    </tr>
+                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>
 
@@ -523,12 +535,14 @@
                                                     <td>&nbsp; </td>
                                                 </tr>
 
-                                                <tr>
-                                                    <td>DWI BUDIHARTANTI</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>NIP. 19640726 198603 2 012</td>
-                                                </tr>
+                                                <?php foreach ($pembantu as $pem) : ?>
+                                                    <tr>
+                                                        <td><?= $pem->namalengkap ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>NIP. <?= $pem->nip ?></td>
+                                                    </tr>
+                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>
 

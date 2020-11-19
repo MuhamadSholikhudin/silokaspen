@@ -21,6 +21,7 @@
                                 <th>pph 23</th>
                                 <th>pph lain</th>
                                 <th>jumlah</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,6 +45,12 @@
                                     <td><?= $paj->pph23 ?></td>
                                     <td><?= $paj->pphlain ?></td>
                                     <td><?= $paj->ppn + $paj->pph21 + $paj->pph22 + $paj->pph23 + $paj->pphlain ?></td>
+                                    <td>
+
+                                        <a class="btn btn-warning text-right" target="blank" href="<?= base_url('pembantu/cetak_pajak/' . $paj->nodok) ?>"> <i class="fa fa-print"></i> Cetak</a>
+                                        <a class="btn btn-danger text-right" href="<?= base_url('pembantu/hapus_pajak/' . $paj->nodok) ?>"> <i class="fa fa-remove"></i> Hapus</a>
+
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -60,6 +67,7 @@
                                 <th>pph 23</th>
                                 <th>pph lain</th>
                                 <th>jumlah</th>
+                                <th>Aksi</th>
                             </tr>
                         </tfoot>
                     </table>
