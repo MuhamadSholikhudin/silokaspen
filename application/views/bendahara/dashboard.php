@@ -14,68 +14,7 @@
         <div class="row">
 
             <div class="col-sm-12">
-                <div class=" bg-light">
-                    <div class="container">
-                        <h1 class="display-2">S I A</h1>
-                        <p class="lead">Sistem Informasi Akuntansi - DINAS PENDIDIKAN, KEPEMUDAAN, DAN OLAHRAGA - KABUPATEN KUDUS</p>
-                    </div>
-                </div>
-
-                <a name="news"></a>
-                <section id="news" class="news">
-                    <div class="container">
-                        
-                        <h4>Sejarah Singkat Dinas Pendidikan, Kepemudaan, dan Olahraga Kabupaten Kudus</h4>
-                        <div class="lead mb-3"></div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p>Dinas Pendidikan Kepemudaan dan Olahraga Kabupaten Kudus dibentuk berdasarkan Peraturan Bupati Kudus Nomor 14 Tahun 2008. Dinas Pendidikan Kepemudaan dan Olahraga Kabupaten Kudus adalah salah satu organisasi publik yang secara khusus menangani urusan pemerintahan di bidang pendidikan, kepemudaan dan olahraga.
-                                    Dinas Pendidikan Pemuda dan Olahraga membawahi 9 UPT (Unit Pelaksana Teknis) Pendidikan Kecamatan :
-                                    <br>1. UPT Pendidikan Kecamatan Kaliwungu
-                                    <br>2. UPT Pendidikan Kecamatan Kota
-                                    <br>3. UPT Pendidikan Kecamatan Jati
-                                    <br>4. UPT Pendidikan Kecamatan Undaan
-                                    <br>5. UPT Pendidikan Kecamatan Mejobo
-                                    <br>6. UPT Pendidikan Kecamatan Jekulo
-                                    <br>7. UPT Pendidikan Kecamatan Bae
-                                    <br>8. UPT Pendidikan Kecamatan Gebog
-                                    <br>9. UPT Pendidikan Kecamatan Dawe</p>
-                                <p>A. Visi
-                                    <br>“Terwujudnya pelayanan yang berkualitas di bidang pendidikan, pemuda, dan olahraga “.
-                                    <br>B. Misi
-                                    <br>Dinas Pendidikan Pemuda dan Olahraga Kabupaten Kudus dirumuskan sebagai berikut :
-                                    <br>1. Menuntaskan Program Wajib Belajar 12 Tahun dengan tetap memantapkan Wajib Belajar 9 tahun.
-                                    <br>2. Meningkatkan profesionalisme pendidik dan tenaga kependidikan.
-                                    <br>3. Melaksanakan pembinaan dan pengembangan pendidikan nonformal dan informal.
-                                    <br>4. Melaksanakan pembinaan kepemudaan.
-                                    <br>5. Melaksanakan pembinaan keolahragaan.
-
-                                </p>
-                                <p>Tugas Pokok dan Fungsi Dinas Pendidikan, Kepemudaan dan Olahraga Kabupaten Kudus
-                                    <br>A. Tugas Pokok
-                                    Berdasarkan Peraturan Daerah Kabupaten Kudus nomor 14 Tahun 2008 tentang Organisasi dan Tata Kerja Dinas Daerah Kabupaten Kudus, tugas pokok Dinas Pendidikan Pemuda dan Olahraga adalah melaksanakan urusan pemerintahan daerah bidang pendidikan.
-
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <p>B. Fungsi
-                                    <br>Berdasarkan Peraturan Daerah Kabupaten Kudus nomor 14
-                                    <br>Tahun 2008 tentang Organisasi dan Tata Kerja Dinas Daerah Kabupaten Kudus, fungsi Dinas Pendidikan Pemuda dan Olahraga adalah :
-                                    <br>1. Perumusan kebijakan teknis bidang pemuda,dan olahraga
-                                    <br>2. Penyelenggaraan urusan pemerintahan dan pelayanan umum bidang pendidikan, pemuda, dan olahraga
-                                    <br>3. Pembinaan dan fasilitasi bidang pendidikan, pemuda, dan olahraga
-                                    <br>4. Pelaksanaan tugas di bidang pendidikan dasar, pendidikan menengah, pendidikan non formal dan pengembangan pendidik dan tenaga kependidikan, pemuda, dan olahraga
-                                    <br>5. Pemantauan, evaluasi, dan pelaporan bidang pendidikan, pemuda, dan olahraga
-                                    <br>6. Pelaksanaan kesekretariatan dinasPelaksanaan tugas lain yang diberikan oleh Bupati sesuai dengan tugas dan fungsinya.
-                                </p>
-                                <p>Lokasi Dinas Pendidikan, Kepemudaan dan Olahraga Kabupaten Kudus
-                                    Dinas Pendidikan, Kepemudaan dan Olahraga Kabupaten Kudus beralamat di Jl. Mejobo No.40, Mlati Kidul, Kecamatan Kota Kudus, Kabupaten Kudus, Jawa Tengah. Berikut adalah maps Dinas Pendidikan, Kepemudaan dan OlahragaKabupaten Kudus.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
+                <?php include "assets/gambar_pkl/beranda.txt" ?>
             </div>
 
         </div>

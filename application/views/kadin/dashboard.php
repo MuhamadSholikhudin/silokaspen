@@ -21,6 +21,10 @@
 
         <div class="row">
 
+            <div class="col-sm-12">
+                <?php include "assets/gambar_pkl/beranda.txt" ?>
+            </div>
+
         </div>
 
 

@@ -24,10 +24,10 @@
 
     <style>
         .login {
-            background-image: url("https://lh3.googleusercontent.com/proxy/yIF9TWaojPUMy13j5FVX6Ve29K-HG52qg5GxtuiCeHnCeuD8FYT4YG-8-vLLOVKpmqBsECHXB-yXV_9hmOyeFCZenHv4TAYJJ21Pd14_DSO1DYlqq8k");
+            background-image: url("<?= base_url('assets/'); ?>gambar_pkl/Makalah.jpg");
             /* Full height */
             height: 650px;
-            
+
 
             /* Center and scale the image nicely */
             background-position: center;
@@ -42,10 +42,10 @@
         <a class="hiddenanchor" id="signup"></a>
         <a class="hiddenanchor" id="signin"></a>
 
-        <div class="login_wrapper bg-light">
+        <div class="login_wrapper">
             <div class="animate form login_form">
                 <section class="login_content">
-                    <form action="<?= base_url('auth/login'); ?>" method="POST" enctype="multipart/form-data">
+                    <form class="text-dark" action="<?= base_url('auth/login'); ?>" method="POST" enctype="multipart/form-data">
                         <h1>Login Form</h1>
                         <div>
                             <input type="text" class="form-control" placeholder="Username" name="username" required="" />
@@ -68,7 +68,7 @@
 
                             <div>
                                 <h1>SILOKASPEN</h1>
-                                <p>©<?= date('Y') ?> All Rights Reserved. SILOKASPEN</p>
+                                
                             </div>
                         </div>
                     </form>

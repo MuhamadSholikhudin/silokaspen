@@ -10,7 +10,7 @@
             <div class="container">                
                 <div class="row mb-5">
                     <div class="col">
-                        <h2 class="bg-info p-2">201753097</h2>
+                    <!--    <h2 class="bg-info p-2">201753097</h2> -->
                     </div>
                 </div>
                 <h4>Sejarah Singkat Dinas Pendidikan, Kepemudaan, dan Olahraga Kabupaten Kudus</h4>

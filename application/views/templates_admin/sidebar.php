@@ -1,6 +1,6 @@
 <div class="col-md-3 left_col">
-  <div class="left_col scroll-view">
-    <div class="navbar nav_title" style="border: 0;">
+  <div class="left_col scroll-view kiri">
+    <div class="navbar nav_title kiri_pojok" style="border: 0;">
       <a href="<?= base_url('') . $this->session->userdata('hakakses') . '/index' ?>" class="site_title"><span>SILOKASPEN</span></a>
     </div>
 
@@ -42,7 +42,7 @@
                 <i class="fa fa-indent"></i> Pajak
               </a>
             </li>
-         
+
 
           <?php } elseif ($this->session->userdata('hakakses') == 'bendahara') { ?>
             <li>

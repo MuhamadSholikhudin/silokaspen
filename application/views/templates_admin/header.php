@@ -37,9 +37,21 @@
 
   <!-- Sweet Alert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+  <style>
+    .kiri {
+      /* background-color: #2e7ece; */
+      background-color: #2e7ece;
+    }
+
+    .kiri_pojok {
+      /* background-color: #2e7ece; */
+      background-color: #2e6ece;
+    }
+  </style>
 </head>
 
 <body class="nav-md">
   <div class="container body">
-    <div class="main_container">
+    <div class="main_container kiri">
       <?= $this->session->flashdata('message'); ?>

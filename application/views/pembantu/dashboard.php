@@ -5,13 +5,15 @@
                 <h3>Selamat datang, <?= $this->session->userdata('namalengkap') ?><br> <small>Pembantu Bendahara Disdikpora</small></h3>
             </div>
 
-            
+
         </div>
 
         <div class="clearfix"></div>
 
         <div class="row">
-
+            <div class="col-sm-12">
+                <?php include "assets/gambar_pkl/beranda.txt" ?>
+            </div>
         </div>
 
 

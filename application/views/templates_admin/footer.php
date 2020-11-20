@@ -1,7 +1,7 @@
         <!-- footer content -->
         <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+          <div class="pull-right kiri">
+            By Lisa Rachmawati
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -24,7 +24,7 @@
           $(document).ready(function() {
             $('#example').DataTable();
 
-// PAJAK 
+            // PAJAK 
             $('#idnotransaksi').change(function() {
               var id = $(this).val();
               $.ajax({
