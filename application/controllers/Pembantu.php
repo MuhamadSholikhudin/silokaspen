@@ -440,14 +440,43 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE nodok = $nodokla
     public function hapus_transaksi($notransaksi)
     {
         $where = ['notransaksi' => $notransaksi];
+        // $cara = $this->db->query("SELECT tb_transaksi.notransaksi FROM tb_transaksi JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi WHERE tb_transaksi.notransaksi = '$notransaksi' ")->num_rows();
+        $cara = $this->db->query("SELECT * FROM tb_transaksi WHERE notransaksi = '$notransaksi' AND  status = 0 ")->num_rows();
+$tran = $this->db->query("SELECT jumlah, kdsaldo FROM tb_transaksi WHERE notransaksi = '$notransaksi'");
+        $paj = $this->db->query("SELECT jumlah FROM tb_pajak WHERE notransaksi = '$notransaksi'");
 
-        $cara = $this->db->query("SELECT tb_transaksi.notransaksi FROM tb_transaksi JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi WHERE tb_transaksi.notransaksi = '$notransaksi'")->num_rows();
+        $cam = $this->db->query("SELECT tb_saldoawal.jumlahsaldosisa, tb_saldoawal.kdsaldo, tb_transaksi.notransaksi, tb_transaksi.jumlah, tb_pajak.jumlah as jp FROM tb_transaksi JOIN tb_saldoawal ON tb_transaksi.kdsaldo = tb_saldoawal.kdsaldo JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi WHERE tb_transaksi.notransaksi = '$notransaksi'");
 
-        if ($cara > 0) {
+
+
+        $trans = $cam->row();
+        $trs = $trans->jumlah;
+        $pk = $trans->jp;
+        $kds = $trans->kdsaldo;
+        $jls = $trans->jumlahsaldosisa;
+
+        $total_hapus = $trs + $pk;
+        $jumlahsalsisa = $total_hapus + $jls ;
+
+
+
+        if ($cara < 1) {
+            $this->session->set_flashdata("message", "<script>Swal.fire('Gagal', 'Tidak Bisa di Hapus !!', 'error')</script>");
             redirect('pembantu/data_transaksi/');
-        } elseif ($cara < 1) {
-            $cara = $this->db->query("SELECT tb_transaksi.notransaksi FROM tb_transaksi WHERE notransaksi = '$notransaksi'")->num_rows();
+        } elseif ($cara > 0) {
+
+            $datat = array(
+                'jumlahsaldosisa' => $jumlahsalsisa
+            );
+
+            $wheret = [
+                'kdsaldo' => $kds
+            ];
+
+            $this->Model_saldoawal->update_datat($wheret, $datat, 'tb_saldoawal');            
             $this->Model_transaksi->hapus_data($where, 'tb_transaksi');
+            $this->Model_pajak->hapus_data($where, 'tb_pajak');
+            $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Berhasil di Hapus', 'success')</script>");
             redirect('pembantu/data_transaksi/');
         }
     }

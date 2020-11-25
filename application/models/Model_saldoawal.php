@@ -49,26 +49,6 @@ class Model_saldoawal extends CI_Model
         }
     }
 
-    public function detail_brg($id_brg){
-$result = $this->db->where('id_brg', $id_brg)->get('tb_saldoawal');
-        if ($result->num_rows() > 0) {
-            return $result->result();
-        } else {
-            return array();
-        }
-    }
-
-    public function get_keyword($keyword){
-        $this->db->select('*');
-        $this->db->from('tb_saldoawal');
-        $this->db->like('nama_brg', $keyword);
-        $this->db->or_like('kategori', $keyword);
-        $this->db->or_like('harga', $keyword);
-        $this->db->or_like('keterangan', $keyword);
-        
-
-        return $this->db->get()->result();
-    }
 
 
     function get_sub_kdsaldop($notransaksi)
