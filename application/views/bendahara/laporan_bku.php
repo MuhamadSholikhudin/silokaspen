@@ -371,7 +371,7 @@
                                                         <td>&nbsp; </td>
                                                     </tr>
 
-                                                    <?php foreach ($pembantu as $pem) : ?>
+                                                    <?php foreach ($kadin as $pem) : ?>
                                                         <tr>
                                                             <td><?= $pem->namalengkap ?></td>
                                                         </tr>

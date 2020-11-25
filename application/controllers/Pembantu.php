@@ -439,17 +439,17 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE nodok = $nodokla
 
     public function hapus_transaksi($notransaksi)
     {
+        $where = ['notransaksi' => $notransaksi];
 
-        $data['filter'] = $this->db->query("SELECT status FROM tb_transaksi WHERE  notransaksi = '$notransaksi' ")->result();
+        $cara = $this->db->query("SELECT tb_transaksi.notransaksi FROM tb_transaksi JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi WHERE tb_transaksi.notransaksi = '$notransaksi'")->num_rows();
 
-        if ($data['filter']['status'] > 1) {
+        if ($cara > 0) {
             redirect('pembantu/data_transaksi/');
-        } elseif ($data['filter']['status'] < 2) {
-            $where = ['notransaksi' => $notransaksi];
+        } elseif ($cara < 1) {
+            $cara = $this->db->query("SELECT tb_transaksi.notransaksi FROM tb_transaksi WHERE notransaksi = '$notransaksi'")->num_rows();
             $this->Model_transaksi->hapus_data($where, 'tb_transaksi');
             redirect('pembantu/data_transaksi/');
         }
-
     }
 
     function get_jnspengeluaran()
@@ -476,45 +476,7 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE nodok = $nodokla
 
     }
 
-    public function edit($id)
-    {
-        $where = array('id_brg' => $id);
-        $data['barang'] = $this->model_barang->edit_barang($where, 'tb_barang')->result();
-
-        $this->load->view('templates_admin/header');
-        $this->load->view('templates_admin/sidebar');
-        $this->load->view('admin/edit_barang', $data);
-        $this->load->view('templates_admin/footer.php');
-    }
-
-    public function update()
-    {
-        $id = $this->input->post('id_brg');
-        $nama_brg = $this->input->post('nama_brg');
-        $keterangan = $this->input->post('keterangan');
-        $kategori = $this->input->post('kategori');
-        $harga = $this->input->post('harga');
-        $stok = $this->input->post('stok');
-
-        $data = [
-            'nama_brg' => $nama_brg,
-            'keterangan' => $keterangan,
-            'kategori' => $kategori,
-            'harga' => $harga,
-            'stok' => $stok,
-        ];
-        $where = [
-            'id_brg' => $id
-        ];
-
-        $this->model_barang->update_data($where, $data, 'tb_barang');
-        redirect('admin/data_barang/index');
-    }
-
-
  
-
-
     function get_sub_kdsaldop()
     {
         $notransaksi = $this->input->post('id', TRUE);

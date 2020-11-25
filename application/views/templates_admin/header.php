@@ -41,17 +41,13 @@
   <style>
     .kiri {
       /* background-color: #2e7ece; */
-      background-color: #2e7ece;
+      background-color: #17a2b8;
     }
 
     .kiri_pojok {
       /* background-color: #2e7ece; */
-      background-color: #2e6ece;
+      background-color: black;
     }
   </style>
 </head>
 
-<body class="nav-md">
-  <div class="container body">
-    <div class="main_container kiri">
-      <?= $this->session->flashdata('message'); ?>

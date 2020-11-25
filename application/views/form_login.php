@@ -24,7 +24,7 @@
 
     <style>
         .login {
-            background-image: url("<?= base_url('assets/'); ?>gambar_pkl/Makalah.jpg");
+            background-image: url("<?= base_url('assets/'); ?>gambar_pkl/login.jpeg");
             /* Full height */
             height: 650px;
 

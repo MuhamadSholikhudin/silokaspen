@@ -1,5 +1,6 @@
-<div class="right_col" role="main" style="min-height: 4546px;">
-    <div class>
+<div class="right_col" role="main" style="min-height: 4546px; ">
+    <div class >
+
         <div class="page-title">
             <div class="title_center">
                 <h3>Selamat datang, <?= $this->session->userdata('namalengkap') ?> <small> Bendahara Disdikpora</small></h3>
@@ -9,8 +10,8 @@
         </div>
 
         <div class="clearfix"></div>
-<br>
-<br>
+        <br>
+        <br>
         <div class="row">
 
             <div class="col-sm-12">

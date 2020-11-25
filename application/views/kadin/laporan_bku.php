@@ -1,6 +1,6 @@
 <div class="right_col" role="main" style="min-height: 4546px;">
     <div class>
-       
+
 
         <div class="clearfix"></div>
 
@@ -157,7 +157,9 @@
                                             <td>&nbsp; </td>
                                         </tr>
                                         <tr>
-                                            <td><div class="btn-sm btn-primary text-center">Ter-ACC</div> </td>
+                                            <td>
+                                                <div class="btn-sm btn-primary text-center">Ter-ACC</div>
+                                            </td>
                                         </tr>
 
                                         <tr>
@@ -306,12 +308,14 @@
                                                         <td>&nbsp; </td>
                                                     </tr>
 
-                                                    <tr>
-                                                        <td>ENDANG LISTIYANI, SE</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>NIP. 19640726 198603 2 012</td>
-                                                    </tr>
+                                                    <?php foreach ($bendahara as $ben) : ?>
+                                                        <tr>
+                                                            <td><?= $ben->namalengkap ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>NIP. <?= $ben->nip ?></td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
                                                 </tbody>
                                             </table>
 
@@ -338,12 +342,14 @@
                                                         <td>&nbsp; </td>
                                                     </tr>
 
-                                                    <tr>
-                                                        <td>DWI BUDIHARTANTI</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>NIP. 19640726 198603 2 012</td>
-                                                    </tr>
+                                                    <?php foreach ($kadin as $pem) : ?>
+                                                        <tr>
+                                                            <td><?= $pem->namalengkap ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>NIP. <?= $pem->nip ?></td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
                                                 </tbody>
                                             </table>
                                 </form>

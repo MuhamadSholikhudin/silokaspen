@@ -120,8 +120,10 @@ $data['bku'] = $this->db->query("SELECT tb_pajak.kdsaldo, tb_saldoawal.periodebu
         $data['jumpphlain'] = $this->db->query(" SELECT SUM(pphlain) as pphlain FROM tb_pajak WHERE kdsaldo = $kdsaldo  ")->result();
 
         $data['bendahara'] = $this->db->query(" SELECT * FROM tb_login WHERE hakakses = 'bendahara' ")->result();
-$data['pembantu'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'pembantu' LIMIT 1")->result();        
-        $this->load->view('templates_admin/header');
+$data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' LIMIT 1")->result();        
+        
+
+$this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
         $this->load->view('bendahara/laporan_bku', $data);
         $this->load->view('templates_admin/footer');
@@ -209,6 +211,7 @@ $data['pembantu'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'p
         $saldomasuk = $saldomasuklama + $saldoselisih;
         $jumlahsaldosisa = $jumlahsaldosisalama + $saldoselisih;
 
+$cari = $this->db->query(" SELECT * FROM tb_saldoawal WHERE kdsaldo = '$kdsaldo' ")->num_rows();
 
         $data = array(
             'kdsaldo' => $kdsaldo,
@@ -224,11 +227,25 @@ $data['pembantu'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'p
             'kdsaldo' => $kdsaldolama
         ];
 
-        $this->Model_saldoawal->update_data($where, $data, 'tb_saldoawal');
-        $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Saldo Awal berhasil di Edit', 'success')</script>");
+if($kdsaldo == $kdsaldolama ){
+        
 
-        redirect('bendahara/data_saldo_awal');
-    }
+            $this->Model_saldoawal->update_data($where, $data, 'tb_saldoawal');
+            $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Saldo Awal berhasil di Edit', 'success')</script>");
+            redirect('bendahara/data_saldo_awal');
+
+        }elseif($cari > 0){
+            $this->session->set_flashdata("message", "<script>Swal.fire('Gagal', 'Data Saldo Awal Tidak berhasil di Edit kdsaldo duplikat', 'info')</script>");
+            redirect('bendahara/data_saldo_awal');
+        }elseif($cari < 1){
+
+            $this->Model_saldoawal->update_data($where, $data, 'tb_saldoawal');
+            $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Saldo Awal berhasil di Edit', 'success')</script>");
+            redirect('bendahara/data_saldo_awal');
+        }
+}
+
+        
 
     public function tambah_jnspengeluaran()
     {

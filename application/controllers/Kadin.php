@@ -22,7 +22,9 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
 
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
+
         $this->load->view('kadin/dashboard');
+        
         $this->load->view('templates_admin/footer');
     }
 
@@ -51,7 +53,11 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $data['jumsisa'] = $this->db->query(" SELECT SUM(jumlahsaldosisa) as jumsis FROM tb_saldoawal WHERE kdsaldo = $kdsaldo")->result();
         $data['jumtunai'] = $this->db->query(" SELECT SUM(tb_transaksi.jumlah) as tunai FROM tb_transaksi  JOIN tb_jnspengeluaran ON tb_transaksi.kdjnspengeluaran = tb_jnspengeluaran.kdjnspengeluaran JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi WHERE tb_transaksi.kdsaldo = $kdsaldo AND tb_jnspengeluaran.carapembayaran = 'tunai' ")->result();
         $data['jumnontunai'] = $this->db->query(" SELECT SUM(tb_transaksi.jumlah) as nontunai FROM tb_transaksi JOIN  tb_jnspengeluaran ON tb_transaksi.kdjnspengeluaran = tb_jnspengeluaran.kdjnspengeluaran JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi WHERE tb_transaksi.kdsaldo = $kdsaldo AND tb_jnspengeluaran.carapembayaran = 'nontunai' ")->result();
-   
+
+        $data['bendahara'] = $this->db->query(" SELECT * FROM tb_login WHERE hakakses = 'bendahara' LIMIT 1")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' LIMIT 1")->result();        
+     
+
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
         $this->load->view('kadin/laporan_bku', $data);

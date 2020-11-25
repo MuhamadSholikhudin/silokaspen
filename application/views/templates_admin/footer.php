@@ -1,13 +1,16 @@
         <!-- footer content -->
         <footer>
-          <div class="pull-right kiri">
-            By Lisa Rachmawati
+          <div class="pull-right">
+            By Lisa Rachmawati 
           </div>
           <div class="clearfix"></div>
         </footer>
         <!-- /footer content -->
         </div>
         </div>
+
+
+
 
         <!-- jQuery -->
         <script src="<?= base_url('assets/'); ?>vendors/jquery/dist/jquery.min.js"></script>
