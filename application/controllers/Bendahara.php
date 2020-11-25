@@ -91,8 +91,10 @@ $data['carapem'] = ['tunai', 'nontunai'];
 
     public function bku()
     {
-$data['bku'] = $this->db->query("SELECT tb_pajak.kdsaldo, tb_saldoawal.periodebulan, tb_saldoawal.periodetahun, tb_saldoawal.status FROM tb_pajak JOIN tb_saldoawal ON tb_pajak.kdsaldo = tb_saldoawal.kdsaldo GROUP BY kdsaldo")->result();
-        $this->load->view('templates_admin/header');
+        // $data['bku'] = $this->db->query("SELECT tb_pajak.kdsaldo, tb_saldoawal.periodebulan, tb_saldoawal.periodetahun, tb_saldoawal.status FROM tb_pajak JOIN tb_saldoawal ON tb_pajak.kdsaldo = tb_saldoawal.kdsaldo GROUP BY kdsaldo")->result();
+        $data['bku'] = $this->db->query("SELECT * FROM tb_saldoawal  ORDER BY tglsaldomasuk DESC")->result();
+        
+$this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
         $this->load->view('bendahara/data_laporan_bku', $data);
         $this->load->view('templates_admin/footer');
@@ -300,29 +302,41 @@ if($kdsaldo == $kdsaldolama ){
     {
         $notransaksi = $this->input->post('notransaksi');
         $id = $this->input->post('kdsaldo');
-        $result = array();
-        foreach ($notransaksi as $key => $val) {
-            $result[] = array(
-                "notransaksi" => $notransaksi[$key],
-                "status" => $_POST['status'][$key]
-            );
-        }
-        $this->db->update_batch('tb_transaksi', $result, 'notransaksi');
+
+$jumtran = $this->db->query("SELECT * FROM tb_transaksi JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi WHERE tb_transaksi.kdsaldo = '$id' ")->num_rows();
+if ($jumtran < 1 ){
+            $this->session->set_flashdata("message", "<script>Swal.fire('Info', 'Data Laporan BKU Tidak dapat diajukan', 'info')</script>");
+
+            redirect('bendahara/laporan_bku/' . $id);
+
+}elseif ($jumtran > 0){
+
+            $result = array();
+            foreach ($notransaksi as $key => $val) {
+                $result[] = array(
+                    "notransaksi" => $notransaksi[$key],
+                    "status" => $_POST['status'][$key]
+                );
+            }
+            $this->db->update_batch('tb_transaksi', $result, 'notransaksi');
 
 
-        $data = [
-            'status' => 1
+            $data = [
+                'status' => 1
+            ];
+            $where = [
+                'kdsaldo' => $id
+            ];
 
-        ];
-        $where = [
-            'kdsaldo' => $id
-        ];
+            $this->Model_saldoawal->update_data($where, $data, 'tb_saldoawal');
 
-        $this->Model_saldoawal->update_data($where, $data, 'tb_saldoawal');
+            $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Laporan BKU berhasil di Ajukan', 'success')</script>");
 
-        $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Laporan BKU berhasil di Ajukan', 'success')</script>");
+            redirect('bendahara/laporan_bku/' . $id);
+}
 
-        redirect('bendahara/laporan_bku/' . $id);
+
+        
     }
 
     public function batalkan_ajukan()

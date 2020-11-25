@@ -159,7 +159,7 @@
                                             <td> Mengetahui</td>
                                         </tr>
                                         <tr>
-                                            <td>Pejabat Pelaksana teknis </td>
+                                            <td> Bendahara Pengeluaran Belanja Langsung</td>
                                         </tr>
                                         <tr>
                                             <td>&nbsp; </td>
@@ -188,10 +188,10 @@
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <td>Kudus, 30 Desember 2019 </td>
+                                            <td>Kudus, <?= date('d-m-Y') ?></td>
                                         </tr>
                                         <tr>
-                                            <td> Pembantu Bendahara Pengeluaran Belanja Langsung</td>
+                                            <td>Kepala Dinas</td>
                                         </tr>
                                         <tr>
                                             <td>Disdikpora Kabupaten Kudus </td>
@@ -212,7 +212,7 @@
                                             <td>&nbsp; </td>
                                         </tr>
 
-                                        <?php foreach ($pembantu as $pem) : ?>
+                                        <?php foreach ($kadin as $pem) : ?>
                                             <tr>
                                                 <td><?= $pem->namalengkap ?></td>
                                             </tr>
@@ -318,7 +318,7 @@
                                                         <td> Mengetahui</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Pejabat Pelaksana teknis </td>
+                                                        <td>Pembantu Bendahara Pengeluaran Belanja Langsung </td>
                                                     </tr>
                                                     <tr>
                                                         <td>&nbsp; </td>
@@ -347,10 +347,10 @@
                                             <table>
                                                 <tbody>
                                                     <tr>
-                                                        <td>Kudus, 30 Desember 2019 </td>
+                                                        <td>Kudus, <?= date('d-m-Y') ?> </td>
                                                     </tr>
                                                     <tr>
-                                                        <td> Pembantu Bendahara Pengeluaran Belanja Langsung</td>
+                                                        <td> Kepala Dinas </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Disdikpora Kabupaten Kudus </td>
@@ -477,7 +477,7 @@
                                                     <td> Mengetahui</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Pejabat Pelaksana teknis </td>
+                                                    <td>Bendahara Pengeluaran Belanja Langsung</td>
                                                 </tr>
                                                 <tr>
                                                     <td>&nbsp; </td>
@@ -511,10 +511,10 @@
                                         <table>
                                             <tbody>
                                                 <tr>
-                                                    <td>Kudus, 30 Desember 2019 </td>
+                                                    <td>Kudus, <?= date('d-m-Y') ?> </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> Pembantu Bendahara Pengeluaran Belanja Langsung</td>
+                                                    <td> Kepala Dinas</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Disdikpora Kabupaten Kudus </td>
@@ -535,7 +535,7 @@
                                                     <td>&nbsp; </td>
                                                 </tr>
 
-                                                <?php foreach ($pembantu as $pem) : ?>
+                                                <?php foreach ($kadin as $pem) : ?>
                                                     <tr>
                                                         <td><?= $pem->namalengkap ?></td>
                                                     </tr>

@@ -23,7 +23,7 @@
 
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Laporan BKU <small>Pemerintah Kabupaten Kudus</small></h2>
+                    <h2>Laporan BKU Pemerintah Kabupaten Kudus</h2>
 
                     <div class="clearfix"></div>
                 </div>
@@ -42,7 +42,6 @@
                                     <th>Tunai</th>
                                     <th>Non Tunai</th>
                                     <th>Terima UP</th>
-
                                     <th>Nama Toko</th>
                                     <th>Alamat Toko</th>
                                     <th>Ppn</th>

@@ -151,7 +151,7 @@
                                             <td> Mengetahui</td>
                                         </tr>
                                         <tr>
-                                            <td>Pejabat Pelaksana teknis </td>
+                                            <td> Bendahara Pengeluaran Belanja Langsung </td>
                                         </tr>
                                         <tr>
                                             <td>&nbsp; </td>
@@ -166,24 +166,25 @@
                                             <td>&nbsp; </td>
                                         </tr>
 
-                                        <tr>
-                                            <td>ENDANG LISTIYANI, SE</td>
-                                        </tr>
-                                        <tr>
-                                            <td>NIP. 19640726 198603 2 012</td>
-                                        </tr>
+                                        <?php foreach ($bendahara as $ben) : ?>
+                                            <tr>
+                                                <td><?= $ben->namalengkap ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>NIP. <?= $ben->nip ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
-
                             </div>
                             <div class="col-sm-4">
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <td>Kudus, 30 Desember 2019 </td>
+                                            <td>Kudus, <?= date('d-m-Y') ?> </td>
                                         </tr>
                                         <tr>
-                                            <td> Pembantu Bendahara Pengeluaran Belanja Langsung</td>
+                                            <td>Kepala Dinas</td>
                                         </tr>
                                         <tr>
                                             <td>Disdikpora Kabupaten Kudus </td>
@@ -198,12 +199,14 @@
                                             <td>&nbsp; </td>
                                         </tr>
 
-                                        <tr>
-                                            <td>DWI BUDIHARTANTI</td>
-                                        </tr>
-                                        <tr>
-                                            <td>NIP. 19640726 198603 2 012</td>
-                                        </tr>
+                                        <?php foreach ($kadin as $pem) : ?>
+                                            <tr>
+                                                <td><?= $pem->namalengkap ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>NIP. <?= $pem->nip ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                                 </form>
@@ -324,10 +327,10 @@
                                             <table>
                                                 <tbody>
                                                     <tr>
-                                                        <td>Kudus, 30 Desember 2019 </td>
+                                                        <td>Kudus, <?= date('d-m-Y') ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <td> Pembantu Bendahara Pengeluaran Belanja Langsung</td>
+                                                        <td> Bendahara Pengeluaran Belanja Langsung</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Disdikpora Kabupaten Kudus </td>

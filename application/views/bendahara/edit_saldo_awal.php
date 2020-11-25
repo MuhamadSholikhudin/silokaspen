@@ -47,7 +47,7 @@
                                         <select class="form-control" id="periodebulan" name="periodebulan">
                                             <?php foreach ($bulan as $bul) : ?>
                                                 <?php if ($bul == $sal->periodebulan) : ?>
-                                                    <option value="<?= $bul ?>"><?= $bul ?></option>
+                                                    <option value="<?= $bul ?>"  selected><?= $bul ?></option>
                                                 <?php else : ?>
                                                     <option value="<?= $bul ?>"><?= $bul ?></option>
 
