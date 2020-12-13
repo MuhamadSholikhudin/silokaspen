@@ -1,6 +1,12 @@
 <div class="right_col" role="main" style="min-height: 4546px;">
     <div class>
-
+        <?php
+        function rupiah($angka)
+        {
+            $hasil_rupiah = "Rp " . number_format($angka, 2, ',', '.');
+            return $hasil_rupiah;
+        }
+        ?>
 
         <div class="clearfix"></div>
 
@@ -21,6 +27,7 @@
                                 <th>Periode tahun</th>
                                 <th>Tgl Saldo Sisa</th>
                                 <th>Jumlah Saldo Sisa</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -28,13 +35,56 @@
                             <?php foreach ($saldo as $sal) : ?>
                                 <tr>
                                     <td><?= $no++; ?></td>
-                                    <td><a href="<?= base_url('bendahara/edit_saldo_awal/') . $sal->kdsaldo ?>"><?= $sal->kdsaldo ?></a></td>
+                                    <td><a href="<?= base_url('bendahara/edit_saldo_awal/') . $sal->id_saldo ?>"><?= $sal->id_saldo ?></a></td>
                                     <td><?= $sal->tglsaldomasuk ?></td>
-                                    <td><?= $sal->saldomasuk ?></td>
-                                    <td><?= $sal->periodebulan ?></td>
+                                    <td><?= rupiah($sal->saldomasuk) ?></td>
+                                    <td><?php
+
+                                        if ($sal->periodebulan == '01') {
+                                            echo  'Januari';
+                                        } elseif ($sal->periodebulan == '02') {
+                                            echo  'Februari';
+                                        } elseif ($sal->periodebulan == '03') {
+                                            echo  'Maret';
+                                        } elseif ($sal->periodebulan == '04') {
+                                            echo  'April';
+                                        } elseif ($sal->periodebulan == '05') {
+                                            echo  'Mei';
+                                        } elseif ($sal->periodebulan == '06') {
+                                            echo  'Juni';
+                                        } elseif ($sal->periodebulan == '07') {
+                                            echo  'Juli';
+                                        } elseif ($sal->periodebulan == '08') {
+                                            echo  'Agustus';
+                                        } elseif ($sal->periodebulan == '09') {
+                                            echo  'September';
+                                        } elseif ($sal->periodebulan == '10') {
+                                            echo  'Oktober';
+                                        } elseif ($sal->periodebulan == '11') {
+                                            echo  'November';
+                                        } elseif ($sal->periodebulan == '12') {
+                                            echo  'Desember';
+                                        }
+                                        ?></td>
                                     <td><?= $sal->periodetahun ?></td>
                                     <td><?= $sal->tglsaldosisa ?></td>
-                                    <td><?= $sal->jumlahsaldosisa ?></td>
+                                    <td>
+                                        <?php
+                                        $sa = $this->db->query("SELECT jumlahsaldosisa FROM tb_saldoawal WHERE tglsaldomasuk < '$sal->tglsaldomasuk' ORDER BY tglsaldomasuk DESC LIMIT 1")->num_rows();
+                                        if ($sa > 0) {
+                                            $saldokemarin = $this->db->query("SELECT jumlahsaldosisa FROM tb_saldoawal WHERE tglsaldomasuk < '$sal->tglsaldomasuk' ORDER BY tglsaldomasuk DESC LIMIT 1");
+                                            $salkem = $saldokemarin->row();
+                                            echo rupiah($salkem->jumlahsaldosisa);
+                                        } elseif ($sa < 1) {
+                                            echo rupiah(0);
+                                        }
+
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <a href="<?= base_url('bendahara/edit_saldo_awal/') . $sal->id_saldo ?>" class="btn btn-success"><i class="fa fa-edit"></i>Edit</a>
+                                </td>
+
                                 </tr>
                             <?php endforeach; ?>
 
@@ -50,6 +100,7 @@
                                 <th>Periode tahun</th>
                                 <th>Tgl Saldo Sisa</th>
                                 <th>Jumlah Saldo Sisa</th>
+                                <th>Aksi</th>
                             </tr>
                         </tfoot>
                     </table>

@@ -9,12 +9,14 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Form Input <small>Data Pajak</small></h2>
+                        <h2>Form Input Edit Data Pajak</small></h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
                         <br>
                         <form id="demo-form2" action="<?= base_url('pembantu/edit_pajak_aksi') ?>" method="POST" enctype="multipart/form-data" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+
+
                             <?php foreach ($pajak as $paj) : ?>
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="nodok">Nomer Dokumen<span class="required">*</span>
@@ -24,7 +26,6 @@
                                         <input type="hidden" id="nodoklama" name="nodoklama" value="<?= $paj->nodok ?>" required="required" class="form-control ">
                                     </div>
                                 </div>
-
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal Dokumen <span class="required">*</span>
                                     </label>
@@ -40,82 +41,129 @@
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="idusername">ID Username <span class="required">*</span>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="notransaksi">Nomer Transaksi<span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="idusername" name="idusername" value="<?= $this->session->userdata('username') ?>" required="required" class="form-control" readonly>
+                                        <input type="text" id="notransaksi" name="notransaksi" required="required" value="<?= $paj->notransaksi ?>" class="form-control" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="item form-group ">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="id_saldo">Id Saldo <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+
+                                        <input type="text" id="id_saldo" required="required" name="id_saldo" value="<?= $paj->id_saldo ?>" class="form-control" readonly>
                                     </div>
                                 </div>
                                 <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="idusername">ID Username <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <input type="hidden" name="idusername" value="<?= $this->session->userdata('idusername') ?>" required="required" class="form-control" readonly>
+                                        <input type="text" id="idusername" value="<?= $this->session->userdata('username') ?>" required="required" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="item form-group d-none">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="jumlah">Jumlah <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <input type="number" id="jumlah" name="jumlahlama" value="<?= $paj->jumlah ?>" required="required" class="form-control">
                                     </div>
                                 </div>
-
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="kdsaldo">Kode Saldo <span class="required">*</span>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="notransaksi">Nominal Transaksi<span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <select class="form-control" id="kdsaldo" name="kdsaldo">
-                                            <?php foreach ($kdsaldo as $kd) : ?>
-                                                <?php if ($kd->kdsaldo == $paj->kdsaldo) : ?>
-                                                    <option value="<?= $kd->kdsaldo ?>" selected> <?= $kd->kdsaldo ?> </option>
-                                                <?php else : ?>
-                                                    <option value="<?= $kd->kdsaldo ?>"> <?= $kd->kdsaldo ?> </option>
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
-                                        </select>
+                                        <?php
+                                        $transakjum = $this->db->query(" SELECT jumlah FROM tb_transaksi WHERE notransaksi = '$paj->notransaksi' AND status < 1 ");
+                                        $klx = $transakjum->row();
+                                        $ji = $klx->jumlah;
+                                        ?>
+                                        <input type="text" id="nominaltransaksi" required="required" value="<?= $ji ?>" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="id_saldo">Saldo Sisa <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 d-none">
+                                        <?php
+                                        $saldolama = $this->db->query(" SELECT id_saldo, jumlahsaldosisa FROM tb_saldoawal WHERE status < 1 ORDER BY tglsaldosisa DESC");
+                                        $row = $saldolama->row();
+                                        $si = $row->id_saldo;
+                                        $so = $row->jumlahsaldosisa;
+                                        ?>
+                                        <input type="number" id="jumlahsaldosisa" required="required" name="sisa" value="<?= $so ?>" class="form-control">
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <input type="number" required="required" value="<?= $so ?>" class="form-control" readonly>
                                     </div>
                                 </div>
 
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="sal">Saldo Sisa <span class="required">*</span>
-                                    </label>
-                                    <?php $jumsisa = $this->db->query("SELECT jumlahsaldosisa FROM tb_saldoawal WHERE kdsaldo = $paj->kdsaldo ")->result(); ?>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <?php foreach ($jumsisa as $sis) : ?>
-                                            <input type="number" id="sal" name="sisa" value="<?= $sis->jumlahsaldosisa ?>" required="required" class="form-control" readonly>
-                                        <?php endforeach; ?>
-                                    </div>
-                                </div>
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="ppn">PPN <span class="required">*</span>
                                     </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="ppn" name="ppn" value="<?= $paj->ppn ?>" required="required" class="form-control">
+                                    <div class="col-md-5 col-sm-5 ">
+                                        <input type="number" id="ppn" name="ppn" Min="0" value="<?= $paj->ppn ?>" required="required" class="form-control">
+                                    </div>
+                                    <div class="col-md-1 col-sm-1 ">
+                                        <?php if ($paj->ppn > 0) { ?>
+                                            <input type="checkbox" name="" id="pilihppn" class="form-control" checked>
+                                        <?php } elseif ($paj->ppn == 0) { ?>
+                                            <input type="checkbox" name="" id="pilihppn" class="form-control">
+                                        <?php } ?>
                                     </div>
                                 </div>
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="pph21">PPh21 <span class="required">*</span>
                                     </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="pph21" name="pph21" value="<?= $paj->pph21 ?>" required="required" class="form-control">
+                                    <div class="col-md-5 col-sm-5">
+                                        <input type="number" id="pph21" name="pph21" Min="0" value="<?= $paj->pph21 ?>" required="required" class="form-control">
+                                    </div>
+                                    <div class="col-md-1 col-sm-1 ">
+                                        <?php if ($paj->pph21 > 0) { ?>
+                                            <input type="checkbox" name="" id="pilihpph21" class="form-control" checked>
+                                        <?php } elseif ($paj->pph21 == 0) { ?>
+                                            <input type="checkbox" name="" id="pilihpph21" class="form-control">
+                                        <?php } ?>
                                     </div>
                                 </div>
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="pph22">PPH22 <span class="required">*</span>
                                     </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="pph22" name="pph22" value="<?= $paj->pph22 ?>" required="required" class="form-control">
+                                    <div class="col-md-5 col-sm-5">
+                                        <input type="number" id="pph22" Min="0" name="pph22" Min="0" value="<?= $paj->pph22 ?>" required="required" class="form-control">
+                                    </div>
+                                    <div class="col-md-1 col-sm-1">
+                                        <?php if ($paj->pph22 > 0) { ?>
+                                            <input type="checkbox" name="" id="pilihpph22" class="form-control" checked>
+                                        <?php } elseif ($paj->pph22 == 0) { ?>
+                                            <input type="checkbox" name="" id="pilihpph22" class="form-control">
+                                        <?php } ?>
                                     </div>
                                 </div>
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="pph23">PP23 <span class="required">*</span>
                                     </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="pph23" name="pph23" value="<?= $paj->pph23 ?>" required="required" class="form-control">
+                                    <div class="col-md-5 col-sm-5">
+                                        <input type="number" id="pph23" name="pph23" Min="0" value="<?= $paj->pph23 ?>" required="required" class="form-control">
+                                    </div>
+                                    <div class="col-md-1 col-sm-1">
+                                        <?php if ($paj->pph23 > 0) { ?>
+                                            <input type="checkbox" name="" id="pilihpph23" class="form-control" checked>
+                                        <?php } elseif ($paj->pph23 == 0) { ?>
+                                            <input type="checkbox" name="" id="pilihpph23" class="form-control">
+                                        <?php } ?>
                                     </div>
                                 </div>
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="pphlain">PPH lain lain<span class="required">*</span>
                                     </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="pphlain" name="pphlain" value="<?= $paj->pphlain ?>" required="required" class="form-control">
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="number" id="pphlain" name="pphlain" Min="0" value="<?= $paj->pphlain ?>" required="required" class="form-control">
                                     </div>
-                                </div>
 
+                                </div>
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="img">Gambar lama<span class="required">*</span>
                                     </label>
@@ -133,6 +181,10 @@
                                     </div>
                                 </div>
                             <?php endforeach; ?>
+
+
+
+
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                                 <div class="col-md-6 col-sm-6 offset-md-3">

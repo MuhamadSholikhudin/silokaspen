@@ -7,6 +7,7 @@ class Model_auth extends CI_Model{
 
         $result = $this->db->where('username', $username)
                             ->where('password', $password)
+                            ->where('status', 'Aktif')
                             ->limit(1)
                             ->get('tb_login');
         if($result->num_rows() > 0){

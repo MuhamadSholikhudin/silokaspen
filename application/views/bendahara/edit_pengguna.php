@@ -69,6 +69,21 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="status_login">Status Pengguna<span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <select class="form-control" id="status_login" name="status_login">
+                                            <?php foreach ($status_login as $car) : ?>
+                                                <?php if ($car == $jns->status_login) : ?>
+                                                    <option value="<?= $car ?>" selected> <?= $car ?> </option>
+                                                <?php else : ?>
+                                                    <option value="<?= $car ?>"> <?= $car ?> </option>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                </div>
 
 
                             <?php endforeach; ?>

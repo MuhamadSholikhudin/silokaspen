@@ -1,7 +1,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            By Lisa Rachmawati 
+            By Lisa Rachmawati
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -31,7 +31,7 @@
             $('#idnotransaksi').change(function() {
               var id = $(this).val();
               $.ajax({
-                url: "<?php echo site_url('pembantu/get_sub_kdsaldop'); ?>",
+                url: "<?php echo site_url('pembantu/get_sub_id_saldop'); ?>",
                 method: "POST",
                 data: {
                   id: id
@@ -43,14 +43,14 @@
                   var html = '';
                   var i;
                   for (i = 0; i < data.length; i++) {
-                    html += data[i].kdsaldo;
+                    html += data[i].id_saldo;
                   }
 
                   var sis = '';
                   for (i = 0; i < data.length; i++) {
                     sis += data[i].sisa;
                   }
-                  $('#kdsaldo').val(html);
+                  $('#id_saldo').val(html);
                   $('#sisa').val(sis);
 
                 }
@@ -59,10 +59,67 @@
             });
 
 
-            $('#idkdsaldo').change(function() {
-              var id = $(this).val();
+            //#transaki
+            // $('#idid_saldo').change(function() {
+            //   var id = $(this).val();
+            //   $.ajax({
+            //     url: "<?php echo site_url('pembantu/get_sub_id_saldo'); ?>",
+            //     method: "POST",
+            //     data: {
+            //       id: id
+            //     },
+            //     async: true,
+            //     dataType: 'json',
+            //     success: function(data) {
+            //       var i;
+
+            //       var sis = '';
+            //       for (i = 0; i < data.length; i++) {
+            //         sis += data[i].sisa;
+            //       }
+            //       // $('#id_saldo').html(html);
+            //       $('#sisa').val(sis);
+
+            //     }
+            //   });
+            //   return false;
+            // });
+
+
+            $('#carapembayaran').change(function() {
+              var cara = $(this).val();
+              if (cara == 'Tunai') {
+                $('#kode_rekening').val("-");
+
+              } else if (cara == 'Non-Tunai') {
+                var id = document.getElementById("kdjnspengeluaran").value;
+                $.ajax({
+                  url: "<?php echo site_url('pembantu/get_sub_kd_pengeluaran'); ?>",
+                  method: "POST",
+                  data: {
+                    id: id
+                  },
+                  async: true,
+                  dataType: 'json',
+                  success: function(data) {
+                    var i;
+                    var sis = '';
+                    for (i = 0; i < data.length; i++) {
+                      sis += data[i].sisa;
+                    }
+                    $('#kode_rekening').val(sis);
+                  }
+                });
+                return false;
+              }
+            });
+
+
+            $('#kdjnspengeluaran').change(function() {
+
+              var id = document.getElementById("kdjnspengeluaran").value;
               $.ajax({
-                url: "<?php echo site_url('pembantu/get_sub_kdsaldo'); ?>",
+                url: "<?php echo site_url('pembantu/get_sub_kd_pengeluaran'); ?>",
                 method: "POST",
                 data: {
                   id: id
@@ -71,20 +128,77 @@
                 dataType: 'json',
                 success: function(data) {
                   var i;
-
                   var sis = '';
                   for (i = 0; i < data.length; i++) {
                     sis += data[i].sisa;
                   }
-                  // $('#kdsaldo').html(html);
-                  $('#sisa').val(sis);
-
+                  $('#kode_rekening').val(sis);
+                  $('#carapembayaran').val("Non-Tunai");
                 }
               });
               return false;
+
             });
 
 
+
+
+
+            $("#pilihppn").change(function() {
+              if (this.checked) {
+                var nomtran = document.getElementById("nominaltransaksi").value;
+
+                var ppn = (nomtran) * 0.1;
+                $("#ppn").val(ppn);
+              } else {
+                //hide the text box
+                $("#ppn").val(0);
+              }
+            });
+
+            $("#pilihpph21").change(function() {
+              if (this.checked) {
+                var nomtran = document.getElementById("nominaltransaksi").value;
+
+                if (nomtran <= 50000000) {
+                  var pph21 = (nomtran * 0.05);
+                } else if (nomtran > 50000000 && nomtran >= 250000000) {
+                  var pph21 = (nomtran * 0.15);
+                } else if (nomtran > 250000000 && nomtran >= 500000000) {
+                  var pph21 = (nomtran * 0.25);
+                }
+                $("#pph21").val(pph21);
+              } else {
+                //hide the text box
+                $("#pph21").val(0);
+              }
+            });
+
+            $("#pilihpph22").change(function() {
+              if (this.checked) {
+                var nomtran = document.getElementById("nominaltransaksi").value;
+
+                var pph22 = nomtran * 0.15;
+                $("#pph22").val(pph22);
+              } else {
+                //hide the text box
+                $("#pph22").val(0);
+              }
+            });
+
+            $("#pilihpph23").change(function() {
+              if (this.checked) {
+                var nomtran = document.getElementById("nominaltransaksi").value;
+
+                var pph23 = nomtran * 0.15;
+                $("#pph23").val(pph23);
+              } else {
+                //hide the text box
+                $("#pph23").val(0);
+              }
+            });
+
+         
 
           });
         </script>

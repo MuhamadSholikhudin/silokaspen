@@ -64,4 +64,7 @@ class Model_saldoawal extends CI_Model
         // $query = $this->db->get_where('tb_transaksi', array('notransaksi' => $notransaksi));
         return $query;
     }
+
+
+
 }

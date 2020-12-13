@@ -25,10 +25,10 @@
                             <?php foreach ($bku as $sal) : ?>
                                 <tr>
                                     <th scope="row"><?= $no++ ?></th>
-                                    <td><a href="<?= base_url('bendahara/laporan_bku/') . $sal->kdsaldo ?>"> Laporan Buku Kas Umum Bulan <?= $sal->periodebulan ?>&nbsp;<?= $sal->periodetahun ?></a></td>
+                                    <td><a href="<?= base_url('bendahara/laporan_bku/') . $sal->id_saldo ?>"> Laporan Buku Kas Umum Bulan <?= $sal->periodebulan ?>&nbsp;<?= $sal->periodetahun ?></a></td>
                                     <td>
                                         <?php if ($sal->status == 2) { ?>
-                                            <a href="<?= base_url('bendahara/cetak_bku/') . $sal->kdsaldo ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-warning">Cetak</a>
+                                            <a href="<?= base_url('bendahara/cetak_bku/') . $sal->id_saldo ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-warning">Cetak</a>
                                         <?php
                                         } else { ?>
                                             <button class="btn btn-sm btn-primary">Belum Acc</button>

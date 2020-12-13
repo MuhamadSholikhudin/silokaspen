@@ -15,6 +15,13 @@
 </head>
 
 <body>
+    <?php
+    function rupiah($angka)
+    {
+        $hasil_rupiah = "Rp " . number_format($angka, 2, ',', '.');
+        return $hasil_rupiah;
+    }
+    ?>
     <div class="center_col" role="main" style="min-height: 4546px;">
         <div class>
 
@@ -36,7 +43,7 @@
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-6">
                                     <?php foreach ($pajak as $paj) : ?>
-                                        <table border="1" class="table">
+                                        <table border="1" class="table table-bordered">
                                             <tbody>
                                                 <tr>
                                                     <td>Nomer Dokumen</td>
@@ -47,45 +54,44 @@
                                                     <td>Tanggal Dokumen</td>
                                                     <td><?= $paj->tgldok ?></td>
                                                 </tr>
+                                                <tr>
 
-                                                <td>Jumlah</td>
+                                                    <td>Nomer Transaksi</td>
+                                                    <td><?= $paj->notransaksi ?></td>
+                                                </tr>
+                                                <td>Nominal Transaksi</td>
                                                 <td>
-                                                    <?= $paj->jumlah ?>
+                                                    <?php $urai = $this->db->query("SELECT jumlah FROM tb_transaksi WHERE notransaksi = '$paj->notransaksi'");
+                                                    $ura = $urai->row();
+                                                    echo rupiah($ura->jumlah);
+                                                    ?>
                                                 </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Kode Saldo</td>
-                                                    <td><?= $paj->kdsaldo ?></td>
+                                                    <td><?= $paj->id_saldo ?></td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Saldo sisa</td>
-                                                    <td>
-                                                        <?php $jumsisa = $this->db->query("SELECT jumlahsaldosisa FROM tb_saldoawal WHERE kdsaldo = $paj->kdsaldo ")->result(); ?>
 
-                                                        <?php foreach ($jumsisa as $sis) : ?>
-                                                            <?= $sis->jumlahsaldosisa ?>
-                                                        <?php endforeach; ?> </td>
-                                                </tr>
                                                 <tr>
                                                     <td>PPN</td>
-                                                    <td><?= $paj->ppn ?></td>
+                                                    <td><?= rupiah($paj->ppn) ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td>PPH 21</td>
-                                                    <td><?= $paj->pph21 ?></td>
+                                                    <td><?= rupiah($paj->pph21) ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td>PPH 22</td>
-                                                    <td><?= $paj->pph22 ?></td>
+                                                    <td><?= rupiah($paj->pph22) ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td>PPH 23</td>
 
-                                                    <td><?= $paj->pph23 ?> </td>
+                                                    <td><?= rupiah($paj->pph23) ?> </td>
                                                 </tr>
                                                 <tr>
                                                     <td>PPH LAIN</td>
-                                                    <td><?= $paj->pphlain ?></td>
+                                                    <td><?= rupiah($paj->pphlain) ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td>GAMBAR</td>

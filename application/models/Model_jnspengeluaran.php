@@ -37,36 +37,9 @@ class Model_jnspengeluaran extends CI_Model
         return $query->result();
     }
 
-    public function find($id)
+    function get_sub_kdjns_pengeluaran($kdjnspengeluaran)
     {
-        $result = $this->db->where('id_brg', $id)
-        ->limit(1)
-        ->get('tb_jnspengeluaran');
-        if($result->num_rows() > 0){
-            return $result->row();
-        }else{
-            return array();
-        }
-    }
-
-    public function detail_brg($id_brg){
-$result = $this->db->where('id_brg', $id_brg)->get('tb_jnspengeluaran');
-        if ($result->num_rows() > 0) {
-            return $result->result();
-        } else {
-            return array();
-        }
-    }
-
-    public function get_keyword($keyword){
-        $this->db->select('*');
-        $this->db->from('tb_jnspengeluaran');
-        $this->db->like('nama_brg', $keyword);
-        $this->db->or_like('kategori', $keyword);
-        $this->db->or_like('harga', $keyword);
-        $this->db->or_like('keterangan', $keyword);
-        
-
-        return $this->db->get()->result();
+        $query = $this->db->query(" SELECT kode_rekening as sisa FROM  tb_jnspengeluaran  WHERE kdjnspengeluaran = $kdjnspengeluaran LIMIT 1");
+        return $query;
     }
 }

@@ -15,6 +15,13 @@
 </head>
 
 <body>
+    <?php
+    function rupiah($angka)
+    {
+        $hasil_rupiah = "Rp " . number_format($angka, 2, ',', '.');
+        return $hasil_rupiah;
+    }
+    ?>
     <div class="center_col" role="main" style="min-height: 4546px;">
         <div class>
 
@@ -37,7 +44,7 @@
                                 <div class="col-sm-6">
                                     <?php
                                     foreach ($transaksi as $tran) : ?>
-                                        <table border="1" class="table">
+                                        <table border="1" class="table table-bordered">
 
 
                                             <tbody>
@@ -55,33 +62,28 @@
                                                     <td><?= $tran->tgltransaksi ?></td>
 
                                                 </tr>
-                                                <td>Saldo Sisa</td>
-                                                <td>
-                                                    <?php $jumsisa = $this->db->query("SELECT jumlahsaldosisa FROM tb_saldoawal WHERE kdsaldo = $tran->kdsaldo ")->result(); ?>
-                                                    <?php foreach ($jumsisa as $sis) : ?>
-                                                        <?= $sis->jumlahsaldosisa ?>
-                                                    <?php endforeach; ?>
-                                                </td>
-                                                </tr>
+
                                                 <tr>
                                                     <td>Kode Saldo</td>
-                                                    <td><?= $tran->kdsaldo ?></td>
+                                                    <td><?= $tran->id_saldo ?></td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Kode Jenis Pengeluaran</td>
-                                                    <td><?= $tran->jnstransaksi ?></td>
-                                                </tr>
+
                                                 <tr>
                                                     <td> Jenis Transaksi</td>
                                                     <td><?= $tran->kdjnspengeluaran ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Uraian</td>
-                                                    <td><?= $tran->uraian ?></td>
+                                                    <td>
+                                                        <?php $urai = $this->db->query("SELECT * FROM tb_jnspengeluaran WHERE kdjnspengeluaran = '$tran->kdjnspengeluaran'");
+                                                        $ura = $urai->row();
+                                                        echo $ura->uraian;
+                                                        ?>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Jumlah</td>
-                                                    <td><?= $tran->jumlah ?></td>
+                                                    <td><?= rupiah($tran->jumlah) ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Gambar</td>
@@ -94,7 +96,7 @@
                                 </div>
                                 <div class="col-sm-3"></div>
                             </div>
-                            
+
 
                         </div>
                     </div>

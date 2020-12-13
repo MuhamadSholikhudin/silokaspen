@@ -29,8 +29,9 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
     public function data_pajak()
     {
         // $data['pajak'] = $this->Model_pajak->tampil_data()->result();
-        // $data['kdsaldo'] = $this->db->query("SELECT kdsaldo FROM tb_saldoawal ")->result();
-$data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON tb_pajak.notransaksi = tb_transaksi.notransaksi")->result();
+        // $data['id_saldo'] = $this->db->query("SELECT id_saldo FROM tb_saldoawal ")->result();
+// $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON tb_pajak.notransaksi = tb_transaksi.notransaksi")->result();
+        $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON tb_pajak.notransaksi = tb_transaksi.notransaksi")->result();
 
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
@@ -55,7 +56,7 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON t
         $data['pajak'] = $this->Model_pajak->edit_pajak($where, 'tb_pajak')->result();
 
         $data['kdjnspengeluaran'] = $this->Model_jnspengeluaran->tampil_data()->result();
-        $data['kdsaldo'] = $this->db->query("SELECT kdsaldo FROM tb_saldoawal ")->result();
+        $data['id_saldo'] = $this->db->query("SELECT id_saldo FROM tb_saldoawal ")->result();
 
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
@@ -69,7 +70,7 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON t
         $data['pajak'] = $this->Model_pajak->edit_pajak($where, 'tb_pajak')->result();
 
         $data['kdjnspengeluaran'] = $this->Model_jnspengeluaran->tampil_data()->result();
-        $data['kdsaldo'] = $this->db->query("SELECT kdsaldo FROM tb_saldoawal ")->result();
+        $data['id_saldo'] = $this->db->query("SELECT id_saldo FROM tb_saldoawal ")->result();
 
  
         $this->load->view('pembantu/cetak_pajak', $data);
@@ -104,7 +105,7 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON t
     public function transaksi()
     {
         $data['kdjnspengeluaran'] = $this->Model_jnspengeluaran->tampil_data()->result();
-        $data['kdsaldo'] = $this->db->query("SELECT kdsaldo FROM tb_saldoawal WHERE status = 0")->result();
+        $data['id_saldo'] = $this->db->query("SELECT id_saldo FROM tb_saldoawal WHERE status = 0")->result();
         $data['transaksi'] = $this->db->query("SELECT * FROM tb_transaksi ")->result();
 
         $this->load->view('templates_admin/header');
@@ -120,7 +121,7 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON t
         $data['transaksi'] = $this->Model_transaksi->edit_transaksi($where, 'tb_transaksi')->result();
 
         $data['kdjnspengeluaran'] = $this->Model_jnspengeluaran->tampil_data()->result();
-        $data['kdsaldo'] = $this->db->query("SELECT kdsaldo FROM tb_saldoawal ")->result();
+        $data['id_saldo'] = $this->db->query("SELECT id_saldo FROM tb_saldoawal ")->result();
 
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
@@ -135,7 +136,7 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON t
         $data['transaksi'] = $this->Model_transaksi->edit_transaksi($where, 'tb_transaksi')->result();
 
         $data['kdjnspengeluaran'] = $this->Model_jnspengeluaran->tampil_data()->result();
-        $data['kdsaldo'] = $this->db->query("SELECT kdsaldo FROM tb_saldoawal ")->result();
+        $data['id_saldo'] = $this->db->query("SELECT id_saldo FROM tb_saldoawal ")->result();
 
        
         $this->load->view('pembantu/cetak_transaksi', $data);
@@ -149,19 +150,24 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON t
         $notransaksi = $this->input->post('notransaksi');
         $tgltransaksi = $this->input->post('tgltransaksi');
         $idusername = $this->input->post('idusername');
-        $kdsaldo = $this->input->post('kdsaldo');
+        $id_saldo = $this->input->post('id_saldo');
         $kdjnspengeluaran = $this->input->post('kdjnspengeluaran');
         $kode_rekening = $this->input->post('kode_rekening');
-        $uraian = $this->input->post('uraian');
+        $carapembayaran = $this->input->post('carapembayaran');
         $jumlah = $this->input->post('jumlah');
+        $namatoko = $this->input->post('namatoko');
+        $alamattoko = $this->input->post('alamattoko');
         $sisa = $this->input->post('sisa');
 
-        $cari = $this->db->query("SELECT notransaksi FROM tb_transaksi WHERE notransaksi = $notransaksi LIMIT 1")->num_rows();
-
-        if($cari == 1){
+        $cari = $this->db->query("SELECT notransaksi FROM tb_transaksi WHERE notransaksi = '$notransaksi' LIMIT 1")->num_rows();
+if($notransaksi == 0){
+            $this->session->set_flashdata("message", "<script>Swal.fire('ERROR', 'Data Transaksi Gagal di tambahkan karena Nomer Transaksi Belum Diisi', 'error')</script>");
+            redirect('pembantu/transaksi');
+}
+        elseif($cari == 1){
             $this->session->set_flashdata("message", "<script>Swal.fire('ERROR', 'Data Transaksi Gagal di tambahkan karena Nomer Transaksi sudah ada', 'error')</script>");
             redirect('pembantu/transaksi');
-        }else{
+        }elseif($cari < 1){
             $jumlahsaldosisa = $sisa - $jumlah;
 
             $gambar = $_FILES['gambar']['name'];
@@ -181,20 +187,23 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON t
                 'notransaksi' => $notransaksi,
                 'tgltransaksi' => $tgltransaksi,
                 'idusername' => $idusername,
-                'kdsaldo' => $kdsaldo,
+                'id_saldo' => $id_saldo,
                 'kdjnspengeluaran' => $kdjnspengeluaran,
                 'kode_rekening' => $kode_rekening,
-                'uraian' => $uraian,
+                'carapembayaran' => $carapembayaran,
+                'namatoko' => $namatoko,
+        'alamattoko' => $alamattoko,
                 'jumlah' => $jumlah,
                 'gambar' => $gambar
             );
 
             $datat = array(
-                'jumlahsaldosisa' => $jumlahsaldosisa
+                'jumlahsaldosisa' => $jumlahsaldosisa,
+                'tglsaldosisa' => date('Y-m-d')
             );
 
             $wheret = array(
-                'kdsaldo' => $kdsaldo
+                'id_saldo' => $id_saldo
             );
 
             $this->Model_saldoawal->update_datat($wheret, $datat, 'tb_saldoawal');
@@ -218,21 +227,26 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON t
         $idusername = $this->input->post('idusername');
         // $jumlah = $this->input->post('jumlah');
         $notransaksi = $this->input->post('notransaksi');
-        $kdsaldo = $this->input->post('kdsaldo');
+        $id_saldo = $this->input->post('id_saldo');
         $ppn = $this->input->post('ppn');
         $pph21 = $this->input->post('pph21');
         $pph22 = $this->input->post('pph22');
         $pph23 = $this->input->post('pph23');
         $pphlain = $this->input->post('pphlain');
         $sisa = $this->input->post('sisa');
-        // $kdsaldo = $this->input->post('kdsaldo');
+        // $id_saldo = $this->input->post('id_saldo');
 
         $cari = $this->db->query("SELECT nodok FROM tb_pajak WHERE nodok = $nodok")->num_rows();
-if($cari == 1){
-            $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Pajak Gagal di tambahkan karena Nomer Dokumen sudah ada', 'error')</script>");
+if($nodok == 0){
+            $this->session->set_flashdata("message", "<script>Swal.fire('Gagal', 'Data Pajak Gagal di tambahkan karena Nomer Dokumen Belum Di isi', 'error')</script>");
 
             redirect('pembantu/pajak');
-}else{
+}elseif($cari == 1){
+            $this->session->set_flashdata("message", "<script>Swal.fire('Gagal', 'Data Pajak Gagal di tambahkan karena Nomer Dokumen sudah ada', 'error')</script>");
+
+            redirect('pembantu/pajak');
+}
+else{
             $jumlah = $ppn + $pph21 + $pph22 + $pph23 + $pphlain;
             $jumlahsaldosisa = $sisa - $jumlah;
 
@@ -255,7 +269,7 @@ if($cari == 1){
                 'idusername' => $idusername,
                 'jumlah' => $jumlah,
                 'notransaksi' => $notransaksi,
-                'kdsaldo' => $kdsaldo,
+                'id_saldo' => $id_saldo,
                 'ppn' => $ppn,
                 'pph21' => $pph21,
                 'pph22' => $pph22,
@@ -265,11 +279,12 @@ if($cari == 1){
             );
 
             $datat = array(
-                'jumlahsaldosisa' => $jumlahsaldosisa
+                'jumlahsaldosisa' => $jumlahsaldosisa,
+                'tglsaldosisa' => date('Y-m-d')
             );
 
             $wheret = array(
-                'kdsaldo' => $kdsaldo
+                'id_saldo' => $id_saldo
             );
 
             $this->Model_saldoawal->update_datat($wheret, $datat, 'tb_saldoawal');
@@ -290,7 +305,7 @@ if($cari == 1){
         $tgldok = $this->input->post('tgldok');
         $idusername = $this->input->post('idusername');
         // $kdjnspengeluaran = $this->input->post('kdjnspengeluaran');
-        $kdsaldo = $this->input->post('kdsaldo');
+        $id_saldo = $this->input->post('id_saldo');
         $ppn = $this->input->post('ppn');
         $pph21 = $this->input->post('pph21');
         $pph22 = $this->input->post('pph22');
@@ -335,7 +350,7 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE nodok = $nodokla
             'tgldok' => $tgldok,
             'idusername' => $idusername,
             'jumlah' => $jumlah,
-            'kdsaldo' => $kdsaldo,
+            'id_saldo' => $id_saldo,
             'ppn' => $ppn,
             'pph21' => $pph21,
             'pph22' => $pph22,
@@ -349,11 +364,12 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE nodok = $nodokla
 
 
         $datat = array(
-            'jumlahsaldosisa' => $jumlahsaldosisa
+            'jumlahsaldosisa' => $jumlahsaldosisa,
+            'tglsaldosisa' => date('Y-m-d')
         );
 
         $wheret = array(
-            'kdsaldo' => $kdsaldo
+            'id_saldo' => $id_saldo
         );
 
         $this->Model_saldoawal->update_datat($wheret, $datat, 'tb_saldoawal');
@@ -368,10 +384,11 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE nodok = $nodokla
         $notransaksi = $this->input->post('notransaksi');
         $tgltransaksi = $this->input->post('tgltransaksi');
         $idusername = $this->input->post('idusername');
-        $kdsaldo = $this->input->post('kdsaldo');
+        $id_saldo = $this->input->post('id_saldo');
         $kdjnspengeluaran = $this->input->post('kdjnspengeluaran');
         $kode_rekening = $this->input->post('kode_rekening');
-        $uraian = $this->input->post('uraian');
+        $namatoko = $this->input->post('namatoko');
+        $alamattoko = $this->input->post('alamattoko');
         $sisa = $this->input->post('sisa');
 
 
@@ -410,10 +427,11 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE nodok = $nodokla
             'notransaksi' => $notransaksi,
             'tgltransaksi' => $tgltransaksi,
             'idusername' => $idusername,
-            'kdsaldo' => $kdsaldo,
+            'id_saldo' => $id_saldo,
             'kdjnspengeluaran' => $kdjnspengeluaran,
             'kode_rekening' => $kode_rekening,
-            'uraian' => $uraian,
+            'namatoko' => $namatoko,
+            'alamattoko' => $alamattoko,
             'jumlah' => $jumlah
         );
 
@@ -423,11 +441,12 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE nodok = $nodokla
 
 
         $datat = array(
-            'jumlahsaldosisa' => $jumlahsaldosisa
+            'jumlahsaldosisa' => $jumlahsaldosisa,
+            'tglsaldosisa' => date('Y-m-d')
         );
 
         $wheret = array(
-            'kdsaldo' => $kdsaldo
+            'id_saldo' => $id_saldo
         );
 
         $this->Model_saldoawal->update_datat($wheret, $datat, 'tb_saldoawal');
@@ -441,43 +460,88 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE nodok = $nodokla
     {
         $where = ['notransaksi' => $notransaksi];
         // $cara = $this->db->query("SELECT tb_transaksi.notransaksi FROM tb_transaksi JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi WHERE tb_transaksi.notransaksi = '$notransaksi' ")->num_rows();
+        
+        $cari = $this->db->query("SELECT * FROM tb_transaksi JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi WHERE tb_transaksi.notransaksi = '$notransaksi' AND  tb_transaksi.status = 0 ")->num_rows();
         $cara = $this->db->query("SELECT * FROM tb_transaksi WHERE notransaksi = '$notransaksi' AND  status = 0 ")->num_rows();
-$tran = $this->db->query("SELECT jumlah, kdsaldo FROM tb_transaksi WHERE notransaksi = '$notransaksi'");
+        $caru = $this->db->query("SELECT * FROM tb_transaksi WHERE notransaksi = '$notransaksi' AND  status > 0 ")->num_rows();
+        $tran = $this->db->query("SELECT jumlah, id_saldo FROM tb_transaksi WHERE notransaksi = '$notransaksi'");
         $paj = $this->db->query("SELECT jumlah FROM tb_pajak WHERE notransaksi = '$notransaksi'");
 
-        $cam = $this->db->query("SELECT tb_saldoawal.jumlahsaldosisa, tb_saldoawal.kdsaldo, tb_transaksi.notransaksi, tb_transaksi.jumlah, tb_pajak.jumlah as jp FROM tb_transaksi JOIN tb_saldoawal ON tb_transaksi.kdsaldo = tb_saldoawal.kdsaldo JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi WHERE tb_transaksi.notransaksi = '$notransaksi'");
+        // $cam = $this->db->query("SELECT tb_saldoawal.jumlahsaldosisa, tb_saldoawal.id_saldo, tb_transaksi.notransaksi, tb_transaksi.jumlah, tb_pajak.jumlah as jp FROM tb_transaksi 
+        // JOIN tb_saldoawal ON tb_transaksi.id_saldo = tb_saldoawal.id_saldo 
+        // JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi WHERE tb_transaksi.notransaksi = '$notransaksi'");
 
+        // $trans = $cam->row();
+        // $trs = $trans->jumlah;
+        // $pk = $trans->jp;
+        // $kds = $trans->id_saldo;
+        // $jls = $trans->jumlahsaldosisa;
 
+        // $total_hapus = $trs + $pk;
 
-        $trans = $cam->row();
-        $trs = $trans->jumlah;
-        $pk = $trans->jp;
-        $kds = $trans->kdsaldo;
-        $jls = $trans->jumlahsaldosisa;
-
-        $total_hapus = $trs + $pk;
-        $jumlahsalsisa = $total_hapus + $jls ;
-
-
-
-        if ($cara < 1) {
+        // $jumlahsalsisa = $total_hapus + $jls;
+        // $jumlahsalsisa2 = $trs + $jls;
+if($caru > 0){
             $this->session->set_flashdata("message", "<script>Swal.fire('Gagal', 'Tidak Bisa di Hapus !!', 'error')</script>");
             redirect('pembantu/data_transaksi/');
-        } elseif ($cara > 0) {
+        } elseif($cari > 0) {
 
+            $cam = $this->db->query("SELECT tb_saldoawal.jumlahsaldosisa, tb_saldoawal.id_saldo, tb_transaksi.notransaksi, tb_transaksi.jumlah, tb_pajak.jumlah as jp FROM tb_transaksi 
+        JOIN tb_saldoawal ON tb_transaksi.id_saldo = tb_saldoawal.id_saldo 
+        JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi WHERE tb_transaksi.notransaksi = '$notransaksi'");
+
+            $trans = $cam->row();
+            $trs = $trans->jumlah;
+            $pk = $trans->jp;
+            $kds = $trans->id_saldo;
+            $jls = $trans->jumlahsaldosisa;
+
+            $total_hapus = $trs + $pk;
+
+            $jumlahsalsisa = $total_hapus + $jls;
             $datat = array(
-                'jumlahsaldosisa' => $jumlahsalsisa
+                'jumlahsaldosisa' => $jumlahsalsisa,
+                'tglsaldosisa' => date('Y-m-d')
             );
 
             $wheret = [
-                'kdsaldo' => $kds
+                'id_saldo' => $kds
             ];
 
-            $this->Model_saldoawal->update_datat($wheret, $datat, 'tb_saldoawal');            
+            $this->Model_saldoawal->update_datat($wheret, $datat, 'tb_saldoawal');
             $this->Model_transaksi->hapus_data($where, 'tb_transaksi');
             $this->Model_pajak->hapus_data($where, 'tb_pajak');
             $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Berhasil di Hapus', 'success')</script>");
             redirect('pembantu/data_transaksi/');
+
+        } elseif ($cara > 0) {
+
+        $cam = $this->db->query("SELECT tb_saldoawal.jumlahsaldosisa, tb_saldoawal.id_saldo, tb_transaksi.notransaksi, tb_transaksi.jumlah FROM tb_transaksi 
+        JOIN tb_saldoawal ON tb_transaksi.id_saldo = tb_saldoawal.id_saldo WHERE tb_transaksi.notransaksi = '$notransaksi'");
+
+        $trans = $cam->row();
+        $trs = $trans->jumlah;
+        $kds = $trans->id_saldo;
+        $jls = $trans->jumlahsaldosisa;
+
+        $total_hapus = $trs + $pk;
+
+        $jumlahsalsisa2 = $trs + $jls;
+            $datat = array(
+                'jumlahsaldosisa' => $jumlahsalsisa2,
+                'tglsaldosisa' => date('Y-m-d')
+            );
+
+            $wheret = [
+                'id_saldo' => $kds
+            ];
+
+            $this->Model_saldoawal->update_datat($wheret, $datat, 'tb_saldoawal');
+            $this->Model_transaksi->hapus_data($where, 'tb_transaksi');
+            $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Berhasil di Hapus', 'success')</script>");
+            redirect('pembantu/data_transaksi/');
+    
+
         }
     }
 
@@ -506,17 +570,26 @@ $tran = $this->db->query("SELECT jumlah, kdsaldo FROM tb_transaksi WHERE notrans
     }
 
  
-    function get_sub_kdsaldop()
+    function get_sub_id_saldop()
     {
         $notransaksi = $this->input->post('id', TRUE);
-        $data = $this->Model_saldoawal->get_sub_kdsaldop($notransaksi)->result();
+        $data = $this->Model_saldoawal->get_sub_id_saldop($notransaksi)->result();
         echo json_encode($data);
     }
 
-    function get_sub_kdsaldo()
+
+
+    function get_sub_id_saldo()
     {
-        $kdsaldo = $this->input->post('id', TRUE);
-        $data = $this->Model_saldoawal->get_sub_kdsaldo($kdsaldo)->result();
+        $id_saldo = $this->input->post('id', TRUE);
+        $data = $this->Model_saldoawal->get_sub_id_saldo($id_saldo)->result();
+        echo json_encode($data);
+    }
+
+    function get_sub_kd_pengeluaran()
+    {
+        $kdjnspengeluaran = $this->input->post('id', TRUE);
+        $data = $this->Model_jnspengeluaran->get_sub_kdjns_pengeluaran($kdjnspengeluaran)->result();
         echo json_encode($data);
     }
 }

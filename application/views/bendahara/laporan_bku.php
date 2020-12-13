@@ -1,6 +1,12 @@
 <div class="right_col" role="main" style="min-height: 4546px;">
     <div class>
-
+        <?php
+        function rupiah($angka)
+        {
+            $hasil_rupiah = "Rp " . number_format($angka, 2, ',', '.');
+            return $hasil_rupiah;
+        }
+        ?>
 
         <div class="clearfix"></div>
 
@@ -10,7 +16,37 @@
                 <div class="x_title ">
                     <div class="text-center">
                         <?php foreach ($idsaldo as $ds) : ?>
-                            <h2 class="text-center">Laporan BKU Pemerintah Kabupaten Kudus Periode <?= $ds->periodebulan ?>&nbsp;<?= $ds->periodetahun ?></h2>
+                            <h2 class="text-center">Laporan BKU Pemerintah Kabupaten Kudus Periode
+
+                                <?php
+                                if ($ds->periodebulan == '01') {
+                                    echo  'Januari';
+                                } elseif ($ds->periodebulan == '02') {
+                                    echo  'Februari';
+                                } elseif ($ds->periodebulan == '03') {
+                                    echo  'Maret';
+                                } elseif ($ds->periodebulan == '04') {
+                                    echo  'April';
+                                } elseif ($ds->periodebulan == '05') {
+                                    echo  'Mei';
+                                } elseif ($ds->periodebulan == '06') {
+                                    echo  'Juni';
+                                } elseif ($ds->periodebulan == '07') {
+                                    echo  'Juli';
+                                } elseif ($ds->periodebulan == '08') {
+                                    echo  'Agustus';
+                                } elseif ($ds->periodebulan == '09') {
+                                    echo  'September';
+                                } elseif ($ds->periodebulan == '10') {
+                                    echo  'Oktober';
+                                } elseif ($ds->periodebulan == '11') {
+                                    echo  'November';
+                                } elseif ($ds->periodebulan == '12') {
+                                    echo  'Desember';
+                                }
+                                ?>
+                                <?= $ds->periodetahun ?>
+                            </h2>
                         <?php endforeach; ?>
                     </div>
 
@@ -52,7 +88,7 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td><?= $ds->saldomasuk ?></td>
+                                        <td><?= rupiah($ds->saldomasuk) ?></td>
 
                                         <td></td>
                                         <td></td>
@@ -68,7 +104,7 @@
                                         <form action="<?= base_url('bendahara/ajukan_laporan_bku/') ?>" method="post" enctype="multipart/form-data">
 
                                             <?php foreach ($idsaldo as $ds) : ?>
-                                                <input type="hidden" name="kdsaldo" value="<?= $ds->kdsaldo ?>">
+                                                <input type="hidden" name="id_saldo" value="<?= $ds->id_saldo ?>">
                                             <?php endforeach; ?>
                                             <?php $no = 1; ?>
                                             <?php foreach ($laporan as $lap) : ?>
@@ -79,21 +115,21 @@
                                                     <td><?= $lap->tgltransaksi ?></td>
                                                     <td><?= $lap->notransaksi ?><input type="hidden" name="notransaksi[]" value="<?= $lap->notransaksi ?>">
                                                         <input type="hidden" name="status[]" value="1"></td>
-                                                    <?php if ($lap->carapembayaran == 'tunai') { ?>
-                                                        <td><?= $lap->jumlah ?></td>
-                                                        <td>0</td>
-                                                    <?php } elseif ($lap->carapembayaran == 'nontunai') { ?>
-                                                        <td>0</td>
-                                                        <td><?= $lap->jumlah ?></td>
+                                                    <?php if ($lap->carapembayaran == 'Tunai') { ?>
+                                                        <td><?= rupiah($lap->jumlah) ?></td>
+                                                        <td><?= rupiah(0) ?></td>
+                                                    <?php } elseif ($lap->carapembayaran == 'Non-Tunai') { ?>
+                                                        <td><?= rupiah(0) ?></td>
+                                                        <td><?= rupiah($lap->jumlah) ?></td>
                                                     <?php } ?>
                                                     <td></td>
                                                     <td><?= $lap->namatoko ?></td>
                                                     <td><?= $lap->alamattoko ?></td>
-                                                    <td><?= $lap->ppn ?></td>
-                                                    <td><?= $lap->pph21 ?></td>
-                                                    <td><?= $lap->pph22 ?></td>
-                                                    <td><?= $lap->pph23 ?></td>
-                                                    <td><?= $lap->pphlain ?></td>
+                                                    <td><?= rupiah($lap->ppn) ?></td>
+                                                    <td><?= rupiah($lap->pph21) ?></td>
+                                                    <td><?= rupiah($lap->pph22) ?></td>
+                                                    <td><?= rupiah($lap->pph23) ?></td>
+                                                    <td><?= rupiah($lap->pphlain) ?></td>
                                                 </tr>
                                             <?php endforeach; ?>
 
@@ -101,38 +137,38 @@
                                                 <td colspan="5" class="text-center">Jumlah</td>
                                                 <td>
                                                     <?php foreach ($jumtunai as $jum) :
-                                                        echo  $jum->tunai;
+                                                        echo  rupiah($jum->tunai);
                                                     endforeach;    ?>
                                                 </td>
                                                 <td><?php foreach ($jumnontunai as $jum) :
-                                                        echo  $jum->nontunai;
+                                                        echo  rupiah($jum->nontunai);
                                                     endforeach;    ?></td>
                                                 <td><?php foreach ($idsaldo as $jum) :
-                                                        echo  $jum->saldomasuk;
+                                                        echo  rupiah($jum->saldomasuk);
                                                     endforeach;    ?></td>
                                                 <td></td>
                                                 <td></td>
 
                                                 <td><?php foreach ($jumppn as $jum) :
-                                                        echo  $jum->ppn;
+                                                        echo  rupiah($jum->ppn);
                                                     endforeach;    ?></td>
                                                 <td><?php foreach ($jumpph21 as $jum) :
-                                                        echo  $jum->pph21;
+                                                        echo  rupiah($jum->pph21);
                                                     endforeach;    ?></td>
                                                 <td><?php foreach ($jumpph22 as $jum) :
-                                                        echo  $jum->pph22;
+                                                        echo  rupiah($jum->pph22);
                                                     endforeach;    ?></td>
                                                 <td><?php foreach ($jumpph23 as $jum) :
-                                                        echo  $jum->pph23;
+                                                        echo  rupiah($jum->pph23);
                                                     endforeach;    ?></td>
                                                 <td><?php foreach ($jumpphlain as $jum) :
-                                                        echo  $jum->pphlain;
+                                                        echo  rupiah($jum->pphlain);
                                                     endforeach;    ?></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="5" class="text-center"> Saldo/disetor Bendahara pengeluaran</td>
                                                 <td><?php foreach ($jumsisa as $jum) :
-                                                        echo  $jum->jumsis;
+                                                        echo  rupiah($jum->jumsis);
                                                     endforeach;    ?></td>
                                                 </td>
                                                 <td></td>
@@ -227,7 +263,7 @@
                                 <form action="<?= base_url('bendahara/batalkan_ajukan/') ?>" method="post">
 
                                     <?php foreach ($idsaldo as $ds) : ?>
-                                        <input type="hidden" name="kdsaldo" value="<?= $ds->kdsaldo ?>">
+                                        <input type="hidden" name="id_saldo" value="<?= $ds->id_saldo ?>">
                                     <?php endforeach; ?>
                                     <?php $no = 1; ?>
                                     <?php foreach ($laporan as $lap) : ?>
@@ -238,21 +274,21 @@
                                             <td><?= $lap->tgltransaksi ?></td>
                                             <td><?= $lap->notransaksi ?><input type="hidden" name="notransaksi[]" value="<?= $lap->notransaksi ?>">
                                                 <input type="hidden" name="status[]" value="0"></td>
-                                            <?php if ($lap->carapembayaran == 'tunai') { ?>
-                                                <td><?= $lap->jumlah ?></td>
-                                                <td>0</td>
-                                            <?php } elseif ($lap->carapembayaran == 'nontunai') { ?>
-                                                <td>0</td>
-                                                <td><?= $lap->jumlah ?></td>
+                                            <?php if ($lap->carapembayaran == 'Tunai') { ?>
+                                                <td><?= rupiah($lap->jumlah) ?></td>
+                                                <td><?= rupiah(0) ?></td>
+                                            <?php } elseif ($lap->carapembayaran == 'Non-Tunai') { ?>
+                                                <td><?= rupiah(0) ?></td>
+                                                <td><?= rupiah($lap->jumlah) ?></td>
                                             <?php } ?>
                                             <td></td>
                                             <td><?= $lap->namatoko ?></td>
                                             <td><?= $lap->alamattoko ?></td>
-                                            <td><?= $lap->ppn ?></td>
-                                            <td><?= $lap->pph21 ?></td>
-                                            <td><?= $lap->pph22 ?></td>
-                                            <td><?= $lap->pph23 ?></td>
-                                            <td><?= $lap->pphlain ?></td>
+                                            <td><?= rupiah($lap->ppn) ?></td>
+                                            <td><?= rupiah($lap->pph21) ?></td>
+                                            <td><?= rupiah($lap->pph22) ?></td>
+                                            <td><?= rupiah($lap->pph23) ?></td>
+                                            <td><?= rupiah($lap->pphlain) ?></td>
                                         </tr>
                                     <?php endforeach; ?>
 
@@ -260,38 +296,38 @@
                                         <td colspan="5" class="text-center">Jumlah</td>
                                         <td>
                                             <?php foreach ($jumtunai as $jum) :
-                                                echo  $jum->tunai;
+                                                echo  rupiah($jum->tunai);
                                             endforeach;    ?>
                                         </td>
                                         <td><?php foreach ($jumnontunai as $jum) :
-                                                echo  $jum->nontunai;
+                                                echo  rupiah($jum->nontunai);
                                             endforeach;    ?></td>
                                         <td><?php foreach ($idsaldo as $jum) :
-                                                echo  $jum->saldomasuk;
+                                                echo  rupiah($jum->saldomasuk);
                                             endforeach;    ?></td>
                                         <td></td>
                                         <td></td>
 
                                         <td><?php foreach ($jumppn as $jum) :
-                                                echo  $jum->ppn;
+                                                echo  rupiah($jum->ppn);
                                             endforeach;    ?></td>
                                         <td><?php foreach ($jumpph21 as $jum) :
-                                                echo  $jum->pph21;
+                                                echo  rupiah($jum->pph21);
                                             endforeach;    ?></td>
                                         <td><?php foreach ($jumpph22 as $jum) :
-                                                echo  $jum->pph22;
+                                                echo  rupiah($jum->pph22);
                                             endforeach;    ?></td>
                                         <td><?php foreach ($jumpph23 as $jum) :
-                                                echo  $jum->pph23;
+                                                echo  rupiah($jum->pph23);
                                             endforeach;    ?></td>
                                         <td><?php foreach ($jumpphlain as $jum) :
-                                                echo  $jum->pphlain;
+                                                echo  rupiah($jum->pphlain);
                                             endforeach;    ?></td>
                                     </tr>
                                     <tr>
                                         <td colspan="5" class="text-center"> Saldo/disetor Bendahara pengeluaran</td>
                                         <td><?php foreach ($jumsisa as $jum) :
-                                                echo  $jum->jumsis;
+                                                echo  rupiah($jum->jumsis);
                                             endforeach;    ?></td>
                                         </td>
                                         <td></td>
@@ -318,7 +354,7 @@
                                                         <td> Mengetahui</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Pembantu Bendahara Pengeluaran Belanja Langsung </td>
+                                                        <td>Bendahara Pengeluaran Belanja Langsung </td>
                                                     </tr>
                                                     <tr>
                                                         <td>&nbsp; </td>
@@ -386,7 +422,7 @@
 
 
                                 <?php foreach ($idsaldo as $ds) : ?>
-                                    <input type="hidden" name="kdsaldo" value="<?= $ds->kdsaldo ?>">
+                                    <input type="hidden" name="id_saldo" value="<?= $ds->id_saldo ?>">
                                 <?php endforeach; ?>
                                 <?php $no = 1; ?>
                                 <?php foreach ($laporan as $lap) : ?>
@@ -397,21 +433,21 @@
                                         <td><?= $lap->tgltransaksi ?></td>
                                         <td><?= $lap->notransaksi ?><input type="hidden" name="notransaksi[]" value="<?= $lap->notransaksi ?>">
                                             <input type="hidden" name="status[]" value="0"></td>
-                                        <?php if ($lap->carapembayaran == 'tunai') { ?>
-                                            <td><?= $lap->jumlah ?></td>
-                                            <td>0</td>
-                                        <?php } elseif ($lap->carapembayaran == 'nontunai') { ?>
-                                            <td>0</td>
-                                            <td><?= $lap->jumlah ?></td>
+                                        <?php if ($lap->carapembayaran == 'Tunai') { ?>
+                                            <td><?= rupiah($lap->jumlah) ?></td>
+                                            <td><?= rupiah(0) ?></td>
+                                        <?php } elseif ($lap->carapembayaran == 'Non-Tunai') { ?>
+                                            <td><?= rupiah(0) ?></td>
+                                            <td><?= rupiah($lap->jumlah) ?></td>
                                         <?php } ?>
                                         <td></td>
                                         <td><?= $lap->namatoko ?></td>
                                         <td><?= $lap->alamattoko ?></td>
-                                        <td><?= $lap->ppn ?></td>
-                                        <td><?= $lap->pph21 ?></td>
-                                        <td><?= $lap->pph22 ?></td>
-                                        <td><?= $lap->pph23 ?></td>
-                                        <td><?= $lap->pphlain ?></td>
+                                        <td><?= rupiah($lap->ppn) ?></td>
+                                        <td><?= rupiah($lap->pph21) ?></td>
+                                        <td><?= rupiah($lap->pph22) ?></td>
+                                        <td><?= rupiah($lap->pph23) ?></td>
+                                        <td><?= rupiah($lap->pphlain) ?></td>
                                     </tr>
                                 <?php endforeach; ?>
 
@@ -419,38 +455,38 @@
                                     <td colspan="5" class="text-center">Jumlah</td>
                                     <td>
                                         <?php foreach ($jumtunai as $jum) :
-                                            echo  $jum->tunai;
+                                            echo  rupiah($jum->tunai);
                                         endforeach;    ?>
                                     </td>
                                     <td><?php foreach ($jumnontunai as $jum) :
-                                            echo  $jum->nontunai;
+                                            echo  rupiah($jum->nontunai);
                                         endforeach;    ?></td>
                                     <td><?php foreach ($idsaldo as $jum) :
-                                            echo  $jum->saldomasuk;
+                                            echo  rupiah($jum->saldomasuk);
                                         endforeach;    ?></td>
                                     <td></td>
                                     <td></td>
 
                                     <td><?php foreach ($jumppn as $jum) :
-                                            echo  $jum->ppn;
+                                            echo  rupiah($jum->ppn);
                                         endforeach;    ?></td>
                                     <td><?php foreach ($jumpph21 as $jum) :
-                                            echo  $jum->pph21;
+                                            echo  rupiah($jum->pph21);
                                         endforeach;    ?></td>
                                     <td><?php foreach ($jumpph22 as $jum) :
-                                            echo  $jum->pph22;
+                                            echo  rupiah($jum->pph22);
                                         endforeach;    ?></td>
                                     <td><?php foreach ($jumpph23 as $jum) :
-                                            echo  $jum->pph23;
+                                            echo  rupiah($jum->pph23);
                                         endforeach;    ?></td>
                                     <td><?php foreach ($jumpphlain as $jum) :
-                                            echo  $jum->pphlain;
+                                            echo  rupiah($jum->pphlain);
                                         endforeach;    ?></td>
                                 </tr>
                                 <tr>
                                     <td colspan="5" class="text-center"> Saldo/disetor Bendahara pengeluaran</td>
                                     <td><?php foreach ($jumsisa as $jum) :
-                                            echo  $jum->jumsis;
+                                            echo  rupiah($jum->jumsis);
                                         endforeach;    ?></td>
                                     </td>
                                     <td></td>

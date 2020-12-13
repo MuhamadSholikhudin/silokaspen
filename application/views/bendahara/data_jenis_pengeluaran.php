@@ -13,10 +13,11 @@
                     <table id="example" class="display text-dark" border="1" style="width:100%">
                         <thead>
                             <tr>
-                                <th>No</th>
+                                <th style="width:10px;">No</th>
                                 <th>Kode Jenis Pengeluaran</th>
-                                <th>Nama Toko</th>
-                                <th>Alamat Toko</th>
+                                <th>Kode Rekening</th>
+                                <th>Uraian</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -25,9 +26,11 @@
                                 <tr>
                                     <td><?= $no++; ?></td>
                                     <td><a href="<?= base_url('bendahara/edit_jenis_pengeluaran/') . $sal->kdjnspengeluaran ?>"><?= $sal->kdjnspengeluaran ?></a></td>
-                                    <td><?= $sal->namatoko ?></td>
-                                    <td><?= $sal->alamattoko ?></td>
-
+                                    <td><?= $sal->kode_rekening ?></td>
+                                    <td><?= $sal->uraian ?></td>
+                                    <td>
+                                        <a href="<?= base_url('bendahara/edit_jenis_pengeluaran/') . $sal->kdjnspengeluaran ?>" class="btn btn-success"><i class="fa fa-edit"></i>Edit </a>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
 
@@ -37,8 +40,9 @@
                             <tr>
                                 <th>No</th>
                                 <th>Kode Jenis Pengeluaran</th>
-                                <th>Nama Toko</th>
-                                <th>Alamat Toko</th>
+                                <th>Kode Rekening</th>
+                                <th>Uraian</th>
+                                <th>Aksi</th>
                             </tr>
                         </tfoot>
                     </table>

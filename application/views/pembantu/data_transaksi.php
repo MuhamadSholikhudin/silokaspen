@@ -1,6 +1,13 @@
 <div class="right_col" role="main" style="min-height: 4546px;">
     <div class>
+        <?php
+        function rupiah($angka)
+        {
 
+            $hasil_rupiah = "Rp " . number_format($angka, 2, ',', '.');
+            return $hasil_rupiah;
+        }
+        ?>
 
         <div class="clearfix"></div>
 
@@ -9,7 +16,7 @@
             <a href="<?= base_url('pembantu/transaksi') ?>" class="btn btn-primary">Tambah Transaksi</a>
             <hr>
             <div class="row">
-                <div class="col-md-12 col-sm-12" border="1">
+                <div class="col-md-12 col-sm-12 table-responsive" border="1">
                     <table id="example" class="display text-dark" border="1" style="width:100%">
                         <thead>
                             <tr>
@@ -18,9 +25,8 @@
                                 <th>Tgl Transaksi</th>
                                 <th>Kode saldo</th>
                                 <th>Jenis Pengeluaran</th>
-                                <th>Jenis Transaksi</th>
                                 <th>Jumlah</th>
-                                <th>Cetak</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,14 +41,12 @@
                                 <?php  } ?>
                                 </td>
                                 <td><?= $tran->tgltransaksi ?></td>
-                                <td><?= $tran->kdsaldo ?></td>
+                                <td><?= $tran->id_saldo ?></td>
                                 <td><?= $tran->kdjnspengeluaran ?></td>
-                                <td><?= $tran->jnstransaksi ?></td>
-                                <td><?= $tran->jumlah ?></td>
+                                <td><?= rupiah($tran->jumlah)  ?></td>
                                 <td>
                                     <a class="btn btn-warning text-right" target="blank" href="<?= base_url('pembantu/cetak_transaksi/' . $tran->notransaksi) ?>"> <i class="fa fa-print"></i> Cetak</a>
-                                    <a class="btn btn-danger text-right"  href="<?= base_url('pembantu/hapus_transaksi/' . $tran->notransaksi) ?>"> <i class="fa fa-remove"></i> Hapus</a>
-
+                                    <a class="btn btn-danger text-right" href="<?= base_url('pembantu/hapus_transaksi/' . $tran->notransaksi) ?>"> <i class="fa fa-remove"></i> Hapus</a>
                                 </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -56,8 +60,8 @@
                                 <th>Tgl Transaksi</th>
                                 <th>Kode saldo</th>
                                 <th>Jenis Pengeluaran</th>
-                                <th>Jenis Transaksi</th>
                                 <th>Jumlah</th>
+                                <th>Aksi</th>
                             </tr>
                         </tfoot>
                     </table>

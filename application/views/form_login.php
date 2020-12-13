@@ -46,12 +46,15 @@
             <div class="animate form login_form">
                 <section class="login_content">
                     <form class="text-dark" action="<?= base_url('auth/login'); ?>" method="POST" enctype="multipart/form-data">
+                        <?= $this->session->flashdata('message'); ?>
                         <h1>Login Form</h1>
                         <div>
                             <input type="text" class="form-control" placeholder="Username" name="username" required="" />
+                            <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
                         </div>
                         <div>
                             <input type="password" class="form-control" placeholder="Password" name="password" required="" />
+                            <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
                         </div>
                         <div>
                             <button class="btn btn-primary">Log in</button>
@@ -68,7 +71,7 @@
 
                             <div>
                                 <h1>SILOKASPEN</h1>
-                                
+
                             </div>
                         </div>
                     </form>

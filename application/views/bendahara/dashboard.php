@@ -11,7 +11,7 @@
 $row = $paj->row();
 
 $li = $row->jumlah;
-echo $li;
+// echo $li;
 
             ?>
             </div>

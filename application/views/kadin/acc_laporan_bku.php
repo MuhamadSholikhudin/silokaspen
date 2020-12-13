@@ -75,7 +75,7 @@
                                 <form action="<?= base_url('kadin/un_acc/') ?>" method="post" enctype="multipart/form-data">
 
                                 <?php foreach($idsaldo as $ds): ?>
-                                <input type="text" name="kdsaldo" value="<?= $ds->kdsaldo ?>" >
+                                <input type="text" name="id_saldo" value="<?= $ds->id_saldo ?>" >
 <?php endforeach; ?>
                                     <?php $no = 1; ?>
                                     <?php foreach ($laporan as $lap) : ?>

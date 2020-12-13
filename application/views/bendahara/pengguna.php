@@ -8,10 +8,10 @@
                 <div class="col-lg-12 text-center">
 
                     <h3>DATA PENGGUNA </h3>
-                    
+
                 </div>
                 <div class="col-lg-12 p-4">
-                        <a href="<?= base_url('bendahara/tambah_pengguna') ?>" class="btn btn-primary">Tambah Pengguna</a>
+                    <a href="<?= base_url('bendahara/tambah_pengguna') ?>" class="btn btn-primary">Tambah Pengguna</a>
                     <table class="table  table-bordered" id="example">
                         <thead>
                             <tr>
@@ -20,6 +20,7 @@
                                 <th scope="col">Nip</th>
                                 <th scope="col">Nama Lengkap</th>
                                 <th scope="col">telephone</th>
+                                <th scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,6 +32,7 @@
                                     <td><?= $sal->nip ?></td>
                                     <td><?= $sal->namalengkap ?></td>
                                     <td><?= $sal->telepon ?></td>
+                                    <td><?= $sal->status ?></td>
                                 </tr>
 
                             <?php endforeach; ?>

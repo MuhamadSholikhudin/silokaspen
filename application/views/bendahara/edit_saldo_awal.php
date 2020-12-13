@@ -1,5 +1,12 @@
 <div class="right_col" role="main" style="min-height: 4546px;">
     <div class>
+        <?php
+        function rupiah($angka)
+        {
+            $hasil_rupiah = "Rp " . number_format($angka, 2, ',', '.');
+            return $hasil_rupiah;
+        }
+        ?>
 
 
         <div class="clearfix"></div>
@@ -19,11 +26,11 @@
                             <?php foreach ($saldo as $sal) : ?>
 
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="kdsaldo">Kode saldo <span class="required">*</span>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="id_saldo">Kode saldo <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="number" id="kdsaldo" name="kdsaldo" value="<?= $sal->kdsaldo ?>" class="form-control" required>
-                                        <input type="hidden" id="kdsaldolama" name="kdsaldolama" value="<?= $sal->kdsaldo ?>" class="form-control" required>
+                                        <input type="number" id="id_saldo" name="id_saldo" value="<?= $sal->id_saldo ?>" class="form-control" required>
+                                        <input type="hidden" id="id_saldolama" name="id_saldolama" value="<?= $sal->id_saldo ?>" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="item form-group">
@@ -46,13 +53,69 @@
                                     <div class="col-md-6 col-sm-6 ">
                                         <select class="form-control" id="periodebulan" name="periodebulan">
                                             <?php foreach ($bulan as $bul) : ?>
-                                                <?php if ($bul == $sal->periodebulan) : ?>
-                                                    <option value="<?= $bul ?>"  selected><?= $bul ?></option>
+                                                <?php if ($bul == $sal->periodebulan ) : ?>
+                                                    <option value="<?= $bul ?>" selected>
+                                                        <?php
+                                                        if ($bul == '01') {
+                                                            echo  'Januari';
+                                                        } elseif ($bul == '02') {
+                                                            echo  'Februari';
+                                                        } elseif ($bul == '03') {
+                                                            echo  'Maret';
+                                                        } elseif ($bul == '04') {
+                                                            echo  'April';
+                                                        } elseif ($bul == '05') {
+                                                            echo  'Mei';
+                                                        } elseif ($bul == '06') {
+                                                            echo  'Juni';
+                                                        } elseif ($bul == '07') {
+                                                            echo  'Juli';
+                                                        } elseif ($bul == '08') {
+                                                            echo  'Agustus';
+                                                        } elseif ($bul == '09') {
+                                                            echo  'September';
+                                                        } elseif ($bul == '10') {
+                                                            echo  'Oktober';
+                                                        } elseif ($bul == '11') {
+                                                            echo  'November';
+                                                        } elseif ($bul == '12') {
+                                                            echo  'Desember';
+                                                        }
+                                                        ?>
+                                                    </option>
                                                 <?php else : ?>
-                                                    <option value="<?= $bul ?>"><?= $bul ?></option>
-
+                                                    <option value="<?= $bul ?>">
+                                                        <?php
+                                                        if ($bul == '01') {
+                                                            echo  'Januari';
+                                                        } elseif ($bul == '02') {
+                                                            echo  'Februari';
+                                                        } elseif ($bul == '03') {
+                                                            echo  'Maret';
+                                                        } elseif ($bul == '04') {
+                                                            echo  'April';
+                                                        } elseif ($bul == '05') {
+                                                            echo  'Mei';
+                                                        } elseif ($bul == '06') {
+                                                            echo  'Juni';
+                                                        } elseif ($bul == '07') {
+                                                            echo  'Juli';
+                                                        } elseif ($bul == '08') {
+                                                            echo  'Agustus';
+                                                        } elseif ($bul == '09') {
+                                                            echo  'September';
+                                                        } elseif ($bul == '10') {
+                                                            echo  'Oktober';
+                                                        } elseif ($bul == '11') {
+                                                            echo  'November';
+                                                        } elseif ($bul == '12') {
+                                                            echo  'Desember';
+                                                        }
+                                                        ?>
+                                                    </option>
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
+
 
                                         </select>
                                     </div>
@@ -111,7 +174,7 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="jumlahsaldosisa">Jumlah Saldo Sisa <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="number" id="jumlahsaldosisa" name="jumlahsaldosisalama" value="<?= $sal->jumlahsaldosisa ?>" required="required" class="form-control">
+                                        <input type="number" id="jumlahsaldosisa" name="jumlahsaldosisalama" value="<?= $sal->jumlahsaldosisa ?>" required="required" class="form-control" readonly>
                                     </div>
                                 </div>
 

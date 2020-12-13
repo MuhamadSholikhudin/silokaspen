@@ -24,13 +24,8 @@
                                         <input type="hidden" id="notransaksilama" required="required" name="notransaksilama" value="<?= $tran->notransaksi ?>" class="form-control ">
                                     </div>
                                 </div>
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="kode_rekening">Kode Rekening <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <input type="number" id="kode_rekening" required="required" name="kode_rekening" value="<?= $tran->kode_rekening ?>" class="form-control ">
-                                    </div>
-                                </div>
+
+
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal transaksi <span class="required">*</span>
                                     </label>
@@ -45,76 +40,102 @@
                                         </script>
                                     </div>
                                 </div>
-
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="id_saldo">Id Saldo <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <input type="text" id="id_saldo" required="required" name="id_saldo" value="<?= $tran->id_saldo ?>" class="form-control" readonly>
+                                    </div>
+                                </div>
                                 <div class="item form-group d-none">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="idusername">Id Username <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="kdsaldo" name="idusername" value="<?= $tran->idusername ?>" required="required" class="form-control ">
+                                        <input type="text" id="id_saldo" name="idusername" value="<?= $tran->idusername ?>" required="required" class="form-control ">
                                     </div>
                                 </div>
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="idusername">Saldo Sisa <span class="required">*</span>
                                     </label>
-                                    <?php $jumsisa = $this->db->query("SELECT jumlahsaldosisa FROM tb_saldoawal WHERE kdsaldo = $tran->kdsaldo ")->result(); ?>
+                                    <?php $jumsisa = $this->db->query("SELECT jumlahsaldosisa FROM tb_saldoawal WHERE id_saldo = $tran->id_saldo ")->result(); ?>
 
                                     <div class="col-md-6 col-sm-6 ">
                                         <?php foreach ($jumsisa as $sis) : ?>
-                                            <input type="text" id="kdsaldo" name="sisa" value="<?= $sis->jumlahsaldosisa ?>" required="required" class="form-control" disabled>
+                                            <input type="text" id="id_saldo" name="sisa" value="<?= $sis->jumlahsaldosisa ?>" required="required" class="form-control" readonly>
                                         <?php endforeach; ?>
                                     </div>
                                 </div>
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="kdsaldo">Kode Saldo <span class="required">*</span>
+                                <!-- <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="id_saldo">Kode Saldo <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <select class="form-control" name="kdsaldo">
-                                            <?php foreach ($kdsaldo as $kd) : ?>
-                                                <?php if ($kd->kdsaldo == $tran->kdsaldo) : ?>
-                                                    <option value="<?= $kd->kdsaldo ?>" selected> <?= $kd->kdsaldo ?> </option>
+                                        <select class="form-control" name="id_saldo">
+                                            <?php foreach ($id_saldo as $kd) : ?>
+                                                <?php if ($kd->id_saldo == $tran->id_saldo) : ?>
+                                                    <option value="<?= $kd->id_saldo ?>" selected> <?= $kd->id_saldo ?> </option>
                                                 <?php else : ?>
-                                                    <option value="<?= $kd->kdsaldo ?>"> <?= $kd->kdsaldo ?> </option>
+                                                    <option value="<?= $kd->id_saldo ?>"> <?= $kd->id_saldo ?> </option>
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="kdjnspengeluaran">Kode Jenis Pengeluaran <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <select class="form-control" name="kdjnspengeluaran">
+                                        <select class="form-control" id="kdjnspengeluaran" name="kdjnspengeluaran">
                                             <?php foreach ($kdjnspengeluaran as $kdjns) : ?>
                                                 <?php if ($kdjns->kdjnspengeluaran == $tran->kdjnspengeluaran) : ?>
-                                                    <option value="<?= $kdjns->kdjnspengeluaran ?>" selected> <?= $kdjns->kdjnspengeluaran ?> </option>
+                                                    <option value="<?= $kdjns->kdjnspengeluaran ?>" selected> <?= $kdjns->kdjnspengeluaran ?> / <?= $kdjns->uraian ?> </option>
                                                 <?php else : ?>
-                                                    <option value="<?= $kdjns->kdjnspengeluaran ?>"> <?= $kdjns->kdjnspengeluaran ?> </option>
+                                                    <option value="<?= $kdjns->kdjnspengeluaran ?>"> <?= $kdjns->kdjnspengeluaran ?> / <?= $kdjns->uraian ?></option>
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
                                 </div>
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="carapembayaran">Cara pembayaran <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <select class="form-control" id="carapembayaran" name="carapembayaran">
+                                            <option value="Non-Tunai">Non-Tunai</option>
+                                            <option value="Tunai"> Tunai</option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="jnstransaksi">Jenis Transaksi <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="jnstransaksi" name="jnstransaksi" value="<?= $tran->jnstransaksi ?>" required="required" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="uraian">Uraian <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <textarea type="text" id="uraian" name="uraian" required="required" class="form-control"><?= $tran->uraian ?></textarea>
-                                    </div>
-                                </div>
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="jumlah">Jumlah <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <input type="hidden" id="jumlah" min="0" name="jumlahlama" value="<?= $tran->jumlah ?>" required="required" class="form-control">
                                         <input type="number" id="jumlah" min="0" name="jumlahbaru" value="<?= $tran->jumlah ?>" required="required" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="kode_rekening">Kode Rekening <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <input type="text" id="kode_rekening" required="required" name="kode_rekening" value="<?= $tran->kode_rekening ?>" class="form-control ">
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="namatoko">Nama Toko<span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <input type="text" id="namatoko" name="namatoko" value="<?= $tran->namatoko ?>" required="required" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="alamattoko">Alamat Toko <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <input type="text"  id="alamattoko" name="alamattoko" value="<?= $tran->alamattoko ?>" required="required" class="form-control">
+                                            
+                                        
                                     </div>
                                 </div>
                                 <div class="item form-group">

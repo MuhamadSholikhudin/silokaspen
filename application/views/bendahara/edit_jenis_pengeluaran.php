@@ -26,43 +26,18 @@
                                         <input type="hidden" id="kdjnspengeluaranlama" name="kdjnspengeluaranlama" value="<?= $jns->kdjnspengeluaran ?>" required="required" class="form-control ">
                                     </div>
                                 </div>
-
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="kode_rekening">Kode rekening <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <textarea type="text" id="kode_rekening" name="kode_rekening" required="kode_rekening" class="form-control"><?= $jns->kode_rekening ?></textarea>
+                                    </div>
+                                </div>
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="uraian">Uraian <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <textarea type="text" id="uraian" name="uraian" required="required" class="form-control"><?= $jns->uraian ?></textarea>
-                                    </div>
-                                </div>
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="carapembayaran">Cara Pembayaran <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <select class="form-control" id="carapembayaran" name="carapembayaran">
-                                            <option value="<?= $jns->carapembayaran ?>"> <?= $jns->carapembayaran ?> </option>
-                                            <?php foreach ($carapem as $car) : ?>
-                                                <?php if ($car == $jns->carapembayaran) : ?>
-                                                    <option value="<?= $car ?>"> <?= $car ?> </option>
-                                                <?php else : ?>
-                                                    <option value="<?= $car ?>"> <?= $car ?> </option>
-                                                <?php endif; ?>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="namatoko">Nama Toko <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="namatoko" name="namatoko" value="<?= $jns->namatoko ?>" required="required" class="form-control">
-                                    </div>
-                                </div>
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="alamattoko">Alamat Toko <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <textarea type="text" id="alamattoko" name="alamattoko" required="required" class="form-control"><?= $jns->alamattoko ?></textarea>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
