@@ -81,7 +81,7 @@
                                     </div>
                                 </div> -->
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="kdjnspengeluaran">Kode Jenis Pengeluaran <span class="required">*</span>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="kdjnspengeluaran">Id Jenis Pengeluaran <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <select class="form-control" id="kdjnspengeluaran" name="kdjnspengeluaran">
@@ -111,9 +111,28 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <input type="hidden" id="jumlah" min="0" name="jumlahlama" value="<?= $tran->jumlah ?>" required="required" class="form-control">
-                                        <input type="number" id="jumlah" min="0" name="jumlahbaru" value="<?= $tran->jumlah ?>" required="required" class="form-control">
+                                        <input type="text" id="jumlah" min="0" name="jumlahbaru" value="<?= $tran->jumlah ?>" required="required" class="form-control">
                                     </div>
                                 </div>
+<!-- 
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="saldomasuk">Saldo Masuk <span class="required">*</span>
+                                    </label>
+
+                                    <div class="col-md-6 col-sm-6 ">
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Rp.</span>
+                                            </div>
+                                            <input type="text" id="jumlah1" name="saldomasuk" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">,00</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="kode_rekening">Kode Rekening <span class="required">*</span>
                                     </label>
@@ -133,9 +152,9 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="alamattoko">Alamat Toko <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text"  id="alamattoko" name="alamattoko" value="<?= $tran->alamattoko ?>" required="required" class="form-control">
-                                            
-                                        
+                                        <input type="text" id="alamattoko" name="alamattoko" value="<?= $tran->alamattoko ?>" required="required" class="form-control">
+
+
                                     </div>
                                 </div>
                                 <div class="item form-group">

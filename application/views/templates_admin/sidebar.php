@@ -18,7 +18,7 @@
             </div>
             <div class="profile_info">
               <!-- <span>Welcome, </span> -->
-              
+
               <h2><?= $this->session->userdata('username') ?></h2>
             </div>
           </div>
@@ -72,10 +72,22 @@
                     </a>
                   </li>
                   <li>
+                    <!--                     
                   <li>
                     <a href="<?= base_url('bendahara/bku') ?>">
                       <i class="fa fa-file"></i> Laporan BKU
                     </a>
+                  </li> -->
+
+
+
+                  <li class=""><a><i class="fa fa-file"></i> Laporan <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: none;">
+                      <li><a href="<?= base_url('bendahara/bku') ?>">Laporan BKU</a></li>
+                      <li><a href="<?= base_url('bendahara/laporan_saldo') ?>">Laporan Data Saldo</a></li>
+                      <li><a href="<?= base_url('bendahara/laporan_transaksi') ?>">Laporan Transaksi</a></li>
+                      <li><a href="<?= base_url('bendahara/laporan_pajak') ?>">Laporan Pajak</a></li>
+                    </ul>
                   </li>
                 <?php } elseif ($this->session->userdata('hakakses') == 'kadin') { ?>
                   <li>

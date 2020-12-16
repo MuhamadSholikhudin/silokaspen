@@ -70,12 +70,12 @@
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="status_login">Status Pengguna<span class="required">*</span>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="status">Status Pengguna<span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <select class="form-control" id="status_login" name="status_login">
-                                            <?php foreach ($status_login as $car) : ?>
-                                                <?php if ($car == $jns->status_login) : ?>
+                                        <select class="form-control" id="status" name="status">
+                                            <?php foreach ($status as $car) : ?>
+                                                <?php if ($car == $jns->status) : ?>
                                                     <option value="<?= $car ?>" selected> <?= $car ?> </option>
                                                 <?php else : ?>
                                                     <option value="<?= $car ?>"> <?= $car ?> </option>

@@ -14,7 +14,7 @@
                         <thead>
                             <tr>
                                 <th style="width:10px;">No</th>
-                                <th>Kode Jenis Pengeluaran</th>
+                                <th>Id Jenis Pengeluaran</th>
                                 <th>Kode Rekening</th>
                                 <th>Uraian</th>
                                 <th>Aksi</th>
@@ -29,7 +29,8 @@
                                     <td><?= $sal->kode_rekening ?></td>
                                     <td><?= $sal->uraian ?></td>
                                     <td>
-                                        <a href="<?= base_url('bendahara/edit_jenis_pengeluaran/') . $sal->kdjnspengeluaran ?>" class="btn btn-success"><i class="fa fa-edit"></i>Edit </a>
+                                        <a href="<?= base_url('bendahara/edit_jenis_pengeluaran/') . $sal->kdjnspengeluaran ?>" class="btn btn-success"><i class="fa fa-edit"></i> &nbsp;Edit </a>
+                                        <a href="<?= base_url('bendahara/hapus_jenis_pengeluaran/') . $sal->kdjnspengeluaran ?>" class="btn btn-danger"><i class="fa fa-trash"></i> &nbsp;Hapus </a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -39,7 +40,7 @@
                         <tfoot>
                             <tr>
                                 <th>No</th>
-                                <th>Kode Jenis Pengeluaran</th>
+                                <th>Id Jenis Pengeluaran</th>
                                 <th>Kode Rekening</th>
                                 <th>Uraian</th>
                                 <th>Aksi</th>

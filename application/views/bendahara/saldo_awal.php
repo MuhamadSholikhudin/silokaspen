@@ -18,10 +18,10 @@
                         <form id="demo-form2" action="<?= base_url('bendahara/tambah_saldoawal') ?>" method="POST" enctype="multipart/form-data" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
 
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="id_saldo">Kode saldo <span class="required">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="id_saldo">Id saldo <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="id_saldo" name="id_saldo" value="<?= date('Ymd') ?>" class="form-control" required >
+                                    <input type="text" id="id_saldo" name="id_saldo" value="<?= date('Ymd') ?>" class="form-control" required>
                                 </div>
                             </div>
                             <div class="item form-group">
@@ -128,7 +128,7 @@
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal saldo masuk <span class="required">*</span>
                                 </label>
-                                <div class="col-md-6 col-sm-6 ">
+                                <div class="col-md-6 col-sm-6">
                                     <input id="tglsaldomasuk" name="tglsaldomasuk" class="date-picker form-control" placeholder="dd-mm-yyyy" type="text" value="<?= date('Y-m-d') ?>" required="required" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
                                     <script>
                                         function timeFunctionLong(input) {
@@ -139,14 +139,32 @@
                                     </script>
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <!-- <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="saldomasuk">Saldo Masuk <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="number" id="saldomasuk" name="saldomasuk" required="true" class="form-control">
+                                    <input type="text" id="saldomasuk1" name="saldomasuk" required="true" class="form-control">
+                                </div>
+
+                            </div> -->
+                            <div class="item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="saldomasuk">Saldo Masuk <span class="required">*</span>
+                                </label>
+
+                                <div class="col-md-6 col-sm-6 ">
+
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Rp.</span>
+                                        </div>
+                                        <input type="text" id="saldomasuk1" name="saldomasuk" class="form-control">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">,00</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group d-none">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal saldo sisa <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
@@ -160,7 +178,7 @@
                                     </script>
                                 </div>
                             </div>
-                            <div class="item form-group">
+                            <div class="item form-group d-none">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="jumlahsaldosisa">Jumlah saldo sisa sebelumnya<span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">

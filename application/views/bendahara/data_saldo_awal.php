@@ -20,13 +20,13 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kode Saldo</th>
+                                <th>Id Saldo</th>
                                 <th>Tgl saldo Masuk</th>
                                 <th>Saldo Masuk</th>
                                 <th>Periode Bulan</th>
                                 <th>Periode tahun</th>
-                                <th>Tgl Saldo Sisa</th>
-                                <th>Jumlah Saldo Sisa</th>
+                                <!-- <th>Tgl Saldo Sisa</th> -->
+                                <!-- <th>Jumlah Saldo Sisa</th> -->
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -67,20 +67,19 @@
                                         }
                                         ?></td>
                                     <td><?= $sal->periodetahun ?></td>
-                                    <td><?= $sal->tglsaldosisa ?></td>
-                                    <td>
+                                    <!-- <td> -->
                                         <?php
-                                        $sa = $this->db->query("SELECT jumlahsaldosisa FROM tb_saldoawal WHERE tglsaldomasuk < '$sal->tglsaldomasuk' ORDER BY tglsaldomasuk DESC LIMIT 1")->num_rows();
-                                        if ($sa > 0) {
-                                            $saldokemarin = $this->db->query("SELECT jumlahsaldosisa FROM tb_saldoawal WHERE tglsaldomasuk < '$sal->tglsaldomasuk' ORDER BY tglsaldomasuk DESC LIMIT 1");
-                                            $salkem = $saldokemarin->row();
-                                            echo rupiah($salkem->jumlahsaldosisa);
-                                        } elseif ($sa < 1) {
-                                            echo rupiah(0);
-                                        }
+                                        // $sa = $this->db->query("SELECT jumlahsaldosisa FROM tb_saldoawal WHERE tglsaldomasuk < '$sal->tglsaldomasuk' ORDER BY tglsaldomasuk DESC LIMIT 1")->num_rows();
+                                        // if ($sa > 0) {
+                                        //     $saldokemarin = $this->db->query("SELECT jumlahsaldosisa FROM tb_saldoawal WHERE tglsaldomasuk < '$sal->tglsaldomasuk' ORDER BY tglsaldomasuk DESC LIMIT 1");
+                                        //     $salkem = $saldokemarin->row();
+                                        //     echo rupiah($salkem->jumlahsaldosisa);
+                                        // } elseif ($sa < 1) {
+                                        //     echo rupiah(0);
+                                        // }
 
                                         ?>
-                                    </td>
+                                    <!-- </td> -->
                                     <td>
                                         <a href="<?= base_url('bendahara/edit_saldo_awal/') . $sal->id_saldo ?>" class="btn btn-success"><i class="fa fa-edit"></i>Edit</a>
                                 </td>
@@ -93,13 +92,12 @@
                         <tfoot>
                             <tr>
                                 <th>No</th>
-                                <th>Kode Saldo</th>
+                                <th>Id Saldo</th>
                                 <th>Tgl saldo Masuk</th>
                                 <th>Saldo Masuk</th>
                                 <th>Periode Bulan</th>
                                 <th>Periode tahun</th>
-                                <th>Tgl Saldo Sisa</th>
-                                <th>Jumlah Saldo Sisa</th>
+                                <!-- <th>Jumlah Saldo Sisa</th> -->
                                 <th>Aksi</th>
                             </tr>
                         </tfoot>

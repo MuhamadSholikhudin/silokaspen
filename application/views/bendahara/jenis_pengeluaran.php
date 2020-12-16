@@ -18,7 +18,7 @@
                         <form id="demo-form2" action="<?= base_url('bendahara/tambah_jnspengeluaran') ?>" method="POST" enctype="multipart/form-data" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
 
                             <div class="item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="kdjndpengeluaran">Kode Jenis Pengeluaran <span class="required">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="kdjndpengeluaran">Id Jenis Pengeluaran <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
                                     <input type="text" id="kdjndpengeluaran" name="kdjnspengeluaran" required="required" class="form-control ">

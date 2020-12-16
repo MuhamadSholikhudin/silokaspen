@@ -84,6 +84,19 @@
                                     </div>
                                 </div>
                                 <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="notransaksi">Id Pengeluaran / Uraian<span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <?php
+                                        $ur = $this->db->query(" SELECT tb_jnspengeluaran.kdjnspengeluaran as kdjns, tb_jnspengeluaran.uraian as uraian FROM tb_jnspengeluaran JOIN tb_transaksi ON tb_jnspengeluaran.kdjnspengeluaran = tb_transaksi.kdjnspengeluaran   WHERE tb_transaksi.notransaksi = '$paj->notransaksi' AND status < 1 ");
+                                        $klx = $ur->row();
+                                        $urar = $klx->uraian;
+                                        $kdj = $klx->kdjns;
+                                        ?>
+                                        <input type="text" id="nominaltransaksi" required="required" value="<?= $kdj ?> / <?= $urar ?>" class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="id_saldo">Saldo Sisa <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 d-none">

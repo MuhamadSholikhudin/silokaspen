@@ -19,7 +19,7 @@
                             <?php foreach ($jnspengeluaran as $jns) : ?>
 
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="kdjndpengeluaran">Kode Jenis Pengeluaran <span class="required">*</span>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="kdjndpengeluaran">Id Jenis Pengeluaran <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <input type="text" id="kdjndpengeluaran" name="kdjnspengeluaran" value="<?= $jns->kdjnspengeluaran ?>" required="required" class="form-control ">

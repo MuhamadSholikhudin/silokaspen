@@ -117,12 +117,12 @@
 
             $('#kdjnspengeluaran').change(function() {
 
-              var id = document.getElementById("kdjnspengeluaran").value;
+              var kdjnspengeluaran = document.getElementById("kdjnspengeluaran").value;
               $.ajax({
                 url: "<?php echo site_url('pembantu/get_sub_kd_pengeluaran'); ?>",
                 method: "POST",
                 data: {
-                  id: id
+                  kdjnspengeluaran: kdjnspengeluaran
                 },
                 async: true,
                 dataType: 'json',
@@ -198,9 +198,72 @@
               }
             });
 
-         
+
 
           });
+        </script>
+
+
+
+        <script type="text/javascript">
+          //Saldo awal
+          var rupiah = document.getElementById('saldomasuk1');
+          rupiah.addEventListener('keyup', function(e) {
+            // tambahkan 'Rp.' pada saat form di ketik
+            // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+            // document.getElementById("saldomasuk1").value = rupiah.value;
+
+
+            rupiah.value = formatRupiah(this.value);
+          });
+
+          /* Fungsi formatRupiah */
+          function formatRupiah(angka, prefix) {
+            var number_string = angka.replace(/[^,\d]/g, '').toString(),
+              split = number_string.split(','),
+              sisa = split[0].length % 3,
+              rupiah = split[0].substr(0, sisa),
+              ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            // tambahkan titik jika yang di input sudah menjadi angka ribuan
+            if (ribuan) {
+              separator = sisa ? '.' : '';
+              rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return prefix == undefined ? rupiah : (rupiah ? rupiah : '');
+          }
+
+
+          //Transaksi
+          var rupiahtr = document.getElementById('jumlah1');
+          rupiahtr.addEventListener('keyup', function(e) {
+            // tambahkan 'Rp.' pada saat form di ketik
+            // gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+            // document.getElementById("saldomasuk1").value = rupiah.value;
+
+
+            rupiahtr.value = formatRupiah(this.value);
+          });
+
+          /* Fungsi formatRupiah */
+          function formatRupiah1(angka, prefix) {
+            var number_string = angka.replace(/[^,\d]/g, '').toString(),
+              split = number_string.split(','),
+              sisa = split[0].length % 3,
+              rupiahtr = split[0].substr(0, sisa),
+              ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            // tambahkan titik jika yang di input sudah menjadi angka ribuan
+            if (ribuan) {
+              separator = sisa ? '.' : '';
+              rupiahtr += separator + ribuan.join('.');
+            }
+
+            rupiahtr = split[1] != undefined ? rupiahtr + ',' + split[1] : rupiahtr;
+            return prefix == undefined ? rupiahtr : (rupiahtr ? rupiahtr : '');
+          }
         </script>
         <!-- <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script type=" text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script> -->

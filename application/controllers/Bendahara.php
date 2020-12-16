@@ -190,10 +190,15 @@ $data['pembantu'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'p
         $tglsaldomasuk = $this->input->post('tglsaldomasuk');
         $periodebulan = $this->input->post('periodebulan');
         $periodetahun = $this->input->post('periodetahun');
-        $saldomasuk = $this->input->post('saldomasuk');
+        $angka1 = $this->input->post('saldomasuk');
         $tglsaldosisa = $this->input->post('tglsaldosisa');
         $jumlahsaldosisa = $this->input->post('jumlahsaldosisa');
 
+        $angka2 = str_replace(".", "", $angka1);
+        $saldomasuk = $angka2;
+        // $angka2 = str_replace("Rp", "", $angka1);
+
+        // $akhirsisa = $jumlahsaldosisa + $saldomasuk;
         $akhirsisa = $jumlahsaldosisa + $saldomasuk;
 
         $data = array(
@@ -220,9 +225,12 @@ $data['pembantu'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'p
         $periodebulan = $this->input->post('periodebulan');
         $periodetahun = $this->input->post('periodetahun');
         $saldomasuklama = $this->input->post('saldomasuklama');
-        $saldomasukbaru = $this->input->post('saldomasukbaru');
+        $saldobm = $this->input->post('saldomasukbaru');
         $tglsaldosisa = $this->input->post('tglsaldosisa');
         $jumlahsaldosisalama = $this->input->post('jumlahsaldosisalama');
+
+
+        $saldomasukbaru = str_replace(".", "", $saldobm);
 
         $saldoselisih = $saldomasukbaru - $saldomasuklama;
 
@@ -294,20 +302,55 @@ if($id_saldo == $id_saldolama ){
         $uraian = $this->input->post('uraian');
         $kode_rekening = $this->input->post('kode_rekening');
 
-        $data = array(
-            'kdjnspengeluaran' => $kdjnspengeluaran,
-            'uraian' => $uraian,
-            'kode_rekening' => $kode_rekening
-        );
+$cari = $this->db->query("SELECT * FROM tb_jnspengeluaran WHERE kdjnspengeluaran = '$kdjnspengeluaran'")->num_rows();
 
-        $where = [
-            'kdjnspengeluaran' => $kdjnspengeluaranlama
-        ];
+        if($kdjnspengeluaran == $kdjnspengeluaranlama){
 
-        $this->Model_jnspengeluaran->update_data($where, $data, 'tb_jnspengeluaran');
-        $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Jenis Pengeluaran berhasil di Edit', 'success')</script>");
+            $data = array(
+                'kdjnspengeluaran' => $kdjnspengeluaran,
+                'uraian' => $uraian,
+                'kode_rekening' => $kode_rekening
+            );
 
-        redirect('bendahara/data_jenis_pengeluaran');
+            $where = [
+                'kdjnspengeluaran' => $kdjnspengeluaranlama
+            ];
+
+            $this->Model_jnspengeluaran->update_data($where, $data, 'tb_jnspengeluaran');
+            $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Jenis Pengeluaran berhasil di Edit', 'success')</script>");
+
+            redirect('bendahara/data_jenis_pengeluaran');        
+        }
+
+
+elseif($kdjnspengeluaran != $kdjnspengeluaranlama) {
+
+            $caru = $this->db->query("SELECT * FROM tb_jnspengeluaran WHERE  kdjnspengeluaran = '$kdjnspengeluaran'")->num_rows();
+
+            if ($caru > 0) {
+            $this->session->set_flashdata("message", "<script>Swal.fire('Gagal', 'Gagal edit jenis pengeluaran karena duplikat Kode Jenis pengeluaran', 'success')</script>");
+            redirect('bendahara/data_jenis_pengeluaran/');
+        }
+elseif($caru < 1){
+            $data = array(
+                'kdjnspengeluaran' => $kdjnspengeluaran,
+                'uraian' => $uraian,
+                'kode_rekening' => $kode_rekening
+            );
+
+            $where = [
+                'kdjnspengeluaran' => $kdjnspengeluaranlama
+            ];
+
+            $this->Model_jnspengeluaran->update_data($where, $data, 'tb_jnspengeluaran');
+            $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Jenis Pengeluaran berhasil di Edit', 'success')</script>");
+
+            redirect('bendahara/data_jenis_pengeluaran');
+}
+
+
+} 
+        
     }
 
     public function ajukan_laporan_bku()
@@ -408,7 +451,7 @@ if ($jumtran < 1 ){
         $where = array('idusername' => $idusername);
         $data['user'] = $this->db->query("SELECT * FROM tb_login WHERE idusername = '$idusername' ")->result();
 $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
-        $data['status_login'] = ['Aktif', 'Tidak Aktif'];
+        $data['status'] = ['Aktif', 'Tidak Aktif'];
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
         $this->load->view('bendahara/edit_pengguna', $data);
@@ -424,6 +467,7 @@ $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
         $telepon = $this->input->post('telepon');
         $hakakses = $this->input->post('hakakses');
         $password = $this->input->post('password');
+        $status = $this->input->post('status');
 
         $data = array(
             'nip' => $nip,
@@ -432,6 +476,7 @@ $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
             'hakakses' => $hakakses,
             'telepon' => $telepon,
             'namalengkap' => $namalengkap,
+            'status' => $status
         );
 
         $this->Model_tblogin->tambah_tb_login($data, 'tb_login');
@@ -448,7 +493,7 @@ $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
         $telepon = $this->input->post('telepon');
         $hakakses = $this->input->post('hakakses');
         $password = $this->input->post('password');
-        $status_login = $this->input->post('status_login');
+        $status = $this->input->post('status');
         
         $data = array(
             'nip' => $nip,
@@ -457,7 +502,7 @@ $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
             'hakakses' => $hakakses,
             'telepon' => $telepon,
             'namalengkap' => $namalengkap,
-            'status_login' => $status_login
+            'status' => $status
         );
 
         $where = [
@@ -466,6 +511,144 @@ $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
 
         $this->Model_tblogin->update_data($where, $data, 'tb_login');
         redirect('bendahara/pengguna/');
+    }
+
+    public function hapus_jenis_pengeluaran($kdjnspengeluaran){
+        $where = ['kdjnspengeluaran' => $kdjnspengeluaran];
+
+        $carikd = $this->db->query("SELECT * FROM tb_transaksi WHERE kdjnspengeluaran = '$kdjnspengeluaran' ")->num_rows();
+    if($carikd > 0){
+            $this->session->set_flashdata("message", "<script>Swal.fire('Gagal', 'Data Jenis Pengeluaran Tidak dapat dihapus', 'error')</script>");
+            redirect('bendahara/data_jenis_pengeluaran/');
+
+    }elseif($carikd < 1){
+
+            $this->Model_jnspengeluaran->hapus_data($where, 'tb_jnspengeluaran');
+            $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Jenis Pengeluaran Berhasil dihapus', 'success')</script>");
+
+            redirect('bendahara/data_jenis_pengeluaran/');
+    }
+
+    }
+
+
+    public function laporan_transaksi(){
+        $this->load->view('templates_admin/header');
+        $this->load->view('templates_admin/sidebar');
+        $this->load->view('laporan/laporan_transaksi');
+        $this->load->view('templates_admin/footer');
+    }
+
+    public function pilih_tanggal_transaksi()
+    {
+        $tanggal_awal = $this->input->post('tanggal_awal');
+        $tanggal_akhir = $this->input->post('tanggal_akhir');
+
+        $data['laporan_transaksi'] = $this->db->query("SELECT * FROM tb_transaksi WHERE tgltransaksi BETWEEN '$tanggal_awal' AND '$tanggal_akhir' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $this->load->view('laporan/cetak_laporan_transaksi', $data);
+    }
+
+    public function pilih_bulan_transaksi()
+    {
+        $bulan = $this->input->post('bulan');
+        $tahun = $this->input->post('tahun');
+
+        $data['laporan_transaksi'] = $this->db->query("SELECT * FROM tb_transaksi WHERE MONTH(tgltransaksi) = '$bulan' AND YEAR(tgltransaksi) = '$tahun' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $this->load->view('laporan/cetak_laporan_transaksi', $data);
+    }
+
+    public function pilih_tahun_transaksi()
+    {
+        $tahun = $this->input->post('tahun');
+
+        $data['laporan_transaksi'] = $this->db->query("SELECT * FROM tb_transaksi WHERE YEAR(tgltransaksi) = '$tahun' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $this->load->view('laporan/cetak_laporan_transaksi', $data);
+    }
+
+
+    public function laporan_saldo()
+    {
+        $this->load->view('templates_admin/header');
+        $this->load->view('templates_admin/sidebar');
+        $this->load->view('laporan/laporan_saldo');
+        $this->load->view('templates_admin/footer');
+    }
+
+    public function pilih_tanggal_saldo()
+    {
+        $tanggal_awal = $this->input->post('tanggal_awal');
+        $tanggal_akhir = $this->input->post('tanggal_akhir');
+
+        $data['laporan_saldo'] = $this->db->query("SELECT * FROM tb_saldoawal WHERE tglsaldomasuk BETWEEN '$tanggal_awal' AND '$tanggal_akhir' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $this->load->view('laporan/cetak_laporan_saldo', $data);
+    }
+
+    public function pilih_bulan_saldo()
+    {
+        $bulan = $this->input->post('bulan');
+        $tahun = $this->input->post('tahun');
+
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $data['laporan_saldo'] = $this->db->query("SELECT * FROM tb_saldoawal WHERE MONTH(tglsaldomasuk) = '$bulan' AND YEAR(tglsaldomasuk) = '$tahun' ")->result();
+        $this->load->view('laporan/cetak_laporan_saldo', $data);
+    }
+
+    public function pilih_tahun_saldo()
+    {
+        $tahun = $this->input->post('tahun');
+
+        $data['laporan_saldo'] = $this->db->query("SELECT * FROM tb_saldoawal WHERE YEAR(tglsaldomasuk) = '$tahun' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $this->load->view('laporan/cetak_laporan_saldo', $data);
+    }
+
+
+
+    public function laporan_pajak()
+    {
+        $this->load->view('templates_admin/header');
+        $this->load->view('templates_admin/sidebar');
+        $this->load->view('laporan/laporan_pajak');
+        $this->load->view('templates_admin/footer');
+    }
+
+    public function pilih_tanggal_pajak()
+    {
+        $tanggal_awal = $this->input->post('tanggal_awal');
+        $tanggal_akhir = $this->input->post('tanggal_akhir');
+
+        $data['laporan_pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE tgldok BETWEEN '$tanggal_awal' AND '$tanggal_akhir' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $this->load->view('laporan/cetak_laporan_pajak', $data);
+    }
+
+    public function pilih_bulan_pajak()
+    {
+        $bulan = $this->input->post('bulan');
+        $tahun = $this->input->post('tahun');
+
+        $data['laporan_pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE MONTH(tgldok) = '$bulan' AND YEAR(tgldok) = '$tahun' ")->result();
+
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $this->load->view('laporan/cetak_laporan_pajak', $data);
+    }
+
+    public function pilih_tahun_pajak()
+    {
+        $tahun = $this->input->post('tahun');
+
+        $data['laporan_pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE YEAR(tgldok) = '$tahun' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $this->load->view('laporan/cetak_laporan_pajak', $data);
+    }
+
+    public function cetak_laporan_transaksi(){
+        $this->load->view('laporan/cetak_laporan_transaksi');
+
     }
 
 }

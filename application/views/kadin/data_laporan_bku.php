@@ -26,7 +26,37 @@
                             <?php foreach ($bku as $sal) : ?>
                                 <tr>
                                     <th scope="row"><?= $no++ ?></th>
-                                    <td><a href="<?= base_url('kadin/laporan_bku/') . $sal->id_saldo ?>"> Laporan Buku Kas Umum Bulan <?= $sal->periodebulan ?>&nbsp;<?= $sal->periodetahun ?></a></td>
+                                    <td><a href="<?= base_url('kadin/laporan_bku/') . $sal->id_saldo ?>"> Laporan Buku Kas Umum Bulan
+
+
+                                            <?php
+                                            if ($sal->periodebulan == '01') {
+                                                echo  'Januari';
+                                            } elseif ($sal->periodebulan == '02') {
+                                                echo  'Februari';
+                                            } elseif ($sal->periodebulan == '03') {
+                                                echo  'Maret';
+                                            } elseif ($sal->periodebulan == '04') {
+                                                echo  'April';
+                                            } elseif ($sal->periodebulan == '05') {
+                                                echo  'Mei';
+                                            } elseif ($sal->periodebulan == '06') {
+                                                echo  'Juni';
+                                            } elseif ($sal->periodebulan == '07') {
+                                                echo  'Juli';
+                                            } elseif ($sal->periodebulan == '08') {
+                                                echo  'Agustus';
+                                            } elseif ($sal->periodebulan == '09') {
+                                                echo  'September';
+                                            } elseif ($sal->periodebulan == '10') {
+                                                echo  'Oktober';
+                                            } elseif ($sal->periodebulan == '11') {
+                                                echo  'November';
+                                            } elseif ($sal->periodebulan == '12') {
+                                                echo  'Desember';
+                                            }
+                                            ?>
+                                            <?= $sal->periodetahun ?></a></td>
                                     <td>
                                         <?php if ($sal->status == 2) { ?>
                                             <a href="<?= base_url('kadin/cetak_bku/') . $sal->id_saldo ?>" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-warning">Cetak</a>

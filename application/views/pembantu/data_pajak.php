@@ -21,14 +21,13 @@
                                     <th>No</th>
                                     <th>No Dokumen</th>
                                     <th>tgl Dokumen</th>
-                                    <th>Jenis Pengeluaran</th>
-                                    <th>Kode Saldo</th>
+                                    <th>Nomer Transaksi</th>
+                                    <th>Id Saldo</th>
                                     <th>ppn</th>
                                     <th>pph 21</th>
                                     <th>pph 22</th>
                                     <th>pph 23</th>
                                     <th>pph lain</th>
-                                    <th>jumlah</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -52,12 +51,15 @@
                                         <td><?= rupiah($paj->pph22) ?></td>
                                         <td><?= rupiah($paj->pph23) ?></td>
                                         <td><?= rupiah($paj->pphlain) ?></td>
-                                        <td><?= rupiah($paj->ppn + $paj->pph21 + $paj->pph22 + $paj->pph23 + $paj->pphlain) ?></td>
                                         <td>
 
-                                            <a class="btn btn-warning text-right" target="blank" href="<?= base_url('pembantu/cetak_pajak/' . $paj->nodok) ?>"> <i class="fa fa-print"></i> Cetak</a>
                                             <!-- <a class="btn btn-danger text-right" href="<?= base_url('pembantu/hapus_pajak/' . $paj->nodok) ?>"> <i class="fa fa-remove"></i> Hapus</a> -->
 
+                                            <?php if ($paj->status == 0) { ?>
+                                                <a href="<?= base_url('pembantu/edit_pajak/') .  $paj->nodok  ?>" class="btn btn-success text-right" > <i class="fa fa-edit"></i> Edit</a>
+                                            <?php   } else { ?>
+                                                <a class="btn btn-warning text-right" target="blank"> <i class="fa fa-print"></i> Cetak</a>
+                                            <?php  } ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -67,14 +69,13 @@
                                     <th>No</th>
                                     <th>No Dokumen</th>
                                     <th>tgl Dokumen</th>
-                                    <th>Jenis Pengeluaran</th>
+                                    <th>Nomer Transaksi</th>
                                     <th>Kode Saldo</th>
                                     <th>ppn</th>
                                     <th>pph 21</th>
                                     <th>pph 22</th>
                                     <th>pph 23</th>
                                     <th>pph lain</th>
-                                    <th>jumlah</th>
                                     <th>Aksi</th>
                                 </tr>
                             </tfoot>

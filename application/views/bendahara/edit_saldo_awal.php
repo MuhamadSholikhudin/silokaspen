@@ -3,7 +3,7 @@
         <?php
         function rupiah($angka)
         {
-            $hasil_rupiah = "Rp " . number_format($angka, 2, ',', '.');
+            $hasil_rupiah = number_format($angka, 0, ',', '.');
             return $hasil_rupiah;
         }
         ?>
@@ -26,7 +26,7 @@
                             <?php foreach ($saldo as $sal) : ?>
 
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="id_saldo">Kode saldo <span class="required">*</span>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="id_saldo">Id saldo <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <input type="number" id="id_saldo" name="id_saldo" value="<?= $sal->id_saldo ?>" class="form-control" required>
@@ -53,7 +53,7 @@
                                     <div class="col-md-6 col-sm-6 ">
                                         <select class="form-control" id="periodebulan" name="periodebulan">
                                             <?php foreach ($bulan as $bul) : ?>
-                                                <?php if ($bul == $sal->periodebulan ) : ?>
+                                                <?php if ($bul == $sal->periodebulan) : ?>
                                                     <option value="<?= $bul ?>" selected>
                                                         <?php
                                                         if ($bul == '01') {
@@ -148,15 +148,32 @@
                                         <input type="text" id="periodetahun" name="periodetahun" value="<?= date('Y'); ?>" required="true" class="form-control" readonly>
                                     </div>
                                 </div>
-                                <div class="item form-group">
+                                <!-- <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="saldomasuk">Saldo Masuk <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <input type="number" id="saldomasuk" name="saldomasukbaru" value="<?= $sal->saldomasuk ?>" required="true" class="form-control">
-                                        <input type="hidden" id="saldomasuk" name="saldomasuklama" value="<?= $sal->saldomasuk ?>" required="true" class="form-control">
+                                    </div>
+                                </div> -->
+                                <div class="item form-group">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="saldomasuk">Saldo Masuk <span class="required">*</span>
+                                    </label>
+
+                                    <div class="col-md-6 col-sm-6 ">
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Rp.</span>
+                                            </div>
+                                            <input type="text" id="saldomasuk1" name="saldomasukbaru" class="form-control" value="<?= rupiah($sal->saldomasuk) ?>">
+                                            <input type="hidden" id="saldomasuk" name="saldomasuklama" value="<?= $sal->saldomasuk ?>" required="true" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">,00</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="item form-group">
+                                <div class="item form-group d-none">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align">Tanggal saldo sisa <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
@@ -170,7 +187,7 @@
                                         </script>
                                     </div>
                                 </div>
-                                <div class="item form-group">
+                                <div class="item form-group  d-none">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="jumlahsaldosisa">Jumlah Saldo Sisa <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">

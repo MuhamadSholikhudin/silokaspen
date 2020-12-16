@@ -64,12 +64,12 @@
                                                 </tr>
 
                                                 <tr>
-                                                    <td>Kode Saldo</td>
+                                                    <td>Id Saldo</td>
                                                     <td><?= $tran->id_saldo ?></td>
                                                 </tr>
 
                                                 <tr>
-                                                    <td> Jenis Transaksi</td>
+                                                    <td>Id Jenis Pengeluaran</td>
                                                     <td><?= $tran->kdjnspengeluaran ?></td>
                                                 </tr>
                                                 <tr>

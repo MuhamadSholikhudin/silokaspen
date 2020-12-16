@@ -96,7 +96,7 @@
                 </div>
             </div>
 
-        <?php } elseif($cektran < 1) { ?>
+        <?php } elseif ($cektran < 1) { ?>
 
             <div class="row">
                 <div class="col-md-12 col-sm-12 ">
@@ -113,7 +113,8 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="notransaksi">Nomer Transaksi <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="notransaksi" required name="notransaksi" class="form-control" required>
+                                        <input type="hidden" id="notransaksi" required="required" value="T<?= date("Ymdhi") ?>" name="notransaksi" class="form-control">
+                                        <input type="text" required="required" value="T<?= date("Ymdhi") ?>" class="form-control" readonly>
                                     </div>
                                 </div>
                                 <div class="item form-group">
@@ -140,7 +141,8 @@
                                         $li = $row->id_saldo;
                                         $lo = $row->jumlahsaldosisa;
                                         ?>
-                                        <input type="text" id="id_saldo" required="required" name="id_saldo" value="<?= $li ?>" class="form-control" readonly>
+                                        <input type="hidden" id="id_saldo" required="required" name="id_saldo" value="<?= $li ?>" class="form-control">
+                                        <input type="text" id="id_saldo" required="required" value="<?= $li ?>" class="form-control" readonly>
                                     </div>
                                 </div>
                                 <div class="item form-group d-none">
@@ -176,7 +178,7 @@
                                 </div>
 
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="kdjnspengeluaran">Kode Jenis Pengeluaran <span class="required">*</span>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="kdjnspengeluaran">Id Jenis Pengeluaran <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <select class="form-control" id="kdjnspengeluaran" name="kdjnspengeluaran">
@@ -190,7 +192,7 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="jumlah">Jumlah <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="number" id="jumlah" min="0" name="jumlah" required="required" class="form-control">
+                                        <input type="number" id="jumlah1" min="0" name="jumlah" required="required" class="form-control">
                                     </div>
                                 </div>
                                 <div class="item form-group">

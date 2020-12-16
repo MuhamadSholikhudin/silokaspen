@@ -114,6 +114,22 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $this->load->view('templates_admin/footer');
     }
 
+    public function input_pajak($notransaksi){
+        $where = array('notransaksi' => $notransaksi);
+        $data['pajak'] = $this->Model_pajak->edit_pajak($where, 'tb_pajak')->result();
+
+      
+        // $data['pajak'] = $this->Model_pajak->edit_pajak($where, 'tb_pajak')->result();
+
+        $data['kdjnspengeluaran'] = $this->Model_jnspengeluaran->tampil_data()->result();
+        $data['id_saldo'] = $this->db->query("SELECT id_saldo FROM tb_saldoawal ")->result();
+
+        $this->load->view('templates_admin/header');
+        $this->load->view('templates_admin/sidebar');
+        $this->load->view('pembantu/pajak', $data);
+        $this->load->view('templates_admin/footer');
+    }
+
     public function edit_transaksi($notransaksi)
     {
 
@@ -159,12 +175,22 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $alamattoko = $this->input->post('alamattoko');
         $sisa = $this->input->post('sisa');
 
+        // $seli =  $sisa - ($sisa * 0.1);
+
+        
+
         $cari = $this->db->query("SELECT notransaksi FROM tb_transaksi WHERE notransaksi = '$notransaksi' LIMIT 1")->num_rows();
-if($notransaksi == 0){
+if($notransaksi == '0'){
             $this->session->set_flashdata("message", "<script>Swal.fire('ERROR', 'Data Transaksi Gagal di tambahkan karena Nomer Transaksi Belum Diisi', 'error')</script>");
             redirect('pembantu/transaksi');
 }
-        elseif($cari == 1){
+
+// elseif($jumlah > $seli){
+//             $this->session->set_flashdata("message", "<script>Swal.fire('ERROR', 'Data Transaksi Gagal di tambahkan karena Karena Jumlah Melebihi Maksimal transaksi', 'error')</script>");
+//             redirect('pembantu/transaksi');
+// }elseif($jumlah < $seli) {
+ 
+        if($cari == 1){
             $this->session->set_flashdata("message", "<script>Swal.fire('ERROR', 'Data Transaksi Gagal di tambahkan karena Nomer Transaksi sudah ada', 'error')</script>");
             redirect('pembantu/transaksi');
         }elseif($cari < 1){
@@ -213,7 +239,8 @@ if($notransaksi == 0){
             $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Transaksi berhasil di tambahkan', 'success')</script>");
 
             redirect('pembantu/data_transaksi');
-        }
+        }   
+// }
 
 
         
@@ -236,8 +263,8 @@ if($notransaksi == 0){
         $sisa = $this->input->post('sisa');
         // $id_saldo = $this->input->post('id_saldo');
 
-        $cari = $this->db->query("SELECT nodok FROM tb_pajak WHERE nodok = $nodok")->num_rows();
-if($nodok == 0){
+        $cari = $this->db->query("SELECT nodok FROM tb_pajak WHERE nodok = '$nodok'")->num_rows();
+if($nodok == '0'){
             $this->session->set_flashdata("message", "<script>Swal.fire('Gagal', 'Data Pajak Gagal di tambahkan karena Nomer Dokumen Belum Di isi', 'error')</script>");
 
             redirect('pembantu/pajak');
@@ -322,23 +349,27 @@ else{
         // $jumlah = $jumlahbaru;
         $jumlahsaldosisa = $sisa + $jumlahselisih;
 
-$data['pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE nodok = $nodoklama ")->result_array();
+$data['pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE nodok = '$nodoklama' ")->result_array();
+        $pajak_gambar = $this->db->query("SELECT gambar FROM tb_pajak WHERE nodok = '$nodoklama' ");
+        $pt = $pajak_gambar->row();
+        $tg = $pt->gambar;
+
 
         // cek jika ada gambar yang akan diupload
         $upload_gambar = $_FILES['gambar']['name'];
 
         if ($upload_gambar) {
             $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            $config['max_size']      = '2048';
+            $config['max_size']      = '5120';
             $config['upload_path'] = './uploads/';
 
             $this->load->library('upload', $config);
 
             if ($this->upload->do_upload('gambar')) {
-                // $old_gambar = $data['pajak']['gambar'];
-                // if ($old_gambar != 'default.jpg') {
-                //     unlink(FCPATH . 'uploads/' . $old_gambar);
-                // }
+                $old_gambar = $tg;
+                if ($old_gambar != 'default.jpg') {
+                    unlink(FCPATH . 'uploads/' . $old_gambar);
+                }
                 $new_gambar = $this->upload->data('file_name');
                 $this->db->set('gambar', $new_gambar);
             } else {
@@ -400,23 +431,26 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE nodok = $nodokla
         $jumlah = $jumlahbaru;
         $jumlahsaldosisa = $sisa - $jumlahselisih;
 
-        $data['transaksi'] = $this->db->query("SELECT * FROM tb_transaksi WHERE notransaksi = $notransaksilama ")->result_array();
+        $data['transaksi'] = $this->db->query("SELECT * FROM tb_transaksi WHERE notransaksi = '$notransaksilama' ")->result_array();
+        $transaksi_gambar = $this->db->query("SELECT gambar FROM tb_transaksi WHERE notransaksi = '$notransaksilama' ");
+$gt = $transaksi_gambar->row();
+   $tg = $gt->gambar;
 
         // cek jika ada gambar yang akan diupload
         $upload_gambar = $_FILES['gambar']['name'];
 
         if ($upload_gambar) {
             $config['allowed_types'] = 'gif|jpg|png|jpeg';
-            $config['max_size']      = '2048';
+            $config['max_size']      = '5120';
             $config['upload_path'] = './uploads/';
 
             $this->load->library('upload', $config);
 
             if ($this->upload->do_upload('gambar')) {
-                // $old_gambar = $data['pajak']['gambar'];
-                // if ($old_gambar != 'default.jpg') {
-                //     unlink(FCPATH . 'uploads/' . $old_gambar);
-                // }
+                $old_gambar = $tg;
+                if ($old_gambar != 'default.jpg') {
+                    unlink(FCPATH . 'uploads/' . $old_gambar);
+                }
                 $new_gambar = $this->upload->data('file_name');
                 $this->db->set('gambar', $new_gambar);
             } else {
@@ -588,7 +622,7 @@ if($caru > 0){
 
     function get_sub_kd_pengeluaran()
     {
-        $kdjnspengeluaran = $this->input->post('id', TRUE);
+        $kdjnspengeluaran = $this->input->post('kdjnspengeluaran', TRUE);
         $data = $this->Model_jnspengeluaran->get_sub_kdjns_pengeluaran($kdjnspengeluaran)->result();
         echo json_encode($data);
     }
