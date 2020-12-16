@@ -35,7 +35,7 @@
                                 </td>
                                 <td><?= $tran->tgltransaksi ?></td>
                                 <td><?= $tran->id_saldo ?></td>
-                                <td><?= $tran->kdjnspengeluaran ?>
+                                <td>
                                 <?php
                                     $jnsp = $this->db->query("SELECT * FROM tb_jnspengeluaran WHERE kdjnspengeluaran = '$tran->kdjnspengeluaran' ");
                                 $psj = $jnsp->row();

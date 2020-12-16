@@ -117,16 +117,21 @@ $this->load->view('templates_admin/header');
     {
         $data['jumif'] = $this->db->get_where('tb_saldoawal', ['id_saldo' => $id_saldo])->result();
 
-        $data['laporan'] = $this->db->query(" SELECT tb_transaksi.kode_rekening, tb_jnspengeluaran.uraian, tb_transaksi.tgltransaksi, tb_transaksi.notransaksi, tb_transaksi.jumlah, tb_transaksi.carapembayaran, tb_transaksi.namatoko, tb_transaksi.alamattoko, tb_pajak.ppn, tb_pajak.pph21, tb_pajak.pph22, tb_pajak.pph23, tb_pajak.pphlain
-        FROM tb_transaksi JOIN tb_saldoawal ON  tb_saldoawal.id_saldo = tb_transaksi.id_saldo 
-        JOIN tb_jnspengeluaran ON tb_transaksi.kdjnspengeluaran = tb_jnspengeluaran.kdjnspengeluaran
-        JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi
-        WHERE tb_saldoawal.id_saldo = $id_saldo ")->result();
+        // $data['laporan'] = $this->db->query(" SELECT tb_transaksi.kode_rekening, tb_jnspengeluaran.uraian, tb_transaksi.tgltransaksi, tb_transaksi.notransaksi, tb_transaksi.jumlah, tb_transaksi.carapembayaran, tb_transaksi.namatoko, tb_transaksi.alamattoko, tb_pajak.ppn, tb_pajak.pph21, tb_pajak.pph22, tb_pajak.pph23, tb_pajak.pphlain
+        // FROM tb_transaksi JOIN tb_saldoawal ON  tb_saldoawal.id_saldo = tb_transaksi.id_saldo 
+        // JOIN tb_jnspengeluaran ON tb_transaksi.kdjnspengeluaran = tb_jnspengeluaran.kdjnspengeluaran
+        // JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi
+        // WHERE tb_saldoawal.id_saldo = $id_saldo ")->result();
+
+        $data['laporan'] = $this->db->query(" SELECT tb_transaksi.kode_rekening, tb_jnspengeluaran.uraian, tb_transaksi.tgltransaksi, tb_transaksi.notransaksi, tb_transaksi.jumlah, tb_transaksi.carapembayaran, tb_transaksi.namatoko, tb_transaksi.alamattoko
+         FROM tb_transaksi JOIN tb_saldoawal ON  tb_saldoawal.id_saldo = tb_transaksi.id_saldo 
+         JOIN tb_jnspengeluaran ON tb_transaksi.kdjnspengeluaran = tb_jnspengeluaran.kdjnspengeluaran
+         WHERE tb_saldoawal.id_saldo = $id_saldo ")->result();
 
         $data['idsaldo'] = $this->db->query(" SELECT * FROM tb_saldoawal WHERE id_saldo = $id_saldo LIMIT 1")->result();
         $data['jumsisa'] = $this->db->query(" SELECT SUM(jumlahsaldosisa) as jumsis FROM tb_saldoawal WHERE id_saldo = $id_saldo")->result();
-        $data['jumtunai'] = $this->db->query(" SELECT SUM(tb_transaksi.jumlah) as tunai FROM tb_transaksi  JOIN tb_jnspengeluaran ON tb_transaksi.kdjnspengeluaran = tb_jnspengeluaran.kdjnspengeluaran JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi WHERE tb_transaksi.id_saldo = $id_saldo AND tb_transaksi.carapembayaran = 'Tunai' ")->result();
-        $data['jumnontunai'] = $this->db->query(" SELECT SUM(tb_transaksi.jumlah) as nontunai FROM tb_transaksi JOIN  tb_jnspengeluaran ON tb_transaksi.kdjnspengeluaran = tb_jnspengeluaran.kdjnspengeluaran JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi WHERE tb_transaksi.id_saldo = $id_saldo AND tb_transaksi.carapembayaran = 'Non-Tunai' ")->result();
+        $data['jumtunai'] = $this->db->query(" SELECT SUM(tb_transaksi.jumlah) as tunai FROM tb_transaksi  JOIN tb_jnspengeluaran ON tb_transaksi.kdjnspengeluaran = tb_jnspengeluaran.kdjnspengeluaran  WHERE tb_transaksi.id_saldo = $id_saldo AND tb_transaksi.carapembayaran = 'Tunai' ")->result();
+        $data['jumnontunai'] = $this->db->query(" SELECT SUM(tb_transaksi.jumlah) as nontunai FROM tb_transaksi JOIN  tb_jnspengeluaran ON tb_transaksi.kdjnspengeluaran = tb_jnspengeluaran.kdjnspengeluaran  WHERE tb_transaksi.id_saldo = $id_saldo AND tb_transaksi.carapembayaran = 'Non-Tunai' ")->result();
                
         $data['jumppn'] = $this->db->query(" SELECT SUM(ppn) as ppn FROM tb_pajak  WHERE id_saldo = $id_saldo  ")->result();
         $data['jumpph21'] = $this->db->query(" SELECT SUM(pph21) as pph21 FROM tb_pajak WHERE id_saldo = $id_saldo  ")->result();
@@ -543,7 +548,8 @@ $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
     {
         $tanggal_awal = $this->input->post('tanggal_awal');
         $tanggal_akhir = $this->input->post('tanggal_akhir');
-
+        $data['inputan1'] = [$tanggal_awal];
+        $data['inputan2'] = [$tanggal_akhir];
         $data['laporan_transaksi'] = $this->db->query("SELECT * FROM tb_transaksi WHERE tgltransaksi BETWEEN '$tanggal_awal' AND '$tanggal_akhir' ")->result();
         $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
         $this->load->view('laporan/cetak_laporan_transaksi', $data);
@@ -581,7 +587,8 @@ $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
     {
         $tanggal_awal = $this->input->post('tanggal_awal');
         $tanggal_akhir = $this->input->post('tanggal_akhir');
-
+        $data['inputan1'] = [$tanggal_awal];
+        $data['inputan2'] = [$tanggal_akhir];
         $data['laporan_saldo'] = $this->db->query("SELECT * FROM tb_saldoawal WHERE tglsaldomasuk BETWEEN '$tanggal_awal' AND '$tanggal_akhir' ")->result();
         $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
         $this->load->view('laporan/cetak_laporan_saldo', $data);
@@ -620,8 +627,10 @@ $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
     {
         $tanggal_awal = $this->input->post('tanggal_awal');
         $tanggal_akhir = $this->input->post('tanggal_akhir');
-
+        $data['inputan1'] = [$tanggal_awal];
+        $data['inputan2'] = [$tanggal_akhir];
         $data['laporan_pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE tgldok BETWEEN '$tanggal_awal' AND '$tanggal_akhir' ")->result();
+        
         $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
         $this->load->view('laporan/cetak_laporan_pajak', $data);
     }

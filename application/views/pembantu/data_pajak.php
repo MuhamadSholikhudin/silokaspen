@@ -1,7 +1,7 @@
 <div class="right_col" role="main" style="min-height: 4546px;">
     <div class>
         <div class="clearfix"></div>
-        
+
         <div class="bg-white p-3">
             <h3 class="text-center">Data Pajak</h3>
             <!-- <a href="<?= base_url('pembantu/pajak') ?>" class="btn btn-primary">Tambah Pajak</a> -->
@@ -50,9 +50,10 @@
                                             <!-- <a class="btn btn-danger text-right" href="<?= base_url('pembantu/hapus_pajak/' . $paj->nodok) ?>"> <i class="fa fa-remove"></i> Hapus</a> -->
 
                                             <?php if ($paj->status == 0) { ?>
-                                                <a href="<?= base_url('pembantu/edit_pajak/') .  $paj->nodok  ?>" class="btn btn-success text-right" > <i class="fa fa-edit"></i> Edit</a>
+                                                <a href="<?= base_url('pembantu/edit_pajak/') .  $paj->nodok  ?>" class="btn btn-success text-left"> <i class="fa fa-edit"></i> Edit</a>
+                                                <a href="<?= base_url('pembantu/hapus_pajak/') .  $paj->nodok  ?>" class="btn btn-danger text-left"> <i class="fa fa-trash"></i> Hapus</a>
                                             <?php   } else { ?>
-                                                <a class="btn btn-warning text-right" target="blank"> <i class="fa fa-print"></i> Cetak</a>
+                                                <a href="<?= base_url('pembantu/cetak_pajak/') .  $paj->nodok  ?>" class="btn btn-warning text-left" target="blank"> <i class="fa fa-print"></i> Cetak</a>
                                             <?php  } ?>
                                         </td>
                                     </tr>

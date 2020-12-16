@@ -27,8 +27,6 @@
                                 <tr>
                                     <th scope="row"><?= $no++ ?></th>
                                     <td><a href="<?= base_url('kadin/laporan_bku/') . $sal->id_saldo ?>"> Laporan Buku Kas Umum Bulan
-
-
                                             <?php
                                             if ($sal->periodebulan == '01') {
                                                 echo  'Januari';

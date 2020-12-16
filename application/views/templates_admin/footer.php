@@ -92,12 +92,12 @@
                 $('#kode_rekening').val("-");
 
               } else if (cara == 'Non-Tunai') {
-                var id = document.getElementById("kdjnspengeluaran").value;
+                var kdjnspengeluaran = document.getElementById("kdjnspengeluaran").value;
                 $.ajax({
                   url: "<?php echo site_url('pembantu/get_sub_kd_pengeluaran'); ?>",
                   method: "POST",
                   data: {
-                    id: id
+                    kdjnspengeluaran: kdjnspengeluaran
                   },
                   async: true,
                   dataType: 'json',

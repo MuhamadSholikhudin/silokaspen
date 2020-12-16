@@ -20,7 +20,7 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="notransaksi">Nomer Transaksi <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="notransaksi" required="required" name="notransaksi" value="<?= $tran->notransaksi ?>" class="form-control ">
+                                        <input type="text" id="notransaksi" required="required" name="notransaksi" value="<?= $tran->notransaksi ?>" class="form-control " readonly>
                                         <input type="hidden" id="notransaksilama" required="required" name="notransaksilama" value="<?= $tran->notransaksi ?>" class="form-control ">
                                     </div>
                                 </div>
@@ -100,13 +100,20 @@
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <select class="form-control" id="carapembayaran" name="carapembayaran">
-                                            <option value="Non-Tunai">Non-Tunai</option>
-                                            <option value="Tunai"> Tunai</option>
+
+                                            
+                                            <?php foreach ($carpem as $car) : ?>
+                                                <?php if ($car == $tran->carapembayaran) : ?>
+                                                    <option value="<?= $car ?>" selected> <?= $car ?> </option>
+                                                <?php else : ?>
+                                                    <option value="<?= $car ?>"> <?= $car ?> </option>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
                                         </select>
                                     </div>
                                 </div>
 
-                                
+
 
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="saldomasuk">jumlah<span class="required">*</span>
@@ -131,7 +138,7 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="kode_rekening">Kode Rekening <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="kode_rekening" required="required" name="kode_rekening" value="<?= $tran->kode_rekening ?>" class="form-control ">
+                                        <input type="text" id="kode_rekening" required="required" name="kode_rekening" value="<?= $tran->kode_rekening ?>" class="form-control " readonly>
                                     </div>
                                 </div>
 

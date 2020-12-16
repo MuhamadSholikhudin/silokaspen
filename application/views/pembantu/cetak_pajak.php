@@ -69,13 +69,14 @@
                                                 </tr>
                                                 <td>Id Pengeluaran / Uraian</td>
                                                 <td>
-                                                    <?php 
-                                        $ur = $this->db->query(" SELECT tb_jnspengeluaran.kdjnspengeluaran as kdjns, tb_jnspengeluaran.uraian as uraian FROM tb_jnspengeluaran JOIN tb_transaksi ON tb_jnspengeluaran.kdjnspengeluaran = tb_transaksi.kdjnspengeluaran   WHERE tb_transaksi.notransaksi = '$paj->notransaksi' AND status < 1 ");
-                                        $klx = $ur->row();
-                                        $urar = $klx->uraian;
-                                        $kdj = $klx->kdjns;
-                                        echo $kdj." / ". $urar;
+                                                    <?php
+                                                    $ur = $this->db->query(" SELECT tb_jnspengeluaran.kdjnspengeluaran as kdjns, tb_jnspengeluaran.uraian as uraian FROM tb_jnspengeluaran JOIN tb_transaksi ON tb_jnspengeluaran.kdjnspengeluaran = tb_transaksi.kdjnspengeluaran  WHERE tb_transaksi.notransaksi = '$paj->notransaksi' ");
+                                                    $klx = $ur->row();
+                                                    $urir = $klx->uraian;
+                                                    $kdj = $klx->kdjns;
+
                                                     ?>
+                                                    <?= $kdj." / ". $urir ?>
                                                 </td>
                                                 </tr>
                                                 <tr>

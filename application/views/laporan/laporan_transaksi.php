@@ -15,7 +15,7 @@
             <div class="col-md-4">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Form Berdasarkan Tanggal</h2>
+                        <h2>Form Pencaraian</h2>
 
                         <div class="clearfix"></div>
                     </div>
@@ -69,13 +69,10 @@
                                 </form>
                     </div>
                 </div>
-
-
-
-
-
             </div>
 
+
+<!--             
             <div class="col-md-4">
                 <div class="x_panel">
                     <div class="x_title">
@@ -184,12 +181,8 @@
                     </div>
                 </div>
 
-
-
-
-
             </div>
-        </div>
+        </div> -->
 
 
     </div>

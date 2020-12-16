@@ -1,13 +1,7 @@
 <div class="right_col" role="main" style="min-height: 4546px;">
     <div class>
         <div class="clearfix"></div>
-        <?php
-        function rupiah($angka)
-        {
-            $hasil_rupiah = "Rp " . number_format($angka, 2, ',', '.');
-            return $hasil_rupiah;
-        }
-        ?>
+
         <div class="row">
             <div class="x_panel">
                 <div class="x_title">
@@ -115,12 +109,27 @@
                                                     <td></td>
                                                     <td><?= $lap->namatoko ?></td>
                                                     <td><?= $lap->alamattoko ?></td>
-                                                    <td><?= rupiah($lap->ppn) ?></td>
-                                                    <td><?= rupiah($lap->pph21) ?></td>
-                                                    <td><?= rupiah($lap->pph22) ?></td>
 
-                                                    <td><?= rupiah($lap->pph23) ?></td>
-                                                    <td><?= rupiah($lap->pphlain) ?></td>
+
+
+                                                    <?php $cekpaj = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON tb_pajak.notransaksi = tb_transaksi.notransaksi  WHERE tb_pajak.notransaksi = '$lap->notransaksi' ");
+                                                    $lapp = $cekpaj->result();
+                                                    if ($cekpaj->num_rows() > 0) { ?>
+                                                        <?php foreach ($lapp as $lapp) : ?>
+                                                            <td><?= rupiah($lapp->ppn) ?></td>
+                                                            <td><?= rupiah($lapp->pph21) ?></td>
+                                                            <td><?= rupiah($lapp->pph22) ?></td>
+                                                            <td><?= rupiah($lapp->pph23) ?></td>
+                                                            <td><?= rupiah($lapp->pphlain) ?></td>
+                                                        <?php endforeach; ?>
+                                                    <?php } elseif ($cekpaj->num_rows() < 1) { ?>
+                                                        <td>Rp. 0,00</td>
+                                                        <td>Rp. 0,00</td>
+                                                        <td>Rp. 0,00</td>
+                                                        <td>Rp. 0,00</td>
+                                                        <td>Rp. 0,00</td>
+
+                                                    <?php } ?>
                                                 </tr>
                                             <?php endforeach; ?>
 
@@ -139,11 +148,22 @@
                                                     endforeach;    ?></td>
                                                 <td></td>
                                                 <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+
+                                                <td><?php foreach ($jumppn as $jum) :
+                                                        echo  rupiah($jum->ppn);
+                                                    endforeach;    ?></td>
+                                                <td><?php foreach ($jumpph21 as $jum) :
+                                                        echo  rupiah($jum->pph21);
+                                                    endforeach;    ?></td>
+                                                <td><?php foreach ($jumpph22 as $jum) :
+                                                        echo  rupiah($jum->pph22);
+                                                    endforeach;    ?></td>
+                                                <td><?php foreach ($jumpph23 as $jum) :
+                                                        echo  rupiah($jum->pph23);
+                                                    endforeach;    ?></td>
+                                                <td><?php foreach ($jumpphlain as $jum) :
+                                                        echo  rupiah($jum->pphlain);
+                                                    endforeach;    ?></td>
                                             </tr>
 
                                             <tr>
@@ -259,11 +279,25 @@
                                             <td></td>
                                             <td><?= $lap->namatoko ?></td>
                                             <td><?= $lap->alamattoko ?></td>
-                                            <td><?= rupiah($lap->ppn) ?></td>
-                                            <td><?= rupiah($lap->pph21) ?></td>
-                                            <td><?= rupiah($lap->pph22) ?></td>
-                                            <td><?= rupiah($lap->pph23) ?></td>
-                                            <td><?= rupiah($lap->pphlain) ?></td>
+
+                                            <?php $cekpaj = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON tb_pajak.notransaksi = tb_transaksi.notransaksi  WHERE tb_pajak.notransaksi = '$lap->notransaksi' ");
+                                            $lapp = $cekpaj->result();
+                                            if ($cekpaj->num_rows() > 0) { ?>
+                                                <?php foreach ($lapp as $lapp) : ?>
+                                                    <td><?= rupiah($lapp->ppn) ?></td>
+                                                    <td><?= rupiah($lapp->pph21) ?></td>
+                                                    <td><?= rupiah($lapp->pph22) ?></td>
+                                                    <td><?= rupiah($lapp->pph23) ?></td>
+                                                    <td><?= rupiah($lapp->pphlain) ?></td>
+                                                <?php endforeach; ?>
+                                            <?php } elseif ($cekpaj->num_rows() < 1) { ?>
+                                                <td>Rp. 0,00</td>
+                                                <td>Rp. 0,00</td>
+                                                <td>Rp. 0,00</td>
+                                                <td>Rp. 0,00</td>
+                                                <td>Rp. 0,00</td>
+
+                                            <?php } ?>
                                         </tr>
                                     <?php endforeach; ?>
 
@@ -282,11 +316,22 @@
                                             endforeach;    ?></td>
                                         <td></td>
                                         <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+
+                                        <td><?php foreach ($jumppn as $jum) :
+                                                echo  rupiah($jum->ppn);
+                                            endforeach;    ?></td>
+                                        <td><?php foreach ($jumpph21 as $jum) :
+                                                echo  rupiah($jum->pph21);
+                                            endforeach;    ?></td>
+                                        <td><?php foreach ($jumpph22 as $jum) :
+                                                echo  rupiah($jum->pph22);
+                                            endforeach;    ?></td>
+                                        <td><?php foreach ($jumpph23 as $jum) :
+                                                echo  rupiah($jum->pph23);
+                                            endforeach;    ?></td>
+                                        <td><?php foreach ($jumpphlain as $jum) :
+                                                echo  rupiah($jum->pphlain);
+                                            endforeach;    ?></td>
                                     </tr>
                                     <tr>
                                         <td colspan="5" class="text-center"> Saldo/disetor Bendahara pengeluaran</td>

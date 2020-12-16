@@ -15,7 +15,15 @@
         <h3 class="mt-4" style="text-align: center;">
             LAPORAN DATA TRANSANSI BELANJAN PENGELUARAN <br>
             DINAS PENDIDIKAN, PEMUDA DAN OLAHRAGA PADA <br>
-            PERIODE TANGGAL AWAL SAMPAI TANGGAL AKHIR <br>
+            PERIODE
+            <?php foreach ($inputan1 as $inpt) : ?>
+                <?= $inpt ?>
+            <?php endforeach; ?>
+            SAMPAI
+            <?php foreach ($inputan2 as $inpt2) : ?>
+                <?= $inpt2 ?>
+            <?php endforeach; ?>
+            <br>
         </h3>
 
         <p>
@@ -94,7 +102,9 @@
         </div>
 
     </div>
-
+    <script>
+        window.print()
+    </script>
     <?php if ($this->session->userdata('hahkakses') == 'bendahara') { ?>
         <script>
             window.open('<?= base_url('bendahara/laporan_transaksi') ?>', '_blank');
@@ -104,9 +114,7 @@
             window.open('<?= base_url('bendahara/laporan_transaksi') ?>', '_blank');
         </script>
     <?php } ?>
-    <script>
-        window.print()
-    </script>
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 

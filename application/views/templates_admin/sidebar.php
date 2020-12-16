@@ -135,17 +135,17 @@
                   </li>
                   <li class=""><a><i class="fa fa-file"></i> Laporan <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none;">
-                      <li><a href="<?= base_url('bendahara/bku') ?>">Laporan BKU</a></li>
-                      <li><a href="<?= base_url('bendahara/laporan_saldo') ?>">Laporan Data Saldo</a></li>
-                      <li><a href="<?= base_url('bendahara/laporan_transaksi') ?>">Laporan Transaksi</a></li>
-                      <li><a href="<?= base_url('bendahara/laporan_pajak') ?>">Laporan Pajak</a></li>
+                      <li><a href="<?= base_url('kadin/bku') ?>">Laporan BKU</a></li>
+                      <li><a href="<?= base_url('kadin/laporan_saldo') ?>">Laporan Data Saldo</a></li>
+                      <li><a href="<?= base_url('kadin/laporan_transaksi') ?>">Laporan Transaksi</a></li>
+                      <li><a href="<?= base_url('kadin/laporan_pajak') ?>">Laporan Pajak</a></li>
                     </ul>
                   </li>
-                  <li>
+                  <!-- <li>
                     <a href="<?= base_url('kadin/bku') ?>">
                       <i class="fa fa-file"></i> Laporan BKU
                     </a>
-                  </li>
+                  </li> -->
                 <?php } ?>
               </ul>
             </div>

@@ -15,7 +15,15 @@
         <h3 class="mt-4" style="text-align: center;">
             LAPORAN DATA PAJAK BELANJA PENGELUARAN <br>
             DINAS PENDIDIKAN, PEMUDA DAN OLAHRAGA PADA <br>
-            PERIODE TANGGAL AWAL SAMPAI TANGGAL AKHIR <br>
+            PERIODE
+            <?php foreach ($inputan1 as $inpt) : ?>
+                <?= $inpt ?>
+            <?php endforeach; ?>
+            SAMPAI
+            <?php foreach ($inputan2 as $inpt2) : ?>
+                <?= $inpt2 ?>
+            <?php endforeach; ?>
+            <br>
         </h3>
 
         <p>
