@@ -1,13 +1,6 @@
 <div class="right_col" role="main" style="min-height: 4546px;">
     <div class>
-        <?php
-        function rupiah($angka)
-        {
-
-            $hasil_rupiah = "Rp " . number_format($angka, 2, ',', '.');
-            return $hasil_rupiah;
-        }
-        ?>
+        
 
         <div class="clearfix"></div>
 
@@ -42,7 +35,13 @@
                                 </td>
                                 <td><?= $tran->tgltransaksi ?></td>
                                 <td><?= $tran->id_saldo ?></td>
-                                <td><?= $tran->kdjnspengeluaran ?></td>
+                                <td><?= $tran->kdjnspengeluaran ?>
+                                <?php
+                                    $jnsp = $this->db->query("SELECT * FROM tb_jnspengeluaran WHERE kdjnspengeluaran = '$tran->kdjnspengeluaran' ");
+                                $psj = $jnsp->row();
+                                echo $psj->uraian;
+   ?>
+                            </td>
                                 <td><?= rupiah($tran->jumlah)  ?></td>
                                 <td>
                                     <?php

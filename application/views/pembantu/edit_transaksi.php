@@ -106,17 +106,10 @@
                                     </div>
                                 </div>
 
+                                
+
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="jumlah">Jumlah <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <input type="hidden" id="jumlah" min="0" name="jumlahlama" value="<?= $tran->jumlah ?>" required="required" class="form-control">
-                                        <input type="text" id="jumlah" min="0" name="jumlahbaru" value="<?= $tran->jumlah ?>" required="required" class="form-control">
-                                    </div>
-                                </div>
-<!-- 
-                                <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="saldomasuk">Saldo Masuk <span class="required">*</span>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="saldomasuk">jumlah<span class="required">*</span>
                                     </label>
 
                                     <div class="col-md-6 col-sm-6 ">
@@ -125,13 +118,14 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp.</span>
                                             </div>
-                                            <input type="text" id="jumlah1" name="saldomasuk" class="form-control">
+                                            <input type="text" id="saldomasuk1" name="jumlahbaru" value="<?= rupiah1($tran->jumlah) ?>" class="form-control">
+                                            <input type="hidden" id="jumlah" min="0" name="jumlahlama" value="<?= $tran->jumlah ?>" required="required" class="form-control">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">,00</span>
                                             </div>
                                         </div>
                                     </div>
-                                </div> -->
+                                </div>
 
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="kode_rekening">Kode Rekening <span class="required">*</span>

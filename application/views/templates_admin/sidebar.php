@@ -2,7 +2,21 @@
   <div class="container body">
     <div class="main_container kiri">
       <?= $this->session->flashdata('message'); ?>
+      <?php
+      function rupiah($angka)
+      {
 
+        $hasil_rupiah = "Rp " . number_format($angka, 2, ',', '.');
+        return $hasil_rupiah;
+      }
+
+      function rupiah1($angka)
+      {
+
+        $hasil_rupiah = number_format($angka, 0, ',', '.');
+        return $hasil_rupiah;
+      }
+      ?>
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view kiri">
           <div class="navbar nav_title kiri_pojok" style="border: 0;">
@@ -32,6 +46,7 @@
               <h3>General</h3>
               <ul class="nav side-menu">
                 <?php if ($this->session->userdata('hakakses') == 'pembantu') { ?>
+
                   <li>
                     <a href="<?= base_url('pembantu/index') ?>">
                       <i class="fa fa-home"></i> Dashboard
@@ -48,9 +63,23 @@
                       <i class="fa fa-indent"></i> Pajak
                     </a>
                   </li>
+                  <li class="bg-light text-dark">
+                    <a class="bg-light text-dark">
+
+                      <?php
+                      $saldolama = $this->db->query(" SELECT id_saldo, jumlahsaldosisa FROM tb_saldoawal ORDER BY tglsaldosisa DESC LIMIT 1");
+                      $row = $saldolama->row();
+                      $li = $row->id_saldo;
+                      $lo = $row->jumlahsaldosisa;
+                      ?>
+
+                      <?= rupiah($lo) ?>
+                    </a>
+                  </li>
 
 
                 <?php } elseif ($this->session->userdata('hakakses') == 'bendahara') { ?>
+
                   <li>
                     <a href="<?= base_url('bendahara/index') ?>">
                       <i class="fa fa-home"></i> Dashboard
@@ -72,12 +101,7 @@
                     </a>
                   </li>
                   <li>
-                    <!--                     
-                  <li>
-                    <a href="<?= base_url('bendahara/bku') ?>">
-                      <i class="fa fa-file"></i> Laporan BKU
-                    </a>
-                  </li> -->
+
 
 
 
@@ -89,13 +113,34 @@
                       <li><a href="<?= base_url('bendahara/laporan_pajak') ?>">Laporan Pajak</a></li>
                     </ul>
                   </li>
+
+                  <li class="bg-success text-dark">
+                    <a class="bg-light text-dark">
+
+                      <?php
+                      $saldolama = $this->db->query(" SELECT id_saldo, jumlahsaldosisa FROM tb_saldoawal ORDER BY tglsaldosisa DESC LIMIT 1");
+                      $row = $saldolama->row();
+                      $li = $row->id_saldo;
+                      $lo = $row->jumlahsaldosisa;
+                      ?>
+
+                      <?= rupiah($lo) ?>
+                    </a>
+                  </li>
                 <?php } elseif ($this->session->userdata('hakakses') == 'kadin') { ?>
                   <li>
                     <a href="<?= base_url('kadin/index') ?>">
                       <i class="fa fa-home"></i> Dashboard
                     </a>
                   </li>
-
+                  <li class=""><a><i class="fa fa-file"></i> Laporan <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: none;">
+                      <li><a href="<?= base_url('bendahara/bku') ?>">Laporan BKU</a></li>
+                      <li><a href="<?= base_url('bendahara/laporan_saldo') ?>">Laporan Data Saldo</a></li>
+                      <li><a href="<?= base_url('bendahara/laporan_transaksi') ?>">Laporan Transaksi</a></li>
+                      <li><a href="<?= base_url('bendahara/laporan_pajak') ?>">Laporan Pajak</a></li>
+                    </ul>
+                  </li>
                   <li>
                     <a href="<?= base_url('kadin/bku') ?>">
                       <i class="fa fa-file"></i> Laporan BKU

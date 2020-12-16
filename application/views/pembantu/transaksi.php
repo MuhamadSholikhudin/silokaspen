@@ -57,7 +57,7 @@
         </div>
         <?php
 
-        $cektran = $this->db->query(" SELECT * FROM tb_transaksi WHERE notransaksi NOT IN (SELECT notransaksi FROM tb_pajak)")->num_rows();
+        // $cektran = $this->db->query(" SELECT * FROM tb_transaksi WHERE notransaksi NOT IN (SELECT notransaksi FROM tb_pajak)")->num_rows();
         $ceksal = $this->db->query(" SELECT * FROM tb_saldoawal WHERE status = 0 ")->num_rows();
 
         if ($ceksal < 1) {
@@ -78,26 +78,9 @@
             </div>
 
         <?php
-        } elseif ($cektran > 0) { ?>
+        } elseif ($ceksal > 0) { ?>
 
-            <div class="row">
-                <div class="col-md-12 col-sm-12 ">
-                    <div class="x_panel">
-                        <div class="x_title">
-                            <h2>Form Input Data Transaksi</h2>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content text-center">
-                            <h1>Maaf transaksi Sebelumnya Pajaknya belum diisi !!!</h1>
-                            <a href="<?= base_url('pembantu/pajak') ?>" class="btn btn-primary">Isi Pajak</a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        <?php } elseif ($cektran < 1) { ?>
-
+        
             <div class="row">
                 <div class="col-md-12 col-sm-12 ">
                     <div class="x_panel">
@@ -188,11 +171,22 @@
                                         </select>
                                     </div>
                                 </div>
+                                
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="jumlah">Jumlah <span class="required">*</span>
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="saldomasuk">Jumlah <span class="required">*</span>
                                     </label>
-                                    <div class="col-md-6 col-sm-6 ">
-                                        <input type="number" id="jumlah1" min="0" name="jumlah" required="required" class="form-control">
+
+                                    <div class="col-md-6 col-sm-6">
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Rp.</span>
+                                            </div>
+                                            <input type="text" id="saldomasuk1" min="0" name="jumlah" required="required" class="form-control">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">,00</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="item form-group">

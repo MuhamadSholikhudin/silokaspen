@@ -1,12 +1,6 @@
 <div class="right_col" role="main" style="min-height: 4546px;">
     <div class>
-        <?php
-        function rupiah($angka)
-        {
-            $hasil_rupiah = "Rp " . number_format($angka, 2, ',', '.');
-            return $hasil_rupiah;
-        }
-        ?>
+        
 
         <div class="clearfix"></div>
 

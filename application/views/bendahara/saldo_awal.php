@@ -21,7 +21,7 @@
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="id_saldo">Id saldo <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 ">
-                                    <input type="text" id="id_saldo" name="id_saldo" value="<?= date('Ymd') ?>" class="form-control" required>
+                                    <input type="text" id="id_saldo" name="id_saldo" value="<?= date('Ymdi') ?>" class="form-control" required>
                                 </div>
                             </div>
                             <div class="item form-group">

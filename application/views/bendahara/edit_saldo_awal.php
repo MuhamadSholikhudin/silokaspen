@@ -1,12 +1,6 @@
 <div class="right_col" role="main" style="min-height: 4546px;">
     <div class>
-        <?php
-        function rupiah($angka)
-        {
-            $hasil_rupiah = number_format($angka, 0, ',', '.');
-            return $hasil_rupiah;
-        }
-        ?>
+      
 
 
         <div class="clearfix"></div>
@@ -165,7 +159,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Rp.</span>
                                             </div>
-                                            <input type="text" id="saldomasuk1" name="saldomasukbaru" class="form-control" value="<?= rupiah($sal->saldomasuk) ?>">
+                                            <input type="text" id="saldomasuk1" name="saldomasukbaru" class="form-control" value="<?= rupiah1($sal->saldomasuk) ?>">
                                             <input type="hidden" id="saldomasuk" name="saldomasuklama" value="<?= $sal->saldomasuk ?>" required="true" class="form-control">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">,00</span>

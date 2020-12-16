@@ -116,7 +116,8 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
 
     public function input_pajak($notransaksi){
         $where = array('notransaksi' => $notransaksi);
-        $data['pajak'] = $this->Model_pajak->edit_pajak($where, 'tb_pajak')->result();
+        // $data['pajak'] = $this->db->query("SELECT * FROM tb_transaksi ")->result();
+        $data['transaksi'] = $this->Model_transaksi->edit_transaksi($where, 'tb_transaksi')->result();
 
       
         // $data['pajak'] = $this->Model_pajak->edit_pajak($where, 'tb_pajak')->result();
@@ -170,14 +171,14 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $kdjnspengeluaran = $this->input->post('kdjnspengeluaran');
         $kode_rekening = $this->input->post('kode_rekening');
         $carapembayaran = $this->input->post('carapembayaran');
-        $jumlah = $this->input->post('jumlah');
+        $jumlahmasuk = $this->input->post('jumlah');
         $namatoko = $this->input->post('namatoko');
         $alamattoko = $this->input->post('alamattoko');
         $sisa = $this->input->post('sisa');
 
         // $seli =  $sisa - ($sisa * 0.1);
 
-        
+        $jumlah = str_replace(".", "", $jumlahmasuk);
 
         $cari = $this->db->query("SELECT notransaksi FROM tb_transaksi WHERE notransaksi = '$notransaksi' LIMIT 1")->num_rows();
 if($notransaksi == '0'){
@@ -424,7 +425,8 @@ $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE nodok = '$nodokl
 
 
         $jumlahlama = $this->input->post('jumlahlama');
-        $jumlahbaru = $this->input->post('jumlahbaru');
+        $jumlah = $this->input->post('jumlahbaru');
+        $jumlahbaru = str_replace(".", "", $jumlah);
 
         $jumlahselisih = $jumlahbaru - $jumlahlama;
 
