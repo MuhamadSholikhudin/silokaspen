@@ -172,8 +172,8 @@ $this->load->view('templates_admin/header');
 
         $data['idsaldo'] = $this->db->query(" SELECT * FROM tb_saldoawal WHERE id_saldo = $id_saldo LIMIT 1")->result();
         $data['jumsisa'] = $this->db->query(" SELECT SUM(jumlahsaldosisa) as jumsis FROM tb_saldoawal WHERE id_saldo = $id_saldo")->result();
-        $data['jumtunai'] = $this->db->query(" SELECT SUM(tb_transaksi.jumlah) as tunai FROM tb_transaksi  JOIN tb_jnspengeluaran ON tb_transaksi.kdjnspengeluaran = tb_jnspengeluaran.kdjnspengeluaran JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi WHERE tb_transaksi.id_saldo = $id_saldo AND tb_transaksi.carapembayaran = 'Tunai' ")->result();
-        $data['jumnontunai'] = $this->db->query(" SELECT SUM(tb_transaksi.jumlah) as nontunai FROM tb_transaksi JOIN  tb_jnspengeluaran ON tb_transaksi.kdjnspengeluaran = tb_jnspengeluaran.kdjnspengeluaran JOIN tb_pajak ON tb_transaksi.notransaksi = tb_pajak.notransaksi WHERE tb_transaksi.id_saldo = $id_saldo AND tb_transaksi.carapembayaran = 'Non-Tunai' ")->result();
+        $data['jumtunai'] = $this->db->query(" SELECT SUM(tb_transaksi.jumlah) as tunai FROM tb_transaksi  JOIN tb_jnspengeluaran ON tb_transaksi.kdjnspengeluaran = tb_jnspengeluaran.kdjnspengeluaran  WHERE tb_transaksi.id_saldo = $id_saldo AND tb_transaksi.carapembayaran = 'Tunai' ")->result();
+        $data['jumnontunai'] = $this->db->query(" SELECT SUM(tb_transaksi.jumlah) as nontunai FROM tb_transaksi JOIN  tb_jnspengeluaran ON tb_transaksi.kdjnspengeluaran = tb_jnspengeluaran.kdjnspengeluaran  WHERE tb_transaksi.id_saldo = $id_saldo AND tb_transaksi.carapembayaran = 'Non-Tunai' ")->result();
 
         $data['jumppn'] = $this->db->query(" SELECT SUM(ppn) as ppn FROM tb_pajak  WHERE id_saldo = $id_saldo  ")->result();
         $data['jumpph21'] = $this->db->query(" SELECT SUM(pph21) as pph21 FROM tb_pajak WHERE id_saldo = $id_saldo  ")->result();

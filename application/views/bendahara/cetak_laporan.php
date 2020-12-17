@@ -128,11 +128,29 @@
                             <td></td>
                             <td><?= $lap->namatoko ?></td>
                             <td><?= $lap->alamattoko ?></td>
-                            <td><?= rupiah($lap->ppn) ?></td>
-                            <td><?= rupiah($lap->pph21) ?></td>
-                            <td><?= rupiah($lap->pph22) ?></td>
-                            <td><?= rupiah($lap->pph23) ?></td>
-                            <td><?= rupiah($lap->pphlain) ?></td>
+
+
+                            <?php $cekpaj = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON tb_pajak.notransaksi = tb_transaksi.notransaksi  WHERE tb_pajak.notransaksi = '$lap->notransaksi' ");
+                            $lapp = $cekpaj->result();
+                            if ($cekpaj->num_rows() > 0) { ?>
+                                <?php foreach ($lapp as $lapp) : ?>
+                                    <td><?= rupiah($lapp->ppn) ?></td>
+                                    <td><?= rupiah($lapp->pph21) ?></td>
+                                    <td><?= rupiah($lapp->pph22) ?></td>
+                                    <td><?= rupiah($lapp->pph23) ?></td>
+                                    <td><?= rupiah($lapp->pphlain) ?></td>
+                                <?php endforeach; ?>
+                            <?php } elseif ($cekpaj->num_rows() < 1) { ?>
+                                <td>Rp. 0,00</td>
+                                <td>Rp. 0,00</td>
+                                <td>Rp. 0,00</td>
+                                <td>Rp. 0,00</td>
+                                <td>Rp. 0,00</td>
+
+                            <?php
+                            }
+
+                            ?>
                             </tr>
                         <?php endforeach; ?>
 
