@@ -44,7 +44,6 @@
                     <th>Alamat Toko</th>
                     <th>Cara Pembayaran</th>
                     <th>Kode Rekening</th>
-                    <th>Id Username</th>
                 </tr>
             </thead>
             <tbody>
@@ -63,14 +62,7 @@
                         <td><?= $laptran->alamattoko ?></td>
                         <td><?= $laptran->carapembayaran ?></td>
                         <td><?= $laptran->kode_rekening ?></td>
-                        <td>
-                            <?php
-                            $urai = $this->db->query("SELECT * FROM tb_login WHERE idusername = '$laptran->idusername'");
-                            $ura = $urai->row();
-                             $eka = $ura->namalengkap;
-                            ?>
-                            <?= $eka ?>
-                        </td>
+                       
                     </tr>
                 <?php endforeach; ?>
 

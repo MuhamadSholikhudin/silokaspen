@@ -45,7 +45,6 @@
                     <th>Pph22</th>
                     <th>Pph23</th>
                     <th>Pph Lain</th>
-                    <th>Id Username</th>
                 </tr>
             </thead>
             <tbody>
@@ -65,14 +64,7 @@
                         <td><?= $lappaj->pph22 ?></td>
                         <td><?= $lappaj->pph23 ?></td>
                         <td><?= $lappaj->pphlain ?></td>
-                        <td>
-                            <?php
-                            $urai = $this->db->query("SELECT * FROM tb_login WHERE idusername = '$lappaj->idusername'");
-                            $ura = $urai->row();
-                            $eka = $ura->namalengkap;
-                            ?>
-                            <?= $eka ?>
-                        </td>
+                        
                     </tr>
                 <?php endforeach; ?>
 
