@@ -158,9 +158,7 @@
                                             <span class="input-group-text">Rp.</span>
                                         </div>
                                         <input type="text" id="saldomasuk1" name="saldomasuk" class="form-control">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text">,00</span>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>

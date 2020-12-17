@@ -127,9 +127,7 @@
                                             </div>
                                             <input type="text" id="saldomasuk1" name="jumlahbaru" value="<?= rupiah1($tran->jumlah) ?>" class="form-control">
                                             <input type="hidden" id="jumlah" min="0" name="jumlahlama" value="<?= $tran->jumlah ?>" required="required" class="form-control">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">,00</span>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>

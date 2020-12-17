@@ -47,20 +47,20 @@
                                     <?php
                                     $ur = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON tb_pajak.notransaksi = tb_transaksi.notransaksi   WHERE tb_transaksi.notransaksi = '$tran->notransaksi' AND  tb_transaksi.status < 1 ")->num_rows();
                                     $ir = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON tb_pajak.notransaksi = tb_transaksi.notransaksi   WHERE tb_transaksi.notransaksi = '$tran->notransaksi' AND  tb_transaksi.status > 0 ")->num_rows();
+                                    $or = $this->db->query("SELECT * FROM tb_transaksi JOIN tb_saldoawal ON tb_saldoawal.id_saldo = tb_transaksi.id_saldo WHERE tb_transaksi.notransaksi = '$tran->notransaksi' AND tb_transaksi.status > 0 ")->num_rows();
    
                                     // $kdj = $klx->kdjns; 
                                     if ($ir > 0) { ?>
                                         <button class="btn btn-dark text-right" > <i class="fa fa-check-square-o"></i> Di Acc</button>
 
-                                    <?php } elseif ($ur > 0) {
-                                        $pr = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON tb_pajak.notransaksi = tb_transaksi.notransaksi   WHERE tb_transaksi.notransaksi = '$tran->notransaksi' AND  tb_transaksi.status < 1 ");
-                                        $pj = $pr->row();
-                                        $urar = $pj->nodok;                                        
-                                        ?>
-                                        <a class="btn btn-success text-right"  href="<?= base_url('pembantu/edit_pajak/' . $urar) ?>"> <i class="fa fa-edit"></i> Edit Pajak</a>
-                                    <?php } elseif ($ur < 1) { ?>
+                                    <?php }elseif($or > 0){      ?>
+                                        <button class="btn btn-dark text-right" > <i class="fa fa-check-square-o"></i> Di Acc</button>
+
+                                    <?php  }elseif ($ur < 1) { ?>
                                         <a class="btn btn-primary text-right"  href="<?= base_url('pembantu/input_pajak/' . $tran->notransaksi) ?>"> <i class="fa fa-pencil"></i> Input Pajak</a>
-                                    <?php }  ?>
+                                    <?php }elseif ($ur > 0) { ?>
+
+<?php } ?>
 
                                     
 

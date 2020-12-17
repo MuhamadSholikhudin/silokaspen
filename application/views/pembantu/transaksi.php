@@ -183,9 +183,7 @@
                                                 <span class="input-group-text">Rp.</span>
                                             </div>
                                             <input type="text" id="saldomasuk1" min="0" name="jumlah" required="required" class="form-control">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">,00</span>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>

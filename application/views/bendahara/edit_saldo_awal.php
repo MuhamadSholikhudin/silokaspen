@@ -161,9 +161,7 @@
                                             </div>
                                             <input type="text" id="saldomasuk1" name="saldomasukbaru" class="form-control" value="<?= rupiah1($sal->saldomasuk) ?>">
                                             <input type="hidden" id="saldomasuk" name="saldomasuklama" value="<?= $sal->saldomasuk ?>" required="true" class="form-control">
-                                            <div class="input-group-append">
-                                                <span class="input-group-text">,00</span>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
