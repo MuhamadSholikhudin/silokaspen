@@ -69,8 +69,9 @@
                             <?php
                             $urai = $this->db->query("SELECT * FROM tb_login WHERE idusername = '$lappaj->idusername'");
                             $ura = $urai->row();
-                            echo $ura->namalengkap;
+                            $eka = $ura->namalengkap;
                             ?>
+                            <?= $eka ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

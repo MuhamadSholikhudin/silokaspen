@@ -4,7 +4,7 @@
 
         <div class="bg-white p-3">
             <h3 class="text-center">Data Pajak</h3>
-            <!-- <a href="<?= base_url('pembantu/pajak') ?>" class="btn btn-primary">Tambah Pajak</a> -->
+            <a href="<?= base_url('pembantu/pajak') ?>" class="btn btn-primary">Tambah Pajak</a>
             <hr>
             <div class="row">
                 <div class="col-md-12 col-sm-12 table-responsive" border="1">

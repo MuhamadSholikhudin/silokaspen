@@ -28,8 +28,8 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
 
     public function data_pajak()
     {
-        // $data['pajak'] = $this->Model_pajak->tampil_data()->result();
-        // $data['id_saldo'] = $this->db->query("SELECT id_saldo FROM tb_saldoawal ")->result();
+//         $data['pajak'] = $this->Model_pajak->tampil_data()->result();
+//         $data['id_saldo'] = $this->db->query("SELECT id_saldo FROM tb_saldoawal ")->result();
 // $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON tb_pajak.notransaksi = tb_transaksi.notransaksi")->result();
         $data['pajak'] = $this->db->query("SELECT * FROM tb_pajak JOIN tb_transaksi ON tb_pajak.notransaksi = tb_transaksi.notransaksi")->result();
 
@@ -41,6 +41,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
 
     public function pajak()
     {
+        
         $data['kdjnspengeluaran'] = $this->Model_jnspengeluaran->tampil_data()->result();
         $data['transaksi'] = $this->db->query("SELECT * FROM tb_transaksi WHERE notransaksi NOT IN(SELECT notransaksi FROM tb_pajak)")->result();
 
