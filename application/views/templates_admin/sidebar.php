@@ -63,17 +63,20 @@
                       <i class="fa fa-indent"></i> Pajak
                     </a>
                   </li>
-                  <li class="bg-light text-dark">
-                    <a class="bg-light text-dark">
+                  <li class="bg-light text-dark text-center">
 
+                    <a class="bg-light text-dark">
+                      Sisa Saldo Hari Ini
                       <?php
                       $saldolama = $this->db->query(" SELECT id_saldo, jumlahsaldosisa FROM tb_saldoawal ORDER BY tglsaldosisa DESC LIMIT 1");
                       $row = $saldolama->row();
                       $li = $row->id_saldo;
                       $lo = $row->jumlahsaldosisa;
                       ?>
+                      <h4>
 
-                      <?= rupiah($lo) ?>
+                        <?= rupiah($lo) ?>
+                      </h4>
                     </a>
                   </li>
 
@@ -114,17 +117,20 @@
                     </ul>
                   </li>
 
-                  <li class="bg-success text-dark">
-                    <a class="bg-light text-dark">
+                  <li class="bg-white text-dark text-center">
 
+                    <a class="bg-light text-dark">
+                      Sisa Saldo Hari Ini
                       <?php
                       $saldolama = $this->db->query(" SELECT id_saldo, jumlahsaldosisa FROM tb_saldoawal ORDER BY tglsaldosisa DESC LIMIT 1");
                       $row = $saldolama->row();
                       $li = $row->id_saldo;
                       $lo = $row->jumlahsaldosisa;
                       ?>
+                      <h4>
 
-                      <?= rupiah($lo) ?>
+                        <?= rupiah($lo) ?>
+                      </h4>
                     </a>
                   </li>
                 <?php } elseif ($this->session->userdata('hakakses') == 'kadin') { ?>
