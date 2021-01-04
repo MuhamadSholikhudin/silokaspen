@@ -93,7 +93,6 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
             redirect('pembantu/data_pajak/');
         } elseif ($filter == 0) {
 
-
             $where = ['nodok' => $nodok];
                     $old_gambar = $tg;
                     if ($old_gambar != 'default.jpg') {
@@ -109,7 +108,6 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
             ];
             $this->Model_saldoawal->update_datat($wheret, $datat, 'tb_saldoawal');
 
-            
             $this->Model_pajak->hapus_data($where, 'tb_pajak');
             redirect('pembantu/data_pajak/');
         }

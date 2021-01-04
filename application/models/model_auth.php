@@ -9,7 +9,7 @@ class Model_auth extends CI_Model{
                             ->where('password', $password)
                             ->where('status', 'Aktif')
                             ->limit(1)
-                            ->get('tb_login');
+                            ->get('tb_user');
         if($result->num_rows() > 0){
             return $result->row();
         }else{

@@ -15,7 +15,7 @@
                     </div>
                     <div class="x_content">
                         <br>
-                        <form id="demo-form2" action="<?= base_url('bendahara/edit_tb_login_aksi') ?>" method="POST" enctype="multipart/form-data" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                        <form id="demo-form2" action="<?= base_url('bendahara/edit_tb_user_aksi') ?>" method="POST" enctype="multipart/form-data" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
                             <?php foreach ($user as $jns) : ?>
 
                                 <div class="item form-group">

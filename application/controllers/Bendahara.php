@@ -139,8 +139,8 @@ $this->load->view('templates_admin/header');
         $data['jumpph23'] = $this->db->query(" SELECT SUM(pph23) as pph23 FROM tb_pajak WHERE id_saldo = $id_saldo  ")->result();
         $data['jumpphlain'] = $this->db->query(" SELECT SUM(pphlain) as pphlain FROM tb_pajak WHERE id_saldo = $id_saldo  ")->result();
 
-        $data['bendahara'] = $this->db->query(" SELECT * FROM tb_login WHERE hakakses = 'bendahara' ")->result();
-$data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' LIMIT 1")->result();        
+        $data['bendahara'] = $this->db->query(" SELECT * FROM tb_user WHERE hakakses = 'bendahara' ")->result();
+$data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' LIMIT 1")->result();        
         
 
 $this->load->view('templates_admin/header');
@@ -181,9 +181,9 @@ $this->load->view('templates_admin/header');
         $data['jumpph23'] = $this->db->query(" SELECT SUM(pph23) as pph23 FROM tb_pajak WHERE id_saldo = $id_saldo  ")->result();
         $data['jumpphlain'] = $this->db->query(" SELECT SUM(pphlain) as pphlain FROM tb_pajak WHERE id_saldo = $id_saldo  ")->result();
 
-        $data['bendahara'] = $this->db->query(" SELECT * FROM tb_login WHERE hakakses = 'bendahara' LIMIT 1 ")->result();
-$data['pembantu'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'pembantu' LIMIT 1 ")->result();
-        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' LIMIT 1")->result();        
+        $data['bendahara'] = $this->db->query(" SELECT * FROM tb_user WHERE hakakses = 'bendahara' LIMIT 1 ")->result();
+$data['pembantu'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'pembantu' LIMIT 1 ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' LIMIT 1")->result();        
 
 
         $this->load->view('bendahara/cetak_laporan', $data);
@@ -432,7 +432,7 @@ if ($jumtran < 1 ){
 
 
     public function pengguna(){
-        $data['user'] = $this->db->get('tb_login')->result();
+        $data['user'] = $this->db->get('tb_user')->result();
 
         $this->load->view('templates_admin/header');
         $this->load->view('templates_admin/sidebar');
@@ -442,7 +442,7 @@ if ($jumtran < 1 ){
 
     public function tambah_pengguna()
     {
-        $data['user'] = $this->db->get('tb_login')->result();
+        $data['user'] = $this->db->get('tb_user')->result();
         $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
 
         $this->load->view('templates_admin/header');
@@ -454,7 +454,7 @@ if ($jumtran < 1 ){
     public function pengguna_edit($idusername)
     {
         $where = array('idusername' => $idusername);
-        $data['user'] = $this->db->query("SELECT * FROM tb_login WHERE idusername = '$idusername' ")->result();
+        $data['user'] = $this->db->query("SELECT * FROM tb_user WHERE idusername = '$idusername' ")->result();
 $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
         $data['status'] = ['Aktif', 'Tidak Aktif'];
         $this->load->view('templates_admin/header');
@@ -464,7 +464,7 @@ $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
     }
 
 
-    public function tambah_tb_login_aksi()
+    public function tambah_tb_user_aksi()
     {
         $namalengkap = $this->input->post('namalengkap');
         $username = $this->input->post('username');
@@ -484,12 +484,12 @@ $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
             'status' => $status
         );
 
-        $this->Model_tblogin->tambah_tb_login($data, 'tb_login');
+        $this->Model_user->tambah_tb_user($data, 'tb_user');
         $this->session->set_flashdata("message", "<script>Swal.fire('Sukses', 'Data Jenis Pengeluaran berhasil di tambahkan', 'success')</script>");
         redirect('bendahara/pengguna/');
     }
 
-    public function edit_tb_login_aksi()
+    public function edit_tb_user_aksi()
     {
         $idusername = $this->input->post('idusername');
         $namalengkap = $this->input->post('namalengkap');
@@ -514,7 +514,7 @@ $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
             'idusername' => $idusername
         ];
 
-        $this->Model_tblogin->update_data($where, $data, 'tb_login');
+        $this->Model_user->update_data($where, $data, 'tb_user');
         redirect('bendahara/pengguna/');
     }
 
@@ -551,7 +551,7 @@ $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
         $data['inputan1'] = [$tanggal_awal];
         $data['inputan2'] = [$tanggal_akhir];
         $data['laporan_transaksi'] = $this->db->query("SELECT * FROM tb_transaksi WHERE tgltransaksi BETWEEN '$tanggal_awal' AND '$tanggal_akhir' ")->result();
-        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
         $this->load->view('laporan/cetak_laporan_transaksi', $data);
     }
 
@@ -561,7 +561,7 @@ $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
         $tahun = $this->input->post('tahun');
 
         $data['laporan_transaksi'] = $this->db->query("SELECT * FROM tb_transaksi WHERE MONTH(tgltransaksi) = '$bulan' AND YEAR(tgltransaksi) = '$tahun' ")->result();
-        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
         $this->load->view('laporan/cetak_laporan_transaksi', $data);
     }
 
@@ -570,7 +570,7 @@ $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
         $tahun = $this->input->post('tahun');
 
         $data['laporan_transaksi'] = $this->db->query("SELECT * FROM tb_transaksi WHERE YEAR(tgltransaksi) = '$tahun' ")->result();
-        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
         $this->load->view('laporan/cetak_laporan_transaksi', $data);
     }
 
@@ -590,7 +590,7 @@ $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
         $data['inputan1'] = [$tanggal_awal];
         $data['inputan2'] = [$tanggal_akhir];
         $data['laporan_saldo'] = $this->db->query("SELECT * FROM tb_saldoawal WHERE tglsaldomasuk BETWEEN '$tanggal_awal' AND '$tanggal_akhir' ")->result();
-        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
         $this->load->view('laporan/cetak_laporan_saldo', $data);
     }
 
@@ -599,7 +599,7 @@ $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
         $bulan = $this->input->post('bulan');
         $tahun = $this->input->post('tahun');
 
-        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
         $data['laporan_saldo'] = $this->db->query("SELECT * FROM tb_saldoawal WHERE MONTH(tglsaldomasuk) = '$bulan' AND YEAR(tglsaldomasuk) = '$tahun' ")->result();
         $this->load->view('laporan/cetak_laporan_saldo', $data);
     }
@@ -609,7 +609,7 @@ $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
         $tahun = $this->input->post('tahun');
 
         $data['laporan_saldo'] = $this->db->query("SELECT * FROM tb_saldoawal WHERE YEAR(tglsaldomasuk) = '$tahun' ")->result();
-        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
         $this->load->view('laporan/cetak_laporan_saldo', $data);
     }
 
@@ -631,7 +631,7 @@ $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
         $data['inputan2'] = [$tanggal_akhir];
         $data['laporan_pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE tgldok BETWEEN '$tanggal_awal' AND '$tanggal_akhir' ")->result();
         
-        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
         $this->load->view('laporan/cetak_laporan_pajak', $data);
     }
 
@@ -642,7 +642,7 @@ $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
 
         $data['laporan_pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE MONTH(tgldok) = '$bulan' AND YEAR(tgldok) = '$tahun' ")->result();
 
-        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
         $this->load->view('laporan/cetak_laporan_pajak', $data);
     }
 
@@ -651,7 +651,7 @@ $data['hakakses'] = ['kadin', 'pembantu', 'bendahara'];
         $tahun = $this->input->post('tahun');
 
         $data['laporan_pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE YEAR(tgldok) = '$tahun' ")->result();
-        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
         $this->load->view('laporan/cetak_laporan_pajak', $data);
     }
 

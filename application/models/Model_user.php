@@ -1,19 +1,19 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Model_tblogin extends CI_Model
+class Model_user extends CI_Model
 {
     public function tampil_data()
     {
-        return $this->db->get('tb_login');
+        return $this->db->get('tb_user');
     }
 
-    public function tambah_tb_login($data, $table)
+    public function tambah_tb_user($data, $table)
     {
         $this->db->insert($table, $data);
     }
 
-    public function edit_tb_login($where, $table)
+    public function edit_tb_user($where, $table)
     {
         return $this->db->get_where($table, $where);
     }

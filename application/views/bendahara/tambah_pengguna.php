@@ -15,7 +15,7 @@
                     </div>
                     <div class="x_content">
                         <br>
-                        <form id="demo-form2" action="<?= base_url('bendahara/tambah_tb_login_aksi') ?>" method="POST" enctype="multipart/form-data" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                        <form id="demo-form2" action="<?= base_url('bendahara/tambah_tb_user_aksi') ?>" method="POST" enctype="multipart/form-data" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
 
                             <div class="item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="username">Username<span class="required">*</span>

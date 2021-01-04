@@ -65,8 +65,8 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $data['jumpphlain'] = $this->db->query(" SELECT SUM(pphlain) as pphlain FROM tb_pajak WHERE id_saldo = $id_saldo  ")->result();
 
 
-        $data['bendahara'] = $this->db->query(" SELECT * FROM tb_login WHERE hakakses = 'bendahara' LIMIT 1")->result();
-        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' LIMIT 1")->result();        
+        $data['bendahara'] = $this->db->query(" SELECT * FROM tb_user WHERE hakakses = 'bendahara' LIMIT 1")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' LIMIT 1")->result();        
      
 
         $this->load->view('templates_admin/header');
@@ -166,10 +166,10 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $data['jumpph23'] = $this->db->query(" SELECT SUM(pph23) as pph23 FROM tb_pajak WHERE id_saldo = $id_saldo  ")->result();
         $data['jumpphlain'] = $this->db->query(" SELECT SUM(pphlain) as pphlain FROM tb_pajak WHERE id_saldo = $id_saldo  ")->result();
 
-        $data['bendahara'] = $this->db->query(" SELECT * FROM tb_login WHERE hakakses = 'bendahara' ")->result();
-        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' LIMIT 1")->result();        
+        $data['bendahara'] = $this->db->query(" SELECT * FROM tb_user WHERE hakakses = 'bendahara' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' LIMIT 1")->result();        
 
-        // $data['pembantu'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'pembantu' LIMIT 1")->result();
+        // $data['pembantu'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'pembantu' LIMIT 1")->result();
 
 
         $this->load->view('kadin/cetak_laporan', $data);
@@ -190,7 +190,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $data['inputan1'] = [$tanggal_awal];
         $data['inputan2'] = [$tanggal_akhir];
         $data['laporan_transaksi'] = $this->db->query("SELECT * FROM tb_transaksi WHERE tgltransaksi BETWEEN '$tanggal_awal' AND '$tanggal_akhir' ")->result();
-        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
         $this->load->view('laporan/cetak_laporan_transaksi', $data);
     }
 
@@ -200,7 +200,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $tahun = $this->input->post('tahun');
 
         $data['laporan_transaksi'] = $this->db->query("SELECT * FROM tb_transaksi WHERE MONTH(tgltransaksi) = '$bulan' AND YEAR(tgltransaksi) = '$tahun' ")->result();
-        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
         $this->load->view('laporan/cetak_laporan_transaksi', $data);
     }
 
@@ -209,7 +209,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $tahun = $this->input->post('tahun');
 
         $data['laporan_transaksi'] = $this->db->query("SELECT * FROM tb_transaksi WHERE YEAR(tgltransaksi) = '$tahun' ")->result();
-        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
         $this->load->view('laporan/cetak_laporan_transaksi', $data);
     }
 
@@ -229,7 +229,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $data['inputan1'] = [$tanggal_awal];
         $data['inputan2'] = [$tanggal_akhir];
         $data['laporan_saldo'] = $this->db->query("SELECT * FROM tb_saldoawal WHERE tglsaldomasuk BETWEEN '$tanggal_awal' AND '$tanggal_akhir' ")->result();
-        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
         $this->load->view('laporan/cetak_laporan_saldo', $data);
     }
 
@@ -238,7 +238,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $bulan = $this->input->post('bulan');
         $tahun = $this->input->post('tahun');
 
-        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
         $data['laporan_saldo'] = $this->db->query("SELECT * FROM tb_saldoawal WHERE MONTH(tglsaldomasuk) = '$bulan' AND YEAR(tglsaldomasuk) = '$tahun' ")->result();
         $this->load->view('laporan/cetak_laporan_saldo', $data);
     }
@@ -248,7 +248,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $tahun = $this->input->post('tahun');
 
         $data['laporan_saldo'] = $this->db->query("SELECT * FROM tb_saldoawal WHERE YEAR(tglsaldomasuk) = '$tahun' ")->result();
-        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
         $this->load->view('laporan/cetak_laporan_saldo', $data);
     }
 
@@ -270,7 +270,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $data['inputan2'] = [$tanggal_akhir];
         $data['laporan_pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE tgldok BETWEEN '$tanggal_awal' AND '$tanggal_akhir' ")->result();
 
-        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
         $this->load->view('laporan/cetak_laporan_pajak', $data);
     }
 
@@ -281,7 +281,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
 
         $data['laporan_pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE MONTH(tgldok) = '$bulan' AND YEAR(tgldok) = '$tahun' ")->result();
 
-        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
         $this->load->view('laporan/cetak_laporan_pajak', $data);
     }
 
@@ -290,7 +290,7 @@ $this->session->set_flashdata('pesan', '<div class="alert alert-danger alert-dis
         $tahun = $this->input->post('tahun');
 
         $data['laporan_pajak'] = $this->db->query("SELECT * FROM tb_pajak WHERE YEAR(tgldok) = '$tahun' ")->result();
-        $data['kadin'] = $this->db->query("SELECT * FROM tb_login WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
+        $data['kadin'] = $this->db->query("SELECT * FROM tb_user WHERE hakakses = 'kadin' AND status = 'Aktif' ")->result();
         $this->load->view('laporan/cetak_laporan_pajak', $data);
     }
 }
